@@ -63,7 +63,7 @@ Delete account
 ## class create user
 
 * post - user creation
-
+1. fields
 ⋅⋅* name
 ⋅⋅* address
 ⋅⋅* country
@@ -79,10 +79,11 @@ Delete account
 # class forgot password
 
 * get - sends email
-⋅⋅* enter email
+
+* enter email
 
 * post - change password
-⋅⋅* new password
+* new password
 
 ## class delete user
 
@@ -93,12 +94,12 @@ Delete account
 ## class make order
 
 * post - submit order
-⋅⋅1. auto fill if user logged in
+1. auto fill if user logged in
 ⋅⋅* name
 ⋅⋅* address
 ⋅⋅* country
 ⋅⋅* phone number
-⋅⋅2. if user not logged in
+2. if user not logged in
 ⋅⋅* email
 ⋅⋅* password  
 ⋅⋅* save info/ create account bool
@@ -107,9 +108,11 @@ Delete account
 
 * post - submits message to order
 
+1. field
 ⋅⋅* message
 
 * get - returns orders, filter by
+1. field 
 ⋅⋅* date
 ⋅⋅* price
 ⋅⋅* status
