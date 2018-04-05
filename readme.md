@@ -58,27 +58,67 @@ Change email
 
 Delete account
 
-# classes and requests
+# user methods
 
 ## class create user
 
 * post - user creation
 
-* put - change email, password, default address
+..* name
+..* address
+..* country
+..* email
+..* phone number
+
+* get - sends email for email validation
+
+## class validate email
+
+* get - validates email
+
+# class forgot password
+
+* get - sends email
+..* enter email
+
+* post - change password
+..* new password
 
 ## class delete user
 
 * post - delete user
 
+# order methods
+
 ## class make order
 
 * post - submit order
+..1. auto fill if user logged in
+..* name
+..* address
+..* country
+..* phone number
+..2. if user not logged in
+..* email
+..* password  
+..* save info/ create account bool
 
 ## class dashboard
 
 * post - submits message to order
 
-* get - returns orders, filter by,
+..* message
+
+* get - returns orders, filter by
+..* date
+..* price
+..* status
+
+* put - change email, password, default address
+
+
+
+
 
 
 
