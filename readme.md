@@ -62,7 +62,7 @@ Delete account
 
 ## class create user
 
-* post - user creation
+### post - user creation
 1. fields
 * name
 * address
@@ -70,30 +70,30 @@ Delete account
 * email
 * phone number
 
-* get - sends email for email validation
+### get - sends email for email validation
 
 ## class validate email
 
-* get - validates email
+### get - validates email
 
 # class forgot password
 
-* get - sends email
+### get - sends email
 
 * enter email
 
-* post - change password
+### post - change password
 * new password
 
 ## class delete user
 
-* post - delete user
+### post - delete user
 
 # order methods
 
 ## class make order
 
-* post - submit order
+### post - submit order
 1. auto fill if user logged in
 * name
 * address
@@ -106,18 +106,18 @@ Delete account
 
 ## class dashboard
 
-* post - submits message to order
+### post - submits message to order
 
 1. field
 * message
 
-* get - returns orders, filter by
+### get - returns orders, filter by
 1. field
 * date
 * price
 * status
 
-* put - change email, password, default address
+### put - change email, password, default address
 
 
 
