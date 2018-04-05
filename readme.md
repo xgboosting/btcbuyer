@@ -58,27 +58,27 @@ Change email
 
 Delete account
 
-#####user stuff
+# classes and requests
 
-#class create user
+## class create user
 
-post - user creation
+* post - user creation
 
-put - change email, password, default address
+* put - change email, password, default address
 
-#class delete user
+## class delete user
 
-post - delete user
+* post - delete user
 
-#class make order
+## class make order
 
-post - submit order
+* post - submit order
 
-#class dashboard
+## class dashboard
 
-post - submits message to order
+* post - submits message to order
 
-get - returns orders, filter by,
+* get - returns orders, filter by,
 
 
 
