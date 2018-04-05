@@ -64,11 +64,11 @@ Delete account
 
 * post - user creation
 1. fields
-⋅⋅* name
-⋅⋅* address
-⋅⋅* country
-⋅⋅* email
-⋅⋅* phone number
+* name
+* address
+* country
+* email
+* phone number
 
 * get - sends email for email validation
 
@@ -95,27 +95,27 @@ Delete account
 
 * post - submit order
 1. auto fill if user logged in
-⋅⋅* name
-⋅⋅* address
-⋅⋅* country
-⋅⋅* phone number
+* name
+* address
+* country
+* phone number
 2. if user not logged in
-⋅⋅* email
-⋅⋅* password  
-⋅⋅* save info/ create account bool
+* email
+* password  
+* save info/ create account bool
 
 ## class dashboard
 
 * post - submits message to order
 
 1. field
-⋅⋅* message
+* message
 
 * get - returns orders, filter by
-1. field 
-⋅⋅* date
-⋅⋅* price
-⋅⋅* status
+1. field
+* date
+* price
+* status
 
 * put - change email, password, default address
 
