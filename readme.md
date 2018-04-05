@@ -64,11 +64,11 @@ Delete account
 
 * post - user creation
 
-..* name
-..* address
-..* country
-..* email
-..* phone number
+⋅⋅* name
+⋅⋅* address
+⋅⋅* country
+⋅⋅* email
+⋅⋅* phone number
 
 * get - sends email for email validation
 
@@ -79,10 +79,10 @@ Delete account
 # class forgot password
 
 * get - sends email
-..* enter email
+⋅⋅* enter email
 
 * post - change password
-..* new password
+⋅⋅* new password
 
 ## class delete user
 
@@ -93,26 +93,26 @@ Delete account
 ## class make order
 
 * post - submit order
-..1. auto fill if user logged in
-..* name
-..* address
-..* country
-..* phone number
-..2. if user not logged in
-..* email
-..* password  
-..* save info/ create account bool
+⋅⋅1. auto fill if user logged in
+⋅⋅* name
+⋅⋅* address
+⋅⋅* country
+⋅⋅* phone number
+⋅⋅2. if user not logged in
+⋅⋅* email
+⋅⋅* password  
+⋅⋅* save info/ create account bool
 
 ## class dashboard
 
 * post - submits message to order
 
-..* message
+⋅⋅* message
 
 * get - returns orders, filter by
-..* date
-..* price
-..* status
+⋅⋅* date
+⋅⋅* price
+⋅⋅* status
 
 * put - change email, password, default address
 
