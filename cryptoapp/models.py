@@ -37,3 +37,9 @@ class Order(models.Model):
     paid_for = models.BooleanField(default=False)
     screenshot_url = models.CharField(max_length=255, default='')
     priority = models.CharField(max_length=255, default='')
+    order_status = models.CharField(max_length=255, default='')
+
+class Validation_token(models.Model):
+    token = models.CharField(max_length=255, default='')
+    dateCreated = models.DateTimeField(auto_now_add=True)
+    user_uuid = models.UUIDField()
