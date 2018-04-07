@@ -41,5 +41,5 @@ class Order(models.Model):
 
 class Validation_token(models.Model):
     token = models.CharField(max_length=255, default='')
-    dateCreated = models.DateTimeField(auto_now_add=True)
+    expires = models.DateTimeField()
     user_uuid = models.UUIDField()
