@@ -1,7 +1,7 @@
 import React, { Component, Text } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { updateMessage } from '../actions';
+import { updateMessage, sendCreateAccount } from '../actions';
 import { connect } from 'react-redux';
 import { Form,
          FormGroup,
@@ -23,7 +23,6 @@ class createAccount extends Component {
   this.passwordChange = this.passwordChange.bind(this);
   this.repeatPasswordChange = this.repeatPasswordChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
-
 }
 
 
@@ -41,14 +40,14 @@ passwordChange(event) {
 
 
  handleSubmit(event) {
-   console.log('##################')
+   console.log('here');
+   event.preventDefault();
    if (this.state.repeatPasswordValue !== this.state.passwordValue) {
-     console.log('what');
      this.props.updateMessage('passwords must match');
-   } else if (this.state.repeatPasswordValue.length < 10){
+   } else if (this.state.repeatPasswordValue.length < 10) {
      this.props.updateMessage('password must be 10 characters');
    } else if (this.state.repeatPasswordValue == this.state.passwordValue && this.state.repeatPasswordValue.length > 10) {
-      console.log('##########################################################');
+      this.props.sendCreateAccount(this.state.emailValue, this.state.passwordValue)
    }
  }
 
@@ -71,8 +70,13 @@ getState() {
 
 
   render () {
+    if (localStorage.getItem('token')) {
+      return (
+        <p>{this.props.message}</p>
+      )
+    }
   return (
-     <div>
+
  <Form horizontal onSubmit={this.handleSubmit}>
   <FormGroup controlId="formHorizontalEmail">
     <Col componentClass={ControlLabel} sm={2}>
@@ -102,22 +106,24 @@ getState() {
   <HelpBlock>{this.props.message}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
-      <Button type="submit">Sign in</Button>
+      <Button type="submit">Create account</Button>
     </Col>
   </FormGroup>
-</Form>;
-    </div>
+</Form>
+
   )
 }
 }
 
 
 const mapStateToProps = state => {
+  console.log(state)
 return {
   message: state.auth.message,
  };
 };
 
 export default connect(mapStateToProps, {
- updateMessage
+ updateMessage,
+ sendCreateAccount
 })(createAccount);

@@ -218,16 +218,16 @@ class Misc(APIView):
 
     def create_user(self, request):
         try:
-           uu = uuid.uuid4()
-           if request.data['guest'] == 'True':
-               print(uu)
-               uu = str(uu)
-               email = '%s@email.com' % uu
-               user = User.objects.create_user(uu, email=uu, password=uu)
-               profile = Profile.objects.create(user=user, is_guest=True, phone_number='')
-               token = AuthToken.objects.create(user)
-               return_data = {'user': user.email, 'token': token}
-               return return_data
+           #uu = uuid.uuid4()
+           #if request.data['guest'] == 'True':
+            #   print(uu)
+            #   uu = str(uu)
+            #   email = '%s@email.com' % uu
+            #   user = User.objects.create_user(uu, email=uu, password=uu)
+            #   profile = Profile.objects.create(user=user, is_guest=True, phone_number='')
+            #   token = AuthToken.objects.create(user)
+            #   return_data = {'user': user.email, 'token': token}
+            #   return return_data
            if User.objects.filter(email=request.data['email']).exists() == False:
                try:
                    first_name = request.data['firstName']

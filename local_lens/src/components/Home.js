@@ -38,24 +38,12 @@ const Home = () => {
     return (
       <div>
     <NavBar />
-    <Switch>
-    <Route path="/faq" component={FAQ}/>
-    <Route path="/login" component={login}/>
-    <Route path="/createAccount" component={createAccount}/>
-    <Route path="/" component={enterUrl}/>
-    </Switch>
     </div>
     )
   }
   return (
-    <div style={divStyle}>
+  <div style={divStyle}>
   <NavBar />
-  <Switch>
-  <Route path="/faq" component={FAQ}/>
-  <Route path="/login" component={login}/>
-  <Route path="/createAccount" component={createAccount}/>
-  <Route path="/" component={enterUrl}/>
-  </Switch>
   </div>
 
   )

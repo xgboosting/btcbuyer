@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import FAQ from './FAQ';
 import login from './login';
 import enterUrl from './enterUrl';
+import dashboard from './dashboard';
 import createAccount from './createAccount';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import {
-  Link
+  Link,
+  Switch,
+  Route
 } from 'react-router-dom'
 
 
@@ -17,27 +20,7 @@ const divStyle = {
    textAlign: 'center'
 };
 
-const h1Style = {
-  color: 'white',
-  fontSize: 70,
-  alignSelf: 'center',
-  justifyContent: 'center'
-};
 
-const pDivStyle = {
-  marginLeft: 250,
-  marginRight: 250
-};
-
-const pStyle = {
-  color: 'white',
-  fontSize: 50
-};
-
-const psmallStyle = {
-  color: 'white',
-  fontSize: 25
-};
 
 const isMobile = window.innerWidth <= 500;
 
@@ -54,6 +37,35 @@ const NavBar = () => {
      </NavDropdown>
      </Navbar>
        </div>
+    )
+  }
+  if (localStorage.getItem('token')) {
+    return (
+       <div style={divStyle} >
+         <Navbar>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <a href="/">NAME</a>
+        </Navbar.Brand>
+      </Navbar.Header>
+      <Nav>
+        <NavItem eventKey={1} href="/dashboard">
+          dashboard
+        </NavItem>
+        <NavItem eventKey={3} href="/faq">
+          FAQ
+        </NavItem>
+      </Nav>
+    </Navbar>
+     <div>
+       <Switch>
+       <Route path="/faq" component={FAQ}/>
+       <Route path="/dashboard" component={dashboard}/>
+       <Route path="/" component={enterUrl}/>
+       </Switch>
+     </div>
+      </div>
+
     )
   }
   return (
@@ -76,18 +88,18 @@ const NavBar = () => {
       </NavItem>
     </Nav>
   </Navbar>
+   <div>
+     <Switch>
+     <Route path="/faq" component={FAQ}/>
+     <Route path="/login" component={login}/>
+     <Route path="/createAccount" component={createAccount}/>
+     <Route path="/" component={enterUrl}/>
+     </Switch>
+   </div>
     </div>
 
   )
 }
 
-
-
-/*Hello.propTypes = {
- onClick: PropTypes.func.isRequired,
-  reset: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired
-
-}*/
 
 export default NavBar
