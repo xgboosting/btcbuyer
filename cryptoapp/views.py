@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from cryptoapp.models import Profile, Address, Message, Order, Validation_token
@@ -9,21 +10,63 @@ from rest_framework.views import APIView
 from rest_framework import status
 from knox.models import AuthToken
 from knox.auth import TokenAuthentication
-import hashlib, random, string, uuid, selenium, json, datetime
+import hashlib, random, string, uuid, json, datetime
+from selenium import webdriver
 
+#place order
+#dashboard
+#send message
+#
+#
+#
+def main(request):
+    with open('/home/conlloc/btcbuy/btcbuyer/local_lens/build/index.html') as f:
+        return HttpResponse(f.read())
 
-class placeOrderForm(APIView):
+class createOrder(APIView):
 
     def post(self, request, format=None):
         try:
+            shipTo = request.data['shipTo']
+            streetAddress = request.data['address']
+            try:
+                apartment = request.data['apartmentNumber']
+            except:
+                apartment = ''
+            country = request.data['country']
+            zip_code = request.data['zipCode']
+            makeDefault = request.data['makeDefault']
+            try:
+                additionalInfo = request.data['additionalInfo']
+            except:
+                additionalInfo = ''
+            Address.objects.create(name=shipTo,street_address=streetAddress,apartment=apartment,country=country,zip_code=zipCode,is_default=makeDefault,additional_info=additionalInfo)
             return
-        except:
+        except Exception as e:
+            print('createOrder post %s' % e)
+
+class getScreenCap(APIView):
+
+    def post(self, request, format=None):
+        try:
+            url = request.data['url']
+            DRIVER = 'chromedriver'
+            driver = webdriver.Chrome(DRIVER)
+            driver.get(url)
+            location = '/photos/%s.png' % url
+            screenshot = driver.save_screenshot(location)
+            driver.quit()
+            return_data = {'screenshot_url': str(location)}
             return
+        except Exception as e:
+            print('change data post %s' % e)
+            return Response({'message':'screenshot failed'}, status=status.HTTP_400_BAD_REQUEST)
             #take selenium screenshot of url yea.
 
 class changeData(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
+
     def post(self, request, format=None):
         try:
             request_user = request._auth.user
@@ -176,6 +219,15 @@ class Misc(APIView):
     def create_user(self, request):
         try:
            uu = uuid.uuid4()
+           if request.data['guest'] == 'True':
+               print(uu)
+               uu = str(uu)
+               email = '%s@email.com' % uu
+               user = User.objects.create_user(uu, email=uu, password=uu)
+               profile = Profile.objects.create(user=user, is_guest=True, phone_number='')
+               token = AuthToken.objects.create(user)
+               return_data = {'user': user.email, 'token': token}
+               return return_data
            if User.objects.filter(email=request.data['email']).exists() == False:
                try:
                    first_name = request.data['firstName']
@@ -188,17 +240,17 @@ class Misc(APIView):
                user = User.objects.create_user(request.data['email'], email=request.data['email'],  password=request.data['password'], last_name=last_name, first_name=first_name)
            else:
                return Response(status=status.HTTP_400_BAD_REQUEST)
-           user.save()
            try:
                phone_number = request.data['phone_number']
            except:
                phone_number = ''
-           profile = Profile.objects.create(user=user, phone_number=phone_number)
+           profile = Profile.objects.create(user=user, phone_number=phone_number, is_guest=False)
            Misc.send_validation_email(self, request.data['email'], profile.uuid)
            token = AuthToken.objects.create(user)
            return_data = {'user': user.email, 'message': 'email sent', 'token': token}
            return return_data
         except Exception as e:
+            print(e)
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 

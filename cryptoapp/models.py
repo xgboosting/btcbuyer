@@ -9,16 +9,18 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=255, default='')
     dateCreated = models.DateTimeField(auto_now_add=True)
     email_validated = models.BooleanField(default=False)
+    is_guest = models.BooleanField(default=False)
 
 class Address(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user_uuid = models.UUIDField(blank=True)
     name = models.CharField(max_length=255, default='')
     street_address = models.CharField(max_length=255, default='')
     apartment = models.CharField(max_length=255, default='')
     country = models.CharField(max_length=255, default='')
     zip_code = models.CharField(max_length=255, default='')
     is_default = models.BooleanField(default=False)
-
+    additional_info = models.CharField(max_length=255, default='')
 
 class Message(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -29,8 +31,8 @@ class Message(models.Model):
 
 class Order(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    address_uuid = models.UUIDField()
     user_uuid = models.UUIDField()
+    address_uuid = models.UUIDField()
     shipped = models.BooleanField(default=False)
     url = models.TextField()
     cost = models.CharField(max_length=10, default='')
