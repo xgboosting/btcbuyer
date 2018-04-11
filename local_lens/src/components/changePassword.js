@@ -1,0 +1,136 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import NavBar from './NavBar'
+import { Link, Redirect } from 'react-router-dom';
+import { updateMessage,
+  loginUser,
+  sendChangePassword,
+  updateChangeMessage } from '../actions';
+import { connect } from 'react-redux';
+import { Form,
+         FormGroup,
+         Col,
+         ControlLabel,
+         FormControl,
+         Checkbox,
+         Button,
+         HelpBlock
+ } from 'react-bootstrap';
+
+
+ class changePassword extends Component {
+
+   constructor(props) {
+   super(props);
+   this.state = {passwordValue: '', newPasswordValue: '', newRepeatPasswordValue: ''};
+   this.passwordChange = this.passwordChange.bind(this);
+   this.newPasswordChange = this.newPasswordChange.bind(this);
+   this.newRepeatPasswordChange = this.newRepeatPasswordChange.bind(this);
+   this.handleSubmit = this.handleSubmit.bind(this);
+ }
+
+
+ passwordChange(event) {
+    this.setState({passwordValue: event.target.value});
+  }
+
+ newRepeatPasswordChange(event) {
+    this.setState({newRepeatPasswordValue: event.target.value});
+  }
+
+ newPasswordChange(event) {
+     this.setState({newPasswordValue: event.target.value});
+   }
+
+
+  handleSubmit(event) {
+    console.log('here');
+    event.preventDefault();
+    if (this.state.newRepeatPasswordValue !== this.state.newPasswordValue) {
+      this.props.updateChangeMessage('passwords must match');
+    } else if (this.state.newRepeatPasswordValue.length < 10) {
+      this.props.updateChangeMessage('password must be 10 characters');
+    } else if (this.state.newRepeatPasswordValue == this.state.newPasswordValue && this.state.newRepeatPasswordValue.length > 9) {
+       this.props.sendChangePassword(this.state.passwordValue, this.state.newPasswordValue)
+    }
+  }
+
+  getRepeatState() {
+    console.log(this.state)
+   const length = this.state.newRepeatPasswordValue.length;
+   if (length > 9 && this.state.newPasswordValue == this.state.newRepeatPasswordValue) return 'success';
+   else if (length > 5) return 'error';
+   else if (length > 0) return 'error';
+   return null;
+ }
+
+ getState() {
+  const length = this.state.newPasswordValue.length;
+  if (length > 9) return 'success';
+  else if (length > 5) return 'error';
+  else if (length > 0) return 'error';
+  return null;
+ }
+
+
+   render () {
+     if (this.props.changeMessage == 'password changed') {
+       return (
+       <div>
+         <Redirect to="/"/>
+       </div>
+     )
+     }
+   return (
+
+  <Form horizontal onSubmit={this.handleSubmit}>
+  <FormGroup controlId="formHorizontalPassword" >
+    <Col componentClass={ControlLabel} sm={2}>
+      Password
+    </Col>
+    <Col sm={3}>
+      <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
+    </Col>
+  </FormGroup>
+
+   <FormGroup controlId="formHorizontalPassword" validationState={this.getState()}>
+     <Col componentClass={ControlLabel} sm={2}>
+       New Password
+     </Col>
+     <Col sm={3}>
+       <FormControl value={this.state.newPasswordValue} onChange={this.newPasswordChange} type="password" placeholder=" new password" />
+     </Col>
+   </FormGroup>
+   <FormGroup controlId="formHorizontalPassword1" validationState={this.getRepeatState()}>
+     <Col componentClass={ControlLabel} sm={2}>
+      Repeat Password
+     </Col>
+     <Col sm={3}>
+       <FormControl value={this.state.newRepeatPasswordValue} onChange={this.newRepeatPasswordChange} type="password" placeholder="repeat new password" />
+     </Col>
+   </FormGroup>
+   <HelpBlock>{this.props.changeMessage}</HelpBlock>
+   <FormGroup>
+     <Col smOffset={0} sm={10}>
+       <Button type="submit">Change password</Button>
+     </Col>
+   </FormGroup>
+ </Form>
+   )
+ }
+ }
+
+
+const mapStateToProps = state => {
+  console.log(state)
+return {
+  changeMessage: state.auth.changeMessage,
+ };
+};
+
+export default connect(mapStateToProps, {
+ updateMessage,
+ loginUser,
+ sendChangePassword,
+ updateChangeMessage
+})(changePassword);
