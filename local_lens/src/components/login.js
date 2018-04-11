@@ -75,6 +75,7 @@ passwordChange(event) {
     </Col>
   </FormGroup>
 </Form>
+   <a href='/password-recover'>forgot your password?</a>
     </div>
   )
 }

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import FAQ from './FAQ';
 import login from './login';
 import enterUrl from './enterUrl';
-import dashboard from './dashboard';
+import logOut from './logOut';
 import createAccount from './createAccount';
+import passwordRecover from './passwordRecover';
+import changePassword from './changePassword';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import {
   Link,
@@ -49,18 +51,21 @@ const NavBar = () => {
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
-        <NavItem eventKey={1} href="/dashboard">
-          dashboard
-        </NavItem>
         <NavItem eventKey={3} href="/faq">
           FAQ
         </NavItem>
+        <NavDropdown eventKey={3.1} title="Dashboard" id="basic-nav-dropdown">
+     <MenuItem href="/faq" eventKey={3.5}>FAQ</MenuItem>
+     <MenuItem href="/change-password" eventKey={3.6}>change password</MenuItem>
+     <MenuItem href="/logOut" eventKey={3.2}>logout</MenuItem>
+   </NavDropdown>
       </Nav>
     </Navbar>
      <div>
        <Switch>
        <Route path="/faq" component={FAQ}/>
-       <Route path="/dashboard" component={dashboard}/>
+       <Route path="/logOut" component={logOut} />
+       <Route path="/change-password" component={changePassword} />
        <Route path="/" component={enterUrl}/>
        </Switch>
      </div>
@@ -93,6 +98,7 @@ const NavBar = () => {
      <Route path="/faq" component={FAQ}/>
      <Route path="/login" component={login}/>
      <Route path="/createAccount" component={createAccount}/>
+     <Route path="/password-recover" component={passwordRecover}/>
      <Route path="/" component={enterUrl}/>
      </Switch>
    </div>

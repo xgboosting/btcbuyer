@@ -2,6 +2,7 @@ import React, { Component, Text } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { updateMessage, sendCreateAccount } from '../actions';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form,
          FormGroup,
@@ -46,7 +47,7 @@ passwordChange(event) {
      this.props.updateMessage('passwords must match');
    } else if (this.state.repeatPasswordValue.length < 10) {
      this.props.updateMessage('password must be 10 characters');
-   } else if (this.state.repeatPasswordValue == this.state.passwordValue && this.state.repeatPasswordValue.length > 10) {
+   } else if (this.state.repeatPasswordValue == this.state.passwordValue && this.state.repeatPasswordValue.length > 9) {
       this.props.sendCreateAccount(this.state.emailValue, this.state.passwordValue)
    }
  }
@@ -54,7 +55,7 @@ passwordChange(event) {
  getRepeatState() {
    console.log(this.state)
   const length = this.state.repeatPasswordValue.length;
-  if (length > 10 && this.state.passwordValue == this.state.repeatPasswordValue) return 'success';
+  if (length > 9 && this.state.passwordValue == this.state.repeatPasswordValue) return 'success';
   else if (length > 5) return 'error';
   else if (length > 0) return 'error';
   return null;
@@ -62,7 +63,7 @@ passwordChange(event) {
 
 getState() {
  const length = this.state.passwordValue.length;
- if (length > 10) return 'success';
+ if (length > 9) return 'success';
  else if (length > 5) return 'error';
  else if (length > 0) return 'error';
  return null;
@@ -72,7 +73,9 @@ getState() {
   render () {
     if (localStorage.getItem('token')) {
       return (
-        <p>{this.props.message}</p>
+        <div>
+          <Redirect to="/"/>
+        </div>
       )
     }
   return (

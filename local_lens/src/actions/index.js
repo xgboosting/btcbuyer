@@ -8,6 +8,8 @@ export const SET_AUTHTOKEN = 'SET_AUTHTOKEN';
 export const SET_GUEST= 'SET_GUEST';
 export const MESSAGE = 'MESSAGE';
 export const LOGIN_MESSAGE = 'LOGIN_MESSAGE';
+export const RECOVER_PASSWORD = 'RECOVER_PASSWORD';
+export const CHANGE_MESSAGE = 'CHANGE_MESSAGE';
 
 
 
@@ -17,10 +19,55 @@ export const helloWorld = () => {
   }
 }
 
+export const sendChangePassword = (currentPassword, theNewPassword) => {
+return (dispatch) => {
+  //axios.defaults.withCredentials = false;
+  const token = localStorage.getItem('token');
+  axios.defaults.headers.common.Authorization = `Token ${token}`;
+  const url = `http://localhost:8000/api/change-password/`;
+  axios.post(url, {
+    password: currentPassword,
+    newPassword: theNewPassword
+  }).then(function (response) {
+    console.log(response.data);
+    dispatch({type: CHANGE_MESSAGE, payload: 'password changed'})
+  }).catch(function (error) {
+    console.log(error);
+    dispatch({type: CHANGE_MESSAGE, payload: 'hmmm something broke, message the admins please'})
+  })
+}
+}
+
+
+export const recoverPassword = (theemail) => {
+  return (dispatch) => {
+    console.log(theemail)
+    axios.defaults.withCredentials = false;
+    const url = `http://localhost:8000/api/recover-password/`;
+    axios.post(url, {
+      email: theemail
+    }).then(function (response) {
+      console.log(response.data);
+      dispatch({type: RECOVER_PASSWORD, payload: 'email sent'})
+    }).catch(function (error) {
+      dispatch({type: RECOVER_PASSWORD, payload: 'we did not find that email please message the admins'})
+    })
+  }
+}
+
 export const reset = () => {
   console.log('reset');
   return {
     type: RESET
+
+  }
+}
+
+export const updateChangeMessage = (message) => {
+  console.log(message);
+  return {
+    type: CHANGE_MESSAGE,
+    payload: message
   }
 }
 

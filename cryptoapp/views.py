@@ -131,11 +131,15 @@ class changePassword(APIView):
 
     def post(self, request, format=None):
         try:
-            user = authenticate(username=request.data['email'], password=request.data['password'])
-            if user is not None and request._auth.user == user:
+            user = request._auth.user
+            #user = authenticate(username=request.data['email'], password=request.data['password'])
+            if user.check_password(str(request.data['password'])) == True:
+                print('true')
                 user.set_password(request.data['newPassword'])
+                user.save()
                 return Response({'message': 'success'}, status=status.HTTP_200_OK)
             else:
+                
                 return Response({'message':'incorrect login info'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             print('change password post %s' % e)
@@ -148,8 +152,10 @@ class recoverPassword(APIView):
         try:
             user = User.objects.get(email=request.data['email'])
             salt = hashlib.sha1(str(random.random()).encode('utf-8')).hexdigest()[:15]
-            user.set_password(str(salt))
+            user.set_password(salt)
+            user.save()
             message = 'this is your new password, please login and change it %s' % str(salt)
+            print(message);
             #send_mail('btc buyer recover password', message, 'defaultemail@email.com', [str(email)], fail_silently=False)
             return Response({'message': 'email sent'}, status=status.HTTP_200_OK)
         except Exception as e:
