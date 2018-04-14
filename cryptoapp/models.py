@@ -3,6 +3,9 @@ from knox.models import AuthToken
 from django.contrib.auth.models import User
 import uuid
 
+class SiteName(models.Model):
+    site_name = models.CharField(max_length=255, default='')
+
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -15,7 +18,7 @@ class Address(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_uuid = models.UUIDField(blank=True)
     name = models.CharField(max_length=255, default='')
-    street_address = models.CharField(max_length=255, default='')
+    address = models.CharField(max_length=255, default='')
     apartment = models.CharField(max_length=255, default='')
     country = models.CharField(max_length=255, default='')
     zip_code = models.CharField(max_length=255, default='')
@@ -37,7 +40,7 @@ class Order(models.Model):
     url = models.TextField()
     cost = models.CharField(max_length=10, default='')
     paid_for = models.BooleanField(default=False)
-    screenshot_url = models.CharField(max_length=255, default='')
+    screenshot_uuid = models.CharField(max_length=255, default='')
     priority = models.CharField(max_length=255, default='')
     order_status = models.CharField(max_length=255, default='')
 

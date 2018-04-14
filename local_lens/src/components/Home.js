@@ -1,27 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import FAQ from './FAQ';
-import login from './login';
+import React from 'react';
 import NavBar from './NavBar';
-import enterUrl from './enterUrl';
-import createAccount from './createAccount';
-import { connect } from 'react-redux';
-import { getInitialState } from '../actions';
-import { Form,
-         FormGroup,
-         Col,
-         ControlLabel,
-         FormControl,
-         Checkbox,
-         Button
- } from 'react-bootstrap';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
-
 
 const divStyle = {
    flex: 1,

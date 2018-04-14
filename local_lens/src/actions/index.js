@@ -10,12 +10,101 @@ export const MESSAGE = 'MESSAGE';
 export const LOGIN_MESSAGE = 'LOGIN_MESSAGE';
 export const RECOVER_PASSWORD = 'RECOVER_PASSWORD';
 export const CHANGE_MESSAGE = 'CHANGE_MESSAGE';
+export const UPDATE_ADDRESSES = 'UPDATE_ADDRESSES';
+export const SET_ORDER_IMAGE = 'SET_ORDER_IMAGE';
 
 
+
+const BASE_URL = 'http://localhost:8000/'
 
 export const helloWorld = () => {
   return {
     type: HELLO_WORLD
+  }
+}
+
+export const getScreenCap = (theurl) => {
+  return (dispatch) => {
+    //axios.defaults.withCredentials = false;
+    if (localStorage.getItem('token') !== null) {
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+    }
+    const url = `${BASE_URL}api/get-screencap/`;
+    axios.post(url, {
+      url: theurl
+    }).then(function (response) {
+      console.log(response.data);
+      localStorage.setItem('screenshot_url', response.data.screenshot_url);
+      dispatch({ type: SET_ORDER_IMAGE, payload: response.data });
+
+    }).catch(function (error) {
+      console.log(error);
+      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'});
+    })
+  }
+}
+
+export const getAddresses = () => {
+  return (dispatch) => {
+
+    //axios.defaults.withCredentials = false;
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+    const url = `${BASE_URL}api/addresses/`;
+    axios.get(url).then(function (response) {
+      console.log(response.data);
+      dispatch({type: UPDATE_ADDRESSES, payload: response.data})
+    }).catch(function (error) {
+      console.log(error);
+      dispatch({type: CHANGE_MESSAGE, payload: 'problem getting addresses'})
+    })
+  }
+}
+
+export const sendNewAddress = (nameValue, apartmentValue, addressValue, countryValue, zipValue, additionalValue, isDefaultValue) => {
+  return (dispatch) => {
+    console.log(isDefaultValue)
+    //axios.defaults.withCredentials = false;
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+    const url = `${BASE_URL}api/addresses/`;
+    axios.post(url, {
+      name: nameValue,
+      apartment: apartmentValue,
+      address: addressValue,
+      country: countryValue,
+      zip: zipValue,
+      additional: additionalValue,
+      isDefault: isDefaultValue
+    }).then(function (response) {
+      console.log(response.data);
+      dispatch({type: UPDATE_ADDRESSES, payload: response.data})
+      dispatch({type: CHANGE_MESSAGE, payload: 'address saved'})
+    }).catch(function (error) {
+      console.log(error);
+      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
+    })
+  }
+}
+
+export const sendChangeEmail = (thePassword, theNewEmail) => {
+  return (dispatch) => {
+    console.log(theNewEmail);
+    //axios.defaults.withCredentials = false;
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+    const url = `${BASE_URL}api/change-data/`;
+    axios.post(url, {
+      password: thePassword,
+      newEmail: theNewEmail
+    }).then(function (response) {
+      console.log(response.data);
+      dispatch({type: CHANGE_MESSAGE, payload: 'email changed'})
+    }).catch(function (error) {
+      console.log(error);
+      dispatch({type: CHANGE_MESSAGE, payload: 'your email or password were incorrect'})
+    })
   }
 }
 
@@ -24,7 +113,7 @@ return (dispatch) => {
   //axios.defaults.withCredentials = false;
   const token = localStorage.getItem('token');
   axios.defaults.headers.common.Authorization = `Token ${token}`;
-  const url = `http://localhost:8000/api/change-password/`;
+  const url = `${BASE_URL}api/change-password/`;
   axios.post(url, {
     password: currentPassword,
     newPassword: theNewPassword
@@ -43,7 +132,7 @@ export const recoverPassword = (theemail) => {
   return (dispatch) => {
     console.log(theemail)
     axios.defaults.withCredentials = false;
-    const url = `http://localhost:8000/api/recover-password/`;
+    const url = `${BASE_URL}api/recover-password/`;
     axios.post(url, {
       email: theemail
     }).then(function (response) {
@@ -79,12 +168,13 @@ export const updateMessage = (message) => {
   }
 }
 
+
 export const loginUser = (theemail, thepassword) => {
    return (dispatch) => {
      console.log(theemail)
      console.log(thepassword)
      axios.defaults.withCredentials = false;
-     const url = `http://localhost:8000/api/login/`;
+     const url = `${BASE_URL}api/login/`;
      axios.post(url, {
        email: theemail,
        password: thepassword
@@ -102,7 +192,7 @@ export const loginUser = (theemail, thepassword) => {
 export const sendCreateAccount = (theemail, thepassword) => {
    return (dispatch) => {
      axios.defaults.withCredentials = false;
-     const url = `http://localhost:8000/api/create-user/`;
+     const url = `${BASE_URL}api/create-user/`;
      axios.post(url, {
        email: theemail,
        password: thepassword
@@ -117,13 +207,13 @@ export const sendCreateAccount = (theemail, thepassword) => {
    }
 }
 
-
+//UNUSED
 export const getInitialState = (token) => {
    return (dispatch) => {
      console.log(token);
-     if (token == 'notavalidtoken') {
+     if (token === 'notavalidtoken') {
      axios.defaults.withCredentials = false;
-     const url = `http://localhost:8000/api/create-user/`;
+     const url = `${BASE_URL}api/create-user/`;
      axios.post(url, {
        guest: 'True'
      }).then(function (response) {
@@ -136,19 +226,4 @@ export const getInitialState = (token) => {
      })
    };
    }
-}
-
-export const photosByNewest = (thePage) => {
-  return (dispatch) => {
-  dispatch({ type: LOADING });
-  axios.defaults.withCredentials = true;
-  const url = `https://locallensapp.com/api/photos-by-newest/`;
-  axios.post(url, {
-    page: thePage
-  }).then(function (response) {
-    console.log(response);
-    dispatch({ type: PHOTOS, payload: response.data });
-    dispatch({ type: LOADING_FALSE })
-  });
-  }
 }

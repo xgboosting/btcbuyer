@@ -71,14 +71,14 @@ getState() {
     if (localStorage.getItem('token')) {
       return (
         <div>
-          <Redirect to="/"/>
+          <Redirect to="/order-form"/>
         </div>
       )
     }
   return (
 
  <Form horizontal onSubmit={this.handleSubmit}>
-  <FormGroup controlId="formHorizontalEmail">
+  <FormGroup controlId="formHorizontalEmailcreate">
     <Col componentClass={ControlLabel} sm={2}>
       Email
     </Col>
@@ -87,7 +87,7 @@ getState() {
     </Col>
   </FormGroup>
 
-  <FormGroup controlId="formHorizontalPassword" validationState={this.getState()}>
+  <FormGroup controlId="formHorizontalPasswordcreate" validationState={this.getState()}>
     <Col componentClass={ControlLabel} sm={2}>
       Password
     </Col>
@@ -95,7 +95,7 @@ getState() {
       <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
     </Col>
   </FormGroup>
-  <FormGroup controlId="formHorizontalPassword1" validationState={this.getRepeatState()}>
+  <FormGroup controlId="formHorizontalPassword1create" validationState={this.getRepeatState()}>
     <Col componentClass={ControlLabel} sm={2}>
       Password
     </Col>

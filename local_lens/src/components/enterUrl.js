@@ -1,62 +1,89 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import FAQ from './FAQ';
-import login from './login';
-import NavBar from './NavBar';
-import createAccount from './createAccount';
+import React, {Component} from 'react';
 import Showtext from './Showtext';
-import ReactRevealText from 'react-reveal-text';
+import { connect } from 'react-redux';
+import { getScreenCap } from '../actions';
+import { Redirect } from 'react-router-dom';
 import { Form,
          FormGroup,
          Col,
          ControlLabel,
          FormControl,
-         Checkbox,
          Button
  } from 'react-bootstrap';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
 
+const divStyle = {
+   flex: 1,
+   justifyContent: 'center',
+   alignItems: 'center',
+   textAlign: 'center',
+   marginTop: '12%',
+   marginLeft: '20%'
+};
 
-const isMobile = window.innerWidth <= 500;
+const formStyle = {
+  borderRadius: 4,
+ borderWidth: 0.5,
+ borderColor: 'black',
+ fontSize: '130%'
+}
 
-const enterUrl = () => {
-  if (isMobile) {
-    return (
-      <div>
-<Form horizontal>
-<FormGroup controlId="formHorizontalEmail">
-<Col componentClass={ControlLabel} sm={1}>
- URL
-</Col>
-<Col sm={4}>
- <FormControl type="email" placeholder="Email" />
-</Col>
-</FormGroup>
-</Form>
-<Showtext />
-</div>
-    )
+const inputSize = {
+  width: '120%',
+  fontSize: '140%'
+}
+
+class enterUrl extends Component {
+
+  constructor(props) {
+  super(props);
+  localStorage.removeItem('screenshot_url');
+  this.state = {urlValue: '', fireRedirect: false};
+  this.urlChange = this.urlChange.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
+}
+
+handleSubmit(event) {
+  console.log('here');
+  event.preventDefault();
+  if (this.state.urlValue.length > 1) {
+    this.setState({ fireRedirect: true })
+    this.props.getScreenCap(this.state.urlValue);
   }
+
+}
+
+urlChange(event) {
+  console.log(this.state.urlValue);
+  this.setState({urlValue: event.target.value});
+}
+
+  render () {
+    if (this.state.fireRedirect === true) {
+      return (<Redirect to='/order-form'/>)
+    }
   return (
-    <div>
-  <Form horizontal>
+    <div style={divStyle}>
+  <Form horizontal style={formStyle} onSubmit={this.handleSubmit}>
 <FormGroup controlId="formHorizontalEmail">
  <Col componentClass={ControlLabel} sm={2}>
    URL
  </Col>
  <Col sm={4}>
-   <FormControl type="url" placeholder="http://www.example.com/" />
+   <FormControl value={this.state.urlValue} onChange={this.urlChange} type="url" placeholder="http://www.example.com/" style={inputSize}/>
  </Col>
 </FormGroup>
+<FormGroup>
+  <Col smOffset={0} sm={10}>
+    <Button type="submit">create order</Button>
+  </Col>
+</FormGroup>
+
 </Form>
 <Showtext />
   </div>
 
   )
+}
 }
 
 /*Hello.propTypes = {
@@ -65,5 +92,13 @@ const enterUrl = () => {
   message: PropTypes.string.isRequired
 
 }*/
+const mapStateToProps = state => {
+  console.log(state)
+return {
+  message: state.auth.message,
+ };
+};
 
-export default enterUrl
+export default connect(mapStateToProps, {
+ getScreenCap
+})(enterUrl);

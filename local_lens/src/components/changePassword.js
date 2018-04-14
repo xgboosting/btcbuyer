@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import NavBar from './NavBar'
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { updateMessage,
   loginUser,
   sendChangePassword,
@@ -12,7 +10,6 @@ import { Form,
          Col,
          ControlLabel,
          FormControl,
-         Checkbox,
          Button,
          HelpBlock
  } from 'react-bootstrap';
@@ -50,7 +47,7 @@ import { Form,
       this.props.updateChangeMessage('passwords must match');
     } else if (this.state.newRepeatPasswordValue.length < 10) {
       this.props.updateChangeMessage('password must be 10 characters');
-    } else if (this.state.newRepeatPasswordValue == this.state.newPasswordValue && this.state.newRepeatPasswordValue.length > 9) {
+    } else if (this.state.newRepeatPasswordValue === this.state.newPasswordValue && this.state.newRepeatPasswordValue.length > 9) {
        this.props.sendChangePassword(this.state.passwordValue, this.state.newPasswordValue)
     }
   }
@@ -58,7 +55,7 @@ import { Form,
   getRepeatState() {
     console.log(this.state)
    const length = this.state.newRepeatPasswordValue.length;
-   if (length > 9 && this.state.newPasswordValue == this.state.newRepeatPasswordValue) return 'success';
+   if (length > 9 && this.state.newPasswordValue === this.state.newRepeatPasswordValue) return 'success';
    else if (length > 5) return 'error';
    else if (length > 0) return 'error';
    return null;
@@ -74,7 +71,7 @@ import { Form,
 
 
    render () {
-     if (this.props.changeMessage == 'password changed') {
+     if (this.props.changeMessage === 'password changed') {
        return (
        <div>
          <Redirect to="/"/>

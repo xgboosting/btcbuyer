@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 
 const divStyle = {
@@ -9,28 +7,6 @@ const divStyle = {
    alignItems: 'center',
    textAlign: 'center',
    heigt: '100%'
-};
-
-const h1Style = {
-  color: 'white',
-  fontSize: 70,
-  alignSelf: 'center',
-  justifyContent: 'center'
-};
-
-const pDivStyle = {
-  marginLeft: 250,
-  marginRight: 250
-};
-
-const pStyle = {
-  color: 'white',
-  fontSize: 50
-};
-
-const psmallStyle = {
-  color: 'white',
-  fontSize: 25
 };
 
 

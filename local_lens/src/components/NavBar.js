@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import FAQ from './FAQ';
 import login from './login';
 import enterUrl from './enterUrl';
@@ -7,12 +6,14 @@ import logOut from './logOut';
 import createAccount from './createAccount';
 import passwordRecover from './passwordRecover';
 import changePassword from './changePassword';
+import changeEmail from './changeEmail';
+import addresses from './addresses';
+import makeOrder from './makeOrder';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import {
-  Link,
   Switch,
   Route
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 
 const divStyle = {
@@ -54,11 +55,19 @@ const NavBar = () => {
         <NavItem eventKey={3} href="/faq">
           FAQ
         </NavItem>
-        <NavDropdown eventKey={3.1} title="Dashboard" id="basic-nav-dropdown">
-     <MenuItem href="/faq" eventKey={3.5}>FAQ</MenuItem>
-     <MenuItem href="/change-password" eventKey={3.6}>change password</MenuItem>
-     <MenuItem href="/logOut" eventKey={3.2}>logout</MenuItem>
-   </NavDropdown>
+        <NavDropdown eventKey={3.1} title="Settings" id="basic-nav-dropdown">
+          <MenuItem href="/faq" eventKey={3.5}>FAQ</MenuItem>
+          <MenuItem href="/change-password" eventKey={3.6}>change password</MenuItem>
+          <MenuItem href="/change-email" eventKey={3.7}>change email</MenuItem>
+          <MenuItem href="/addresses" eventKey={3.8}>addresses</MenuItem>
+          <MenuItem href="/logOut" eventKey={3.2}>logout</MenuItem>
+        </NavDropdown>
+        <NavDropdown eventKey={3.1} title="Orders" id="basic-nav-dropdown">
+         <MenuItem href="/" eventKey={3.5}>new order</MenuItem>
+         <MenuItem href="/paid-orders" eventKey={3.7}>paid orders</MenuItem>
+         <MenuItem href="/unpaid-orders" eventKey={3.6}>unpaid orders</MenuItem>
+         <MenuItem href="/completed-orders" eventKey={3.2}>completed orders</MenuItem>
+        </NavDropdown>
       </Nav>
     </Navbar>
      <div>
@@ -66,6 +75,9 @@ const NavBar = () => {
        <Route path="/faq" component={FAQ}/>
        <Route path="/logOut" component={logOut} />
        <Route path="/change-password" component={changePassword} />
+       <Route path="/change-email" component={changeEmail} />
+       <Route path="/addresses" component={addresses} />
+       <Route path="/order-form" component={makeOrder}/>
        <Route path="/" component={enterUrl}/>
        </Switch>
      </div>
@@ -99,6 +111,7 @@ const NavBar = () => {
      <Route path="/login" component={login}/>
      <Route path="/createAccount" component={createAccount}/>
      <Route path="/password-recover" component={passwordRecover}/>
+     <Route path="/order-form" component={makeOrder}/>
      <Route path="/" component={enterUrl}/>
      </Switch>
    </div>

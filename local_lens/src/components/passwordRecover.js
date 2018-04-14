@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import NavBar from './NavBar'
-import { Link, Redirect } from 'react-router-dom';
 import { recoverPassword } from '../actions';
 import { connect } from 'react-redux';
 import { Form,
@@ -9,7 +6,6 @@ import { Form,
          Col,
          ControlLabel,
          FormControl,
-         Checkbox,
          Button,
          HelpBlock
  } from 'react-bootstrap';

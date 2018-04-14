@@ -15,11 +15,14 @@ class Showtext extends React.Component {
     setTimeout(() => {
       this.setState({ secondshow: true });
     }, 1000);
+    setTimeout(() => {
+      this.setState({ thirdshow: true });
+    }, 1500);
   }
 
   render() {
     return (
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', fontSize: '200%', width: '80%' }}>
 
           <ReactRevealText show={this.state.show}>
              welcome to example.com, this site allows you to buy anything on the web with crypto currency!
@@ -29,7 +32,11 @@ class Showtext extends React.Component {
           <ReactRevealText show={this.state.secondshow}>
              simply paste the url of what you want to buy into ^^ that box up there, verify it is the correct product, enter your shipping info and send us a payment!!
           </ReactRevealText>
-    
+
+          <ReactRevealText show={this.state.thirdshow} style={{ textAlign: 'center', fontSize: '300%' }}>
+           BTC. BTC CASH. ETH. LTC.
+          </ReactRevealText>
+
       </div>
     );
   }

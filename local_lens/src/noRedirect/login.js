@@ -41,7 +41,7 @@ passwordChange(event) {
     if (this.props.loginMessage === 'you are now logged in') {
       return (
       <div>
-        <Redirect to="/"/>
+        <Redirect to="/order-form"/>
       </div>
     )
     }

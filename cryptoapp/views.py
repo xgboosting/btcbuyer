@@ -23,6 +23,29 @@ def main(request):
     with open('/home/conlloc/btcbuy/btcbuyer/local_lens/build/index.html') as f:
         return HttpResponse(f.read())
 
+class addresses(APIView):
+     authentication_classes = (TokenAuthentication,)
+     permission_classes = (IsAuthenticated,)
+
+     def post(self, request, format=None):
+         try:
+             user = request._auth.user
+             profile = Profile.objects.get(user=user)
+             return_data = Misc.new_address(self, request, profile.uuid)
+             return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
+         except:
+             return Response({'message':'problem saving address'}, status=status.HTTP_400_BAD_REQUEST)
+
+     def get(self, request, format=None):
+         try:
+             user = request._auth.user
+             profile = Profile.objects.get(user=user)
+             return_data = Misc.get_addresses(self, profile.uuid)
+             return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
+         except Exception as e:
+             print('addresses get %s' % e)
+
+
 class createOrder(APIView):
 
     def post(self, request, format=None):
@@ -49,17 +72,18 @@ class getScreenCap(APIView):
 
     def post(self, request, format=None):
         try:
+            print('here')
             url = request.data['url']
             DRIVER = 'chromedriver'
-            driver = webdriver.Chrome(DRIVER)
+            driver = webdriver.Chrome('/home/conlloc/btcbuy/venv/selenium/webdriver/chrome/chromedriver')
             driver.get(url)
-            location = '/photos/%s.png' % url
+            location = '/home/conlloc/btcbuy/btcbuyer/photos/%s.png' % uuid.uuid4()
             screenshot = driver.save_screenshot(location)
             driver.quit()
             return_data = {'screenshot_url': str(location)}
-            return
+            return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
         except Exception as e:
-            print('change data post %s' % e)
+            print('get screencap post %s' % e)
             return Response({'message':'screenshot failed'}, status=status.HTTP_400_BAD_REQUEST)
             #take selenium screenshot of url yea.
 
@@ -69,13 +93,15 @@ class changeData(APIView):
 
     def post(self, request, format=None):
         try:
-            request_user = request._auth.user
-            user = authenticate(username=request.data['email'], password=request.data['password'])
-            if user is not None and request_user == user:
+            user = request._auth.user
+            if user.check_password(str(request.data['password'])) == True:
+                print(request.data)
                 if request.data['newEmail'] is not None:
                     user.username = request.data['newEmail']
                     user.email = request.data['newEmail']
                     user.save()
+                    print(user.email)
+                    return Response({'message': 'email changed'}, status=status.HTTP_200_OK)
                 elif request.data['firstName'] is not None:
                     user.first_name = request.data['firstName']
                     user.save()
@@ -87,12 +113,12 @@ class changeData(APIView):
                     profile.phone_number = request.data['phoneNumber']
                     profile.save()
                 else:
-                    pass
+                    return Response({'message':'no data provided'}, status=status.HTTP_400_BAD_REQUEST)
             else:
                 return Response({'message':'problem with authentication'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             print('change data post %s' % e)
-
+            return Response({'message':'problem with authentication or data'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class logout(APIView):
@@ -139,7 +165,7 @@ class changePassword(APIView):
                 user.save()
                 return Response({'message': 'success'}, status=status.HTTP_200_OK)
             else:
-                
+
                 return Response({'message':'incorrect login info'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             print('change password post %s' % e)
@@ -274,4 +300,42 @@ class Misc(APIView):
             return True
         except Exception as e:
             print('misc send_validation_email %s' % e)
+            return False
+
+    def new_address(self, request, user_uuid):
+        try:
+            print(request.data['isDefault'])
+            isDefault = request.data['isDefault']
+            print(isDefault)
+            if isDefault == True:
+                addresses = Address.objects.filter(user_uuid=user_uuid)
+                for address in addresses:
+                    address.is_default = False
+                    address.save()
+            name = request.data['name']
+            address = request.data['address']
+            apartment = request.data['apartment']
+            country = request.data['country']
+            zipCode = request.data['zip']
+            additional = request.data['additional']
+            address = Address.objects.create(user_uuid=user_uuid, name=name, address=address, apartment=apartment, country=country, zip_code=zipCode, additional_info=additional, is_default=isDefault)
+
+            return Misc.get_addresses(self, user_uuid)
+        except Exception as e:
+            print('new address %s' % e)
+            return False
+
+    def get_addresses(self, user_uuid):
+        try:
+            addresses = Address.objects.filter(user_uuid=user_uuid)
+            adds = []
+            for add in addresses:
+                data = {'name': add.name, 'address': add.address, 'apartment': add.apartment, 'country': add.country, 'zipCode': add.zip_code, 'additional': add.additional_info, 'isDefault': add.is_default}
+                adds.append(data)
+            return_data = {}
+            return_data['objects'] = adds
+            print(return_data)
+            return return_data
+        except Exception as e:
+            print('get addresses %s' % e)
             return False
