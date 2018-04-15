@@ -104,7 +104,6 @@ renderImage() {
        <div>
          {this.renderImage()}
          <AddressForm />
-         this is where the order form goes
        </div>
      )
      }

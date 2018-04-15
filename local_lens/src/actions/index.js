@@ -22,6 +22,69 @@ export const helloWorld = () => {
     type: HELLO_WORLD
   }
 }
+export const sendOrderWithAddress = (thePrice, uuid, theUrl, theScreenshotUUID) => {
+  return (dispatch) => {
+    //axios.defaults.withCredentials = false;
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+    const url = `${BASE_URL}api/orders/`;
+    axios.post(url, {
+      addressUUID: uuid,
+      price: thePrice,
+      url: theUrl,
+      screenshotUUID: theScreenshotUUID,
+      creatingOrder: true
+    }).then(function (response) {
+      console.log(response.data);
+      dispatch({type: UPDATE_ADDRESSES, payload: response.data})
+      dispatch({type: CHANGE_MESSAGE, payload: 'address saved'})
+    }).catch(function (error) {
+      console.log(error);
+      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
+    })
+  }
+}
+
+export const sendOrderNewAddress = (nameValue,
+  apartmentValue,
+  addressValue,
+  countryValue,
+  zipValue,
+  additionalValue,
+  phoneValue,
+  thePrice,
+  uuid,
+  theUrl,
+  theScreenshotUUID) => {
+  return (dispatch) => {
+    //axios.defaults.withCredentials = false;
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+    const url = `${BASE_URL}api/orders/`;
+    axios.post(url, {
+      name: nameValue,
+      apartment: apartmentValue,
+      address: addressValue,
+      country: countryValue,
+      zip: zipValue,
+      additional: additionalValue,
+      phone: phoneValue,
+      addressUUID: uuid,
+      price: thePrice,
+      url: theUrl,
+      screenshotUUID: theScreenshotUUID,
+      creatingOrder: true
+    }).then(function (response) {
+      console.log(response.data);
+      dispatch({type: UPDATE_ADDRESSES, payload: response.data})
+      dispatch({type: CHANGE_MESSAGE, payload: 'address saved'})
+    }).catch(function (error) {
+      console.log(error);
+      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
+    })
+  }
+}
+
 
 export const getScreenCap = (theurl) => {
   return (dispatch) => {
@@ -36,6 +99,7 @@ export const getScreenCap = (theurl) => {
     }).then(function (response) {
       console.log(response.data);
       localStorage.setItem('screenshot_url', response.data.screenshot_url);
+      localStorage.setItem('screenshot_uuid', response.data.screenshot_uuid);
       dispatch({ type: SET_ORDER_IMAGE, payload: response.data });
 
     }).catch(function (error) {
@@ -62,7 +126,7 @@ export const getAddresses = () => {
   }
 }
 
-export const sendNewAddress = (nameValue, apartmentValue, addressValue, countryValue, zipValue, additionalValue, isDefaultValue) => {
+export const sendNewAddress = (nameValue, apartmentValue, addressValue, countryValue, zipValue, additionalValue, isDefaultValue, phoneValue) => {
   return (dispatch) => {
     console.log(isDefaultValue)
     //axios.defaults.withCredentials = false;
@@ -76,7 +140,8 @@ export const sendNewAddress = (nameValue, apartmentValue, addressValue, countryV
       country: countryValue,
       zip: zipValue,
       additional: additionalValue,
-      isDefault: isDefaultValue
+      isDefault: isDefaultValue,
+      phone: phoneValue
     }).then(function (response) {
       console.log(response.data);
       dispatch({type: UPDATE_ADDRESSES, payload: response.data})

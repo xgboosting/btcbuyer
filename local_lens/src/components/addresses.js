@@ -25,7 +25,7 @@ import { Form,
 
    constructor(props) {
    super(props);
-   this.state = {nameValue: '', addressValue: '', apartmentValue: '', countryValue: '', zipValue: '', additionalValue: '', isDefaultValue: true};
+   this.state = {nameValue: '', addressValue: '', apartmentValue: '', countryValue: '', zipValue: '', additionalValue: '', isDefaultValue: true, phoneValue: ''};
    this.props.getAddresses();
    this.nameChange = this.nameChange.bind(this);
    this.addressChange = this.addressChange.bind(this);
@@ -34,6 +34,7 @@ import { Form,
    this.zipChange = this.zipChange.bind(this);
    this.additionalChange = this.additionalChange.bind(this);
    this.isDefaultChange = this.isDefaultChange.bind(this);
+   this.phoneChange = this.phoneChange.bind(this);
    this.handleSubmit = this.handleSubmit.bind(this);
  }
 
@@ -61,6 +62,12 @@ zipChange(event) {
 additionalChange(event) {
   this.setState({additionalValue: event.target.value});
 }
+
+
+phoneChange(event) {
+  this.setState({phoneValue: event.target.value});
+}
+
 isDefaultChange() {
   console.log(this.state.isDefaultValue)
   if (this.state.isDefaultValue === true) {
@@ -77,7 +84,7 @@ isDefaultChange() {
     } else if (this.state.addressValue.length < 2) {
       this.props.updateChangeMessage('please enter a valid address');
     } else {
-      this.setState({nameValue: '', addressValue: '', apartmentValue: '', countryValue: '', zipValue: '', additionalValue: '', isDefaultValue: true});
+      this.setState({phoneValue: '', nameValue: '', addressValue: '', apartmentValue: '', countryValue: '', zipValue: '', additionalValue: '', isDefaultValue: true});
       if (this.state.isDefaultValue === true) {
         this.props.sendNewAddress(
           this.state.nameValue,
@@ -86,7 +93,8 @@ isDefaultChange() {
            this.state.countryValue,
            this.state.zipValue,
            this.state.additionalValue,
-           false);
+           false,
+         this.state.phoneValue);
     } else if (this.state.isDefaultValue === false) {
       this.props.sendNewAddress(
         this.state.nameValue,
@@ -95,7 +103,8 @@ isDefaultChange() {
          this.state.countryValue,
          this.state.zipValue,
          this.state.additionalValue,
-         true);
+         true,
+         this.state.phoneValue);
     }
     }
   }
@@ -127,7 +136,8 @@ isDefaultChange() {
           {object.apartment}<br />
           {object.country}<br />
            {object.zipCode}<br />
-           {object.additionalInfo}
+         {object.additionalInfo}<br />
+       {object.phoneNumber}
           <br />
         </Col>
         </div>
@@ -188,6 +198,14 @@ isDefaultChange() {
      </Col>
      <Col sm={2}>
        <FormControl value={this.state.zipValue} onChange={this.zipChange} type="text" placeholder="zip code" />
+     </Col>
+   </FormGroup>
+   <FormGroup controlId="formHorizontalPassword1" >
+     <Col componentClass={ControlLabel} sm={2}>
+      phone number
+     </Col>
+     <Col sm={2}>
+       <FormControl value={this.state.phoneValue} onChange={this.phoneChange} type="text" placeholder="+1-541-754-3010" />
      </Col>
    </FormGroup>
    <FormGroup controlId="formHorizontalPassword1" >

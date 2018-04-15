@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getAddresses, sendNewAddress, updateChangeMessage } from '../actions';
+import { getAddresses, sendNewAddress, updateChangeMessage, sendOrderNewAddress, sendOrderWithAddress } from '../actions';
 import { connect } from 'react-redux';
 import { Form,
          FormGroup,
@@ -25,7 +25,22 @@ import { Form,
 
    constructor(props) {
    super(props);
-   this.state = {nameValue: '', addressValue: '', apartmentValue: '', countryValue: '', zipValue: '', additionalValue: '', isDefaultValue: true};
+   this.state = {
+    nameValue: '',
+   addressValue: '',
+   apartmentValue: '',
+   phoneValue: '',
+   countryValue: '',
+   zipValue: '',
+   additionalValue: '',
+   isDefaultValue: true,
+   urlValue: localStorage.getItem('screenshot_url'),
+   screenshotUUID: localStorage.getItem('screenshot_uuid'),
+   productNameValue: '',
+   priceValue: '',
+   additionalOrderValue: '',
+   uuid: ''
+  };
    this.props.getAddresses();
    this.nameChange = this.nameChange.bind(this);
    this.addressChange = this.addressChange.bind(this);
@@ -33,8 +48,15 @@ import { Form,
    this.countryChange = this.countryChange.bind(this);
    this.zipChange = this.zipChange.bind(this);
    this.additionalChange = this.additionalChange.bind(this);
-   this.isDefaultChange = this.isDefaultChange.bind(this);
+   this.useAddress = this.useAddress.bind(this);
    this.handleSubmit = this.handleSubmit.bind(this);
+
+   this.handleSubmitOrder = this.handleSubmitOrder.bind(this);
+   this.urlChange = this.urlChange.bind(this);
+   this.productNameChange = this.productNameChange.bind(this);
+   this.priceChange = this.priceChange.bind(this);
+   this.additionalOrderChange = this.additionalOrderChange.bind(this);
+   this.phoneChange = this.phoneChange.bind(this);
  }
 
 
@@ -61,54 +83,88 @@ zipChange(event) {
 additionalChange(event) {
   this.setState({additionalValue: event.target.value});
 }
-isDefaultChange() {
-  console.log(this.state.isDefaultValue)
-  if (this.state.isDefaultValue === true) {
-  this.setState({isDefaultValue: false});
-} else if (this.state.isDefaultValue === false) {
-  this.setState({isDefaultValue: true});
+
+
+urlChange(event) {
+  this.setState({ urlValue: event.target.value });
+}
+
+
+productNameChange(event) {
+  this.setState({ productNameValue: event.target.value });
+}
+
+
+priceChange(event) {
+  this.setState({ priceValue: event.target.value });
+}
+
+
+additionalOrderChange(event) {
+  this.setState({ additionalOrderValue: event.target.value });
+}
+
+phoneChange(event) {
+  this.setState({ phoneValue: event.target.value });
+}
+
+handleSubmitOrder() {
+  if (this.state.uuid !== '') {
+    console.log('address has uuid')
+    this.props.sendOrderWithAddress(this.state.priceValue, this.state.uuid, this.state.urlValue, this.state.screenshotUUID);
+  } else {
+  console.log('address no uuid')
+  this.props.sendOrderNewAddress(
+  this.state.nameValue,
+  this.state.apartmentValue,
+  this.state.addressValue,
+  this.state.countryValue,
+  this.state.zipValue,
+  this.state.additionalValue,
+  false,
+  this.state.phoneValue,
+  this.state.priceValue,
+  this.state.uuid,
+  this.state.urlValue,
+  this.state.screenshotUUID);
 }
 }
 
-  handleSubmit(event) {
+handleSubmit(event) {
     event.preventDefault();
     if (this.state.nameValue.length < 2) {
       this.props.updateChangeMessage('you need to enter a name');
     } else if (this.state.addressValue.length < 2) {
       this.props.updateChangeMessage('please enter a valid address');
     } else {
-      this.setState({nameValue: '', addressValue: '', apartmentValue: '', countryValue: '', zipValue: '', additionalValue: '', isDefaultValue: true});
+      this.setState({uuid: '', nameValue: '', addressValue: '', apartmentValue: '', countryValue: '', zipValue: '', additionalValue: '', isDefaultValue: true});
       if (this.state.isDefaultValue === true) {
-        this.props.sendNewAddress(
-          this.state.nameValue,
+           this.props.sendNewAddress(
+           this.state.nameValue,
            this.state.apartmentValue,
-          this.state.addressValue,
+           this.state.addressValue,
            this.state.countryValue,
            this.state.zipValue,
            this.state.additionalValue,
-           false);
+           false,
+           this.state.phoneValue);
     } else if (this.state.isDefaultValue === false) {
       this.props.sendNewAddress(
         this.state.nameValue,
-         this.state.apartmentValue,
+        this.state.apartmentValue,
         this.state.addressValue,
-         this.state.countryValue,
-         this.state.zipValue,
-         this.state.additionalValue,
-         true);
+        this.state.countryValue,
+        this.state.zipValue,
+        this.state.additionalValue,
+        true,
+        this.state.phoneValue);
     }
     }
   }
 
-  checked(bool) {
-   if (bool === true) {
-     return (
-     <Checkbox inline readOnly checked>is default</Checkbox>
-     )
-   } return (
-     <Button>make default</Button>
-   )
-  }
+useAddress(object, event) {
+    this.setState({uuid: object.uuid, nameValue: object.name, addressValue: object.address, apartmentValue: object.apartment, countryValue: object.country, zipValue: object.zipCode, additionalValue: object.additional});
+}
 
  returnAddresses() {
 
@@ -120,17 +176,17 @@ isDefaultChange() {
        {addressesToMap.map((object, i) =>
          <div style={{colStyle}} key={i}>
 
-        <Col sm={6} md={3} key={i} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '1%'}}>
+        <Col sm={6} md={3} key={i} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '2%'}}>
           <br />
           {object.name} <br />
           {object.address} <br />
           {object.apartment}<br />
           {object.country}<br />
            {object.zipCode}<br />
+           {object.phoneNumber} <br />
            {object.additionalInfo}
-           <FormControl>
-           <Checkbox >
-           <FormControl
+            <Button style={{"marginBottom": '2%'}} onClick={() => this.useAddress(object)}>use this address</Button>
+
           <br />
         </Col>
         </div>
@@ -151,8 +207,8 @@ isDefaultChange() {
        {this.returnAddresses()}
       </Row>
     </Grid>
-  <Form horizontal onSubmit={this.handleSubmit}>
-  <FormGroup  >
+  <Form horizontal onSubmit={this.handleSubmit} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '2%'}}>
+  <FormGroup style={{ 'marginTop': '2%'}} >
     <Col componentClass={ControlLabel} sm={2}>
       name
     </Col>
@@ -193,6 +249,14 @@ isDefaultChange() {
        <FormControl value={this.state.zipValue} onChange={this.zipChange} type="text" placeholder="zip code" />
      </Col>
    </FormGroup>
+   <FormGroup controlId="formHorizontalPassword1" >
+     <Col componentClass={ControlLabel} sm={2}>
+      phone number
+     </Col>
+     <Col sm={2}>
+       <FormControl value={this.state.phoneValue} onChange={this.phoneChange} type="text" placeholder="+1-541-754-3010" />
+     </Col>
+   </FormGroup>
    <FormGroup controlId="formHorizontalPassword12" >
      <Col componentClass={ControlLabel} sm={2}>
       additional info
@@ -208,6 +272,57 @@ isDefaultChange() {
      </Col>
    </FormGroup>
  </Form>
+
+
+ <Form horizontal onSubmit={this.handleSubmitOrder} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '2%'}}>
+ <FormGroup style={{ 'marginTop': '2%'}} >
+   <Col componentClass={ControlLabel} sm={2}>
+     url
+   </Col>
+   <Col sm={4}>
+     <FormControl value={this.state.urlValue} onChange={this.urlChange} type="text" placeholder="http://example.com/product" />
+   </Col>
+ </FormGroup>
+
+  <FormGroup controlId="formHorizontalPassword" >
+    <Col componentClass={ControlLabel} sm={2}>
+      product name
+    </Col>
+    <Col sm={4}>
+      <FormControl value={this.state.productNameValue} onChange={this.productNameChange} type="text" placeholder="the name of the product" />
+    </Col>
+  </FormGroup>
+  <FormGroup controlId="formHorizontalPassword12">
+    <Col componentClass={ControlLabel} sm={2}>
+     quantity
+    </Col>
+    <Col sm={3}>
+      <FormControl value={this.state.quantityValue} onChange={this.quantityChange} type="number" placeholder="1" />
+    </Col>
+  </FormGroup>
+  <FormGroup controlId="formHorizontalPassword12" >
+    <Col componentClass={ControlLabel} sm={2}>
+     price total (USD) include shipping!
+    </Col>
+    <Col sm={4}>
+      <FormControl value={this.state.priceValue} onChange={this.priceChange} type="number" placeholder="10.00" />
+    </Col>
+  </FormGroup>
+  <FormGroup controlId="formHorizontalPassword12" >
+    <Col componentClass={ControlLabel} sm={2}>
+     additional info
+    </Col>
+    <Col sm={8}>
+      <FormControl value={this.state.additionalOrderValue} onChange={this.additionalOrderChange} componentClass="textarea" placeholder="this is where you should enter any information about color, size, and any other options" />
+    </Col>
+  </FormGroup>
+  <HelpBlock>{this.props.changeMessage}</HelpBlock>
+  <FormGroup>
+    <Col smOffset={0} sm={10}>
+      <Button type="submit">continue to payment</Button>
+    </Col>
+  </FormGroup>
+</Form>
  </div>
    )
  }
@@ -241,5 +356,7 @@ return {
 export default connect(mapStateToProps, {
  getAddresses,
  sendNewAddress,
- updateChangeMessage
+ updateChangeMessage,
+ sendOrderNewAddress,
+ sendOrderWithAddress
 })(addressForm);

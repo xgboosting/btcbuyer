@@ -23,6 +23,30 @@ def main(request):
     with open('/home/conlloc/btcbuy/btcbuyer/local_lens/build/index.html') as f:
         return HttpResponse(f.read())
 
+class orders(APIView):
+     authentication_classes = (TokenAuthentication,)
+     permission_classes = (IsAuthenticated,)
+
+     def post(self, request, format=None):
+         try:
+             user = request._auth.user
+             profile = Profile.objects.get(user=user)
+             return_data = Misc.create_order(self, request, profile.uuid)
+             print(return_data)
+             return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
+         except:
+             return Response({'message':'make order error'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+     def get(self, request, format=None):
+         try:
+             user = request._auth.user
+             profile = Profile.objects.get(user=user)
+             return_data = Misc.get_orders(self, profile.uuid)
+         except Exception as e:
+             print(e)
+             return
+
 class addresses(APIView):
      authentication_classes = (TokenAuthentication,)
      permission_classes = (IsAuthenticated,)
@@ -77,10 +101,11 @@ class getScreenCap(APIView):
             DRIVER = 'chromedriver'
             driver = webdriver.Chrome('/home/conlloc/btcbuy/venv/selenium/webdriver/chrome/chromedriver')
             driver.get(url)
-            location = '/home/conlloc/btcbuy/btcbuyer/photos/%s.png' % uuid.uuid4()
+            uu = uuid.uuid4()
+            location = '/home/conlloc/btcbuy/btcbuyer/photos/%s.png' % uu
             screenshot = driver.save_screenshot(location)
             driver.quit()
-            return_data = {'screenshot_url': str(location)}
+            return_data = {'screenshot_uuid': str(uu), 'screenshot_url': str(url)}
             return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
         except Exception as e:
             print('get screencap post %s' % e)
@@ -304,23 +329,25 @@ class Misc(APIView):
 
     def new_address(self, request, user_uuid):
         try:
-            print(request.data['isDefault'])
-            isDefault = request.data['isDefault']
-            print(isDefault)
-            if isDefault == True:
-                addresses = Address.objects.filter(user_uuid=user_uuid)
-                for address in addresses:
-                    address.is_default = False
-                    address.save()
             name = request.data['name']
             address = request.data['address']
             apartment = request.data['apartment']
             country = request.data['country']
             zipCode = request.data['zip']
             additional = request.data['additional']
-            address = Address.objects.create(user_uuid=user_uuid, name=name, address=address, apartment=apartment, country=country, zip_code=zipCode, additional_info=additional, is_default=isDefault)
-
-            return Misc.get_addresses(self, user_uuid)
+            phone_number = request.data['phone']
+            try:
+                creating_order = request.data['creatingOrder']
+                print(creating_order)
+            except:
+                creating_order = False
+                print(creating_order)
+            address = Address.objects.create(phone_number=phone_number, user_uuid=user_uuid, name=name, address=address, apartment=apartment, country=country, zip_code=zipCode, additional_info=additional)
+            if creating_order == False:
+                print('creating order false')
+                return Misc.get_addresses(self, user_uuid)
+            print('creating order true')
+            return address
         except Exception as e:
             print('new address %s' % e)
             return False
@@ -330,12 +357,51 @@ class Misc(APIView):
             addresses = Address.objects.filter(user_uuid=user_uuid)
             adds = []
             for add in addresses:
-                data = {'name': add.name, 'address': add.address, 'apartment': add.apartment, 'country': add.country, 'zipCode': add.zip_code, 'additional': add.additional_info, 'isDefault': add.is_default}
+                data = {'name': add.name, 'address': add.address, 'apartment': add.apartment, 'country': add.country, 'zipCode': add.zip_code, 'additional': add.additional_info, 'isDefault': add.is_default, 'phoneNumber': add.phone_number, 'uuid': add.uuid}
                 adds.append(data)
             return_data = {}
             return_data['objects'] = adds
-            print(return_data)
             return return_data
         except Exception as e:
             print('get addresses %s' % e)
+            return False
+
+    def get_orders(self, uuid):
+        orders = Order.objects.filter(user_uuid=uuid).order_by('created').reverse()
+        ords = []
+        for order in orders:
+            add = Address.objects.get(uuid=order.address_uuid)
+            data = {'name': add.name, 'address': add.address, 'apartment': add.apartment, 'country': add.country, 'zipCode': add.zip_code, 'additional': add.additional_info, 'isDefault': add.is_default, 'phoneNumber': add.phone_number, 'uuid': add.uuid \
+            }
+            return
+
+
+    def create_order(self, request, user_uuid):
+        try:
+            if request.data['addressUUID'] != '':
+                try:
+                    print('uuid is true')
+                    order = Order.objects.create(user_uuid=user_uuid, price=request.data['price'], address_uuid=request.data['addressUUID'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='unpaid', order_status='low')
+                    return_data = {}
+                    return_data['objects'] = {'success with saved address'}
+                    return return_data
+                except Exception as e:
+                    print('save order %s' % e)
+            else:
+                try:
+                    print('uuid is false')
+                    one_address = Misc.new_address(self, request, user_uuid) #remember to pass creating_order = True
+                    address_uuid = one_address.uuid
+                    print(address_uuid)
+                    print(request.data['price'])
+                    print(request.data['screenshotUUID'])
+                    order = Order.objects.create(user_uuid=user_uuid, address_uuid=address_uuid, price=request.data['price'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='unpaid', order_status='low')
+                    print(one_address)
+                    return_data = {}
+                    return_data['objects'] = {'success with new address'}
+                    return return_data
+                except Exception as e:
+                    print('get one address %' % e)
+        except Exception as e:
+            print('except %s' %e)
             return False

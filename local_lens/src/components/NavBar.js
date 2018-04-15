@@ -9,6 +9,9 @@ import changePassword from './changePassword';
 import changeEmail from './changeEmail';
 import addresses from './addresses';
 import makeOrder from './makeOrder';
+import paidOrder from './paidOrder';
+import completedOrder from './completedOrder';
+import unpaidOrder from './unpaidOrder'
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import {
   Switch,
@@ -72,13 +75,17 @@ const NavBar = () => {
     </Navbar>
      <div>
        <Switch>
-       <Route path="/faq" component={FAQ}/>
+       <Route path="/faq" component={FAQ} />
        <Route path="/logOut" component={logOut} />
        <Route path="/change-password" component={changePassword} />
        <Route path="/change-email" component={changeEmail} />
        <Route path="/addresses" component={addresses} />
+       <Route path="/unpaid-orders" component={unpaidOrder} />
+       <Route path="/paid-orders" component={paidOrder} />
+       <Route path="/completed-orders" component={completedOrder} />
        <Route path="/order-form" component={makeOrder}/>
-       <Route path="/" component={enterUrl}/>
+
+       <Route path="/" component={enterUrl} />
        </Switch>
      </div>
       </div>

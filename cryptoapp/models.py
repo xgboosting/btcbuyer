@@ -10,7 +10,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     phone_number = models.CharField(max_length=255, default='')
-    dateCreated = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     email_validated = models.BooleanField(default=False)
     is_guest = models.BooleanField(default=False)
 
@@ -24,12 +24,14 @@ class Address(models.Model):
     zip_code = models.CharField(max_length=255, default='')
     is_default = models.BooleanField(default=False)
     additional_info = models.CharField(max_length=255, default='')
+    phone_number = models.CharField(max_length=20, default='')
+    created = models.DateTimeField(auto_now_add=True)
 
 class Message(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     sender = models.UUIDField()
     sendee = models.UUIDField()
-    date = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=255, default='')
 
 class Order(models.Model):
@@ -38,11 +40,24 @@ class Order(models.Model):
     address_uuid = models.UUIDField()
     shipped = models.BooleanField(default=False)
     url = models.TextField()
-    cost = models.CharField(max_length=10, default='')
+    price = models.CharField(max_length=10, default='')
     paid_for = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
     screenshot_uuid = models.CharField(max_length=255, default='')
-    priority = models.CharField(max_length=255, default='')
-    order_status = models.CharField(max_length=255, default='')
+    PRIORITY_CHOICES = (
+        ('HIGH', 'high'),
+        ('MEDIUM', 'medium'),
+        ('LOW', 'low'),
+    )
+    priority = models.CharField(max_length=255, choices=PRIORITY_CHOICES)
+    STATUS = (
+        ('UNPAID', 'unpaid'),
+        ('PAID', 'paid'),
+        ('SHIPPED', 'shipped'),
+        ('DELIVERED', 'delivered'),
+
+    )
+    order_status = models.CharField(max_length=255, choices=STATUS)
 
 class Validation_token(models.Model):
     token = models.CharField(max_length=255, default='')
