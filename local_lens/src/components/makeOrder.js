@@ -37,35 +37,6 @@ isDefaultChange() {
 }
 }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    if (this.state.nameValue.length < 2) {
-      this.props.updateChangeMessage('you need to enter a name');
-    } else if (this.state.addressValue.length < 2) {
-      this.props.updateChangeMessage('please enter a valid address');
-    } else {
-      this.setState({nameValue: '', addressValue: '', apartmentValue: '', countryValue: '', zipValue: '', additionalValue: '', isDefaultValue: true});
-      if (this.state.isDefaultValue === true) {
-        this.props.sendNewAddress(
-          this.state.nameValue,
-           this.state.apartmentValue,
-          this.state.addressValue,
-           this.state.countryValue,
-           this.state.zipValue,
-           this.state.additionalValue,
-           false);
-    } else if (this.state.isDefaultValue === false) {
-      this.props.sendNewAddress(
-        this.state.nameValue,
-         this.state.apartmentValue,
-        this.state.addressValue,
-         this.state.countryValue,
-         this.state.zipValue,
-         this.state.additionalValue,
-         true);
-    }
-    }
-  }
 
   checked(bool) {
    if (bool === true) {

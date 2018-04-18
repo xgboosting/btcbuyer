@@ -9,22 +9,18 @@ import { Form,
          Button,
          HelpBlock,
          Grid,
-         Row,
-         Checkbox
+         Row
  } from 'react-bootstrap';
-
-//name
-//address
-//apartment
-//country
-//zip
-//additional info
-
+import { Redirect } from 'react-router-dom';
 
  class addressForm extends Component {
 
    constructor(props) {
    super(props);
+
+   const myuuid = localStorage.getItem('screenshot_uuid');
+   const myurl = localStorage.getItem('screenshot_url');
+
    this.state = {
     nameValue: '',
    addressValue: '',
@@ -34,8 +30,8 @@ import { Form,
    zipValue: '',
    additionalValue: '',
    isDefaultValue: true,
-   urlValue: localStorage.getItem('screenshot_url'),
-   screenshotUUID: localStorage.getItem('screenshot_uuid'),
+   urlValue: myurl,
+   screenshotUUID: myuuid,
    productNameValue: '',
    priceValue: '',
    additionalOrderValue: '',
@@ -61,27 +57,27 @@ import { Form,
 
 
 nameChange(event) {
-    this.setState({nameValue: event.target.value});
+    this.setState({nameValue: event.target.value, uuid: ''});
   }
 
 addressChange(event) {
-    this.setState({addressValue: event.target.value});
+    this.setState({addressValue: event.target.value, uuid: ''});
   }
 
  apartmentChange(event) {
-     this.setState({apartmentValue: event.target.value});
+     this.setState({apartmentValue: event.target.value, uuid: ''});
    }
 
 countryChange(event) {
-  this.setState({countryValue: event.target.value});
+  this.setState({countryValue: event.target.value, uuid: '' });
 }
 
 zipChange(event) {
-  this.setState({zipValue: event.target.value});
+  this.setState({zipValue: event.target.value, uuid: '' });
 }
 
 additionalChange(event) {
-  this.setState({additionalValue: event.target.value});
+  this.setState({additionalValue: event.target.value, uuid: '' });
 }
 
 
@@ -108,7 +104,9 @@ phoneChange(event) {
   this.setState({ phoneValue: event.target.value });
 }
 
-handleSubmitOrder() {
+handleSubmitOrder(event) {
+  event.preventDefault();
+  console.log('does this fire')
   if (this.state.uuid !== '') {
     console.log('address has uuid')
     this.props.sendOrderWithAddress(this.state.priceValue, this.state.uuid, this.state.urlValue, this.state.screenshotUUID);
@@ -121,7 +119,6 @@ handleSubmitOrder() {
   this.state.countryValue,
   this.state.zipValue,
   this.state.additionalValue,
-  false,
   this.state.phoneValue,
   this.state.priceValue,
   this.state.uuid,
@@ -200,6 +197,14 @@ useAddress(object, event) {
 
 
    render () {
+     console.log(this.props)
+     if (this.props.changeMessage === 'success') {
+       return (
+         <div>
+           <Redirect to="/unpaid-orders"/>
+         </div>
+       )
+     }
    return (
     <div style={divStyle}>
     <Grid>
@@ -207,7 +212,7 @@ useAddress(object, event) {
        {this.returnAddresses()}
       </Row>
     </Grid>
-  <Form horizontal onSubmit={this.handleSubmit} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '2%'}}>
+  <Form horizontal onSubmit={this.handleSubmitOrder} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '2%'}}>
   <FormGroup style={{ 'marginTop': '2%'}} >
     <Col componentClass={ControlLabel} sm={2}>
       name
@@ -265,16 +270,10 @@ useAddress(object, event) {
        <FormControl value={this.state.additionalValue} onChange={this.additionalChange} componentClass="textarea" placeholder="additional info" />
      </Col>
    </FormGroup>
-   <HelpBlock>{this.props.changeMessage}</HelpBlock>
-   <FormGroup>
-     <Col smOffset={0} sm={10}>
-       <Button type="submit">Save Address</Button>
-     </Col>
-   </FormGroup>
- </Form>
 
 
- <Form horizontal onSubmit={this.handleSubmitOrder} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '2%'}}>
+
+
  <FormGroup style={{ 'marginTop': '2%'}} >
    <Col componentClass={ControlLabel} sm={2}>
      url

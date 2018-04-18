@@ -9,9 +9,9 @@ import changePassword from './changePassword';
 import changeEmail from './changeEmail';
 import addresses from './addresses';
 import makeOrder from './makeOrder';
-import paidOrder from './paidOrder';
-import completedOrder from './completedOrder';
-import unpaidOrder from './unpaidOrder'
+import paidOrder from './orders/paidOrder';
+import completedOrder from './orders/completedOrder';
+import unpaidOrder from './orders/unpaidOrder';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import {
   Switch,
@@ -28,23 +28,9 @@ const divStyle = {
 
 
 
-const isMobile = window.innerWidth <= 500;
+//const isMobile = window.innerWidth <= 500;
 
 const NavBar = () => {
-  if (isMobile) {
-    return (
-      <div style={divStyle} >
-          <Navbar inverse collapseOnSelect>
-          <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-       <MenuItem href="/" eventKey={3.1}>Home</MenuItem>
-       <MenuItem href="/createAccount" eventKey={3.2}>Create Account</MenuItem>
-       <MenuItem href="/login" eventKey={3.3}>login</MenuItem>
-       <MenuItem href="/faq" eventKey={3.4}>FAQ</MenuItem>
-     </NavDropdown>
-     </Navbar>
-       </div>
-    )
-  }
   if (localStorage.getItem('token')) {
     return (
        <div style={divStyle} >

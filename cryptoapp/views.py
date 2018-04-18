@@ -23,6 +23,36 @@ def main(request):
     with open('/home/conlloc/btcbuy/btcbuyer/local_lens/build/index.html') as f:
         return HttpResponse(f.read())
 
+class Payment(APIView):
+     authentication_classes = (TokenAuthentication,)
+     permission_classes = (IsAuthenticated,)
+
+     def post(self, request, format=None):
+         try:
+             user = request._auth.user
+             profile = Profile.objects.get(user=user)
+             return_data = {'address': str(request.data['cryptoType'])}
+             return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
+         except:
+             return Response({'message':'create message'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class createMessage(APIView):
+     authentication_classes = (TokenAuthentication,)
+     permission_classes = (IsAuthenticated,)
+
+     def post(self, request, format=None):
+         try:
+             user = request._auth.user
+             profile = Profile.objects.get(user=user)
+             Message.objects.create(order_uuid=request.data['orderUUID'], by_user=user, content=request.data['content'])
+             print('1')
+             return_data = Misc.get_orders(self, request.data['option'], profile.uuid)
+             return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
+         except:
+             return Response({'message':'create message'}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class orders(APIView):
      authentication_classes = (TokenAuthentication,)
      permission_classes = (IsAuthenticated,)
@@ -32,17 +62,19 @@ class orders(APIView):
              user = request._auth.user
              profile = Profile.objects.get(user=user)
              return_data = Misc.create_order(self, request, profile.uuid)
-             print(return_data)
+             print('right? %s' % return_data)
              return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
          except:
              return Response({'message':'make order error'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-     def get(self, request, format=None):
+     def get(self, request, *args, format=None):
          try:
              user = request._auth.user
              profile = Profile.objects.get(user=user)
-             return_data = Misc.get_orders(self, profile.uuid)
+             print(args[0])
+             return_data = Misc.get_orders(self, args[0], profile.uuid)
+             return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
          except Exception as e:
              print(e)
              return
@@ -366,14 +398,31 @@ class Misc(APIView):
             print('get addresses %s' % e)
             return False
 
-    def get_orders(self, uuid):
-        orders = Order.objects.filter(user_uuid=uuid).order_by('created').reverse()
+
+    def get_orders(self, option, uuid):
+        print('#################')
+        print(option)
+        if option == 'unpaid':
+            orders = Order.objects.filter(user_uuid=uuid, order_status='UNPAID').order_by('created').reverse()
+        elif option == 'paid':
+            orders = Order.objects.filter(user_uuid=uuid, order_status='PAID').order_by('created').reverse()
+            print(orders)
+        elif option == 'completed':
+            orders = Order.objects.filter(user_uuid=uuid, order_status='COMPLETED').order_by('created').reverse()
+        else:
+            orders = Order.objects.filter(user_uuid=uuid).order_by('created').reverse()
         ords = []
+
         for order in orders:
+            message = Message.objects.filter(order_uuid=order.uuid).order_by('created')
             add = Address.objects.get(uuid=order.address_uuid)
-            data = {'name': add.name, 'address': add.address, 'apartment': add.apartment, 'country': add.country, 'zipCode': add.zip_code, 'additional': add.additional_info, 'isDefault': add.is_default, 'phoneNumber': add.phone_number, 'uuid': add.uuid \
-            }
-            return
+            data = {'name': add.name, 'address': add.address, 'apartment': add.apartment, 'country': add.country, 'zipCode': add.zip_code, 'additional': add.additional_info, 'isDefault': add.is_default, 'phoneNumber': add.phone_number, 'addressUUID': add.uuid, 'orderUUID': order.uuid, \
+            'shipped': order.shipped, 'url': order.url, 'price': order.price, 'paidFor': order.paid_for, 'created': order.created, 'screenshotUUID': order.screenshot_uuid, 'priority': order.priority, 'orderStatus': order.order_status, 'orderCreated': order.created, \
+            'messages':[{'content':mess.content,'created':mess.created, 'byUser': mess.by_user} for mess in message]}
+            ords.append(data)
+        return_data = {}
+        return_data['objects'] = ords
+        return return_data
 
 
     def create_order(self, request, user_uuid):
@@ -381,9 +430,8 @@ class Misc(APIView):
             if request.data['addressUUID'] != '':
                 try:
                     print('uuid is true')
-                    order = Order.objects.create(user_uuid=user_uuid, price=request.data['price'], address_uuid=request.data['addressUUID'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='unpaid', order_status='low')
-                    return_data = {}
-                    return_data['objects'] = {'success with saved address'}
+                    order = Order.objects.create(user_uuid=user_uuid, price=request.data['price'], address_uuid=request.data['addressUUID'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='low', order_status='UNPAID')
+                    return_data = Misc.get_orders(self, 'unpaid', user_uuid)
                     return return_data
                 except Exception as e:
                     print('save order %s' % e)
@@ -395,10 +443,8 @@ class Misc(APIView):
                     print(address_uuid)
                     print(request.data['price'])
                     print(request.data['screenshotUUID'])
-                    order = Order.objects.create(user_uuid=user_uuid, address_uuid=address_uuid, price=request.data['price'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='unpaid', order_status='low')
-                    print(one_address)
-                    return_data = {}
-                    return_data['objects'] = {'success with new address'}
+                    order = Order.objects.create(user_uuid=user_uuid, address_uuid=address_uuid, price=request.data['price'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='low', order_status='UNPAID')
+                    return_data = Misc.get_orders(self, 'unpaid', user_uuid)
                     return return_data
                 except Exception as e:
                     print('get one address %' % e)

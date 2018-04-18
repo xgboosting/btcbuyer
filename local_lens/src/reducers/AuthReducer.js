@@ -9,11 +9,12 @@ import {
   RECOVER_PASSWORD,
   CHANGE_MESSAGE,
   UPDATE_ADDRESSES,
-  SET_ORDER_IMAGE
+  SET_ORDER_IMAGE,
+  UPDATE_ORDERS
 } from './../actions';
 
 
-let initialState = { message: '', photos: {}, loading: false,  token: 'notavalidtoken', guest: true, addresses: {}, orderImg: '' }
+let initialState = { message: '', photos: {}, loading: false,  token: 'notavalidtoken', guest: true, addresses: {}, orderImg: '', orders: {} }
 
 export default ( state = initialState, action) => {
   switch (action.type) {
@@ -40,6 +41,8 @@ export default ( state = initialState, action) => {
     case SET_ORDER_IMAGE:
         console.log(action.payload)
         return Object.assign({}, state, { orderImg: action.payload.screenshot_url })
+    case UPDATE_ORDERS:
+            return Object.assign({}, state, { orders: action.payload })
     default:
       return state
   }

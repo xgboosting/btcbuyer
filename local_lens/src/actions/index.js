@@ -12,6 +12,7 @@ export const RECOVER_PASSWORD = 'RECOVER_PASSWORD';
 export const CHANGE_MESSAGE = 'CHANGE_MESSAGE';
 export const UPDATE_ADDRESSES = 'UPDATE_ADDRESSES';
 export const SET_ORDER_IMAGE = 'SET_ORDER_IMAGE';
+export const UPDATE_ORDERS = 'UPDATE_ORDERS';
 
 
 
@@ -20,6 +21,42 @@ const BASE_URL = 'http://localhost:8000/'
 export const helloWorld = () => {
   return {
     type: HELLO_WORLD
+  }
+}
+
+export const sendMessage = (theorderUUID, themessage, theoption) => {
+  return (dispatch) => {
+    //axios.defaults.withCredentials = false;
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+    const url = `${BASE_URL}api/message/`;
+    axios.post(url, {
+       orderUUID: theorderUUID,
+       content: themessage,
+       option: theoption
+    }).then(function (response) {
+      console.log(response.data);
+      dispatch({type: UPDATE_ORDERS, payload: response.data});
+    }).catch(function (error) {
+      console.log(error);
+      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
+    })
+  }
+}
+
+export const getOrders = (status) => {
+  return (dispatch) => {
+    //axios.defaults.withCredentials = false;
+    console.log(status)
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+    const url = `${BASE_URL}api/orders/${status}`;
+    axios.get(url).then(function (response) {
+      console.log(response.data);
+      dispatch({type: UPDATE_ORDERS, payload: response.data});
+    }).catch(function (error) {
+      console.log(error);
+    })
   }
 }
 export const sendOrderWithAddress = (thePrice, uuid, theUrl, theScreenshotUUID) => {
@@ -36,8 +73,8 @@ export const sendOrderWithAddress = (thePrice, uuid, theUrl, theScreenshotUUID) 
       creatingOrder: true
     }).then(function (response) {
       console.log(response.data);
-      dispatch({type: UPDATE_ADDRESSES, payload: response.data})
-      dispatch({type: CHANGE_MESSAGE, payload: 'address saved'})
+      dispatch({type: UPDATE_ADDRESSES, payload: response.data});
+      dispatch({type: CHANGE_MESSAGE, payload: 'success'});
     }).catch(function (error) {
       console.log(error);
       dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
@@ -45,7 +82,8 @@ export const sendOrderWithAddress = (thePrice, uuid, theUrl, theScreenshotUUID) 
   }
 }
 
-export const sendOrderNewAddress = (nameValue,
+export const sendOrderNewAddress = (
+  nameValue,
   apartmentValue,
   addressValue,
   countryValue,
@@ -56,9 +94,11 @@ export const sendOrderNewAddress = (nameValue,
   uuid,
   theUrl,
   theScreenshotUUID) => {
+
   return (dispatch) => {
-    //axios.defaults.withCredentials = false;
+    console.log('#############################')
     const token = localStorage.getItem('token');
+    console.log(token);
     axios.defaults.headers.common.Authorization = `Token ${token}`;
     const url = `${BASE_URL}api/orders/`;
     axios.post(url, {
@@ -76,8 +116,9 @@ export const sendOrderNewAddress = (nameValue,
       creatingOrder: true
     }).then(function (response) {
       console.log(response.data);
+      localStorage.setItem('orders', response.data);
       dispatch({type: UPDATE_ADDRESSES, payload: response.data})
-      dispatch({type: CHANGE_MESSAGE, payload: 'address saved'})
+      dispatch({type: CHANGE_MESSAGE, payload: 'success'})
     }).catch(function (error) {
       console.log(error);
       dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
@@ -100,6 +141,7 @@ export const getScreenCap = (theurl) => {
       console.log(response.data);
       localStorage.setItem('screenshot_url', response.data.screenshot_url);
       localStorage.setItem('screenshot_uuid', response.data.screenshot_uuid);
+
       dispatch({ type: SET_ORDER_IMAGE, payload: response.data });
 
     }).catch(function (error) {

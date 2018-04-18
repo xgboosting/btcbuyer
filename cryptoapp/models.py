@@ -29,8 +29,8 @@ class Address(models.Model):
 
 class Message(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sender = models.UUIDField()
-    sendee = models.UUIDField()
+    order_uuid = models.UUIDField()
+    by_user = models.CharField(max_length=255, default='admin')
     created = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=255, default='')
 
@@ -53,11 +53,11 @@ class Order(models.Model):
     STATUS = (
         ('UNPAID', 'unpaid'),
         ('PAID', 'paid'),
-        ('SHIPPED', 'shipped'),
-        ('DELIVERED', 'delivered'),
+        ('COMPLETED', 'completed')
 
     )
     order_status = models.CharField(max_length=255, choices=STATUS)
+
 
 class Validation_token(models.Model):
     token = models.CharField(max_length=255, default='')
