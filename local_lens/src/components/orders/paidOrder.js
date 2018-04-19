@@ -117,7 +117,11 @@ renderOrders () {
 
   if (this.props.orders.objects !== undefined) {
   const ordersToMap = this.props.orders.objects
-
+  if (this.props.orders.objects.length === 0 && ) {
+    return (
+    <p><b>you have no paid orders</b></p>
+  )
+  }
   return (
     <div style={{ marginTop: '5%', marginBottom: '3%', width:'100%', flex: 1}}>
 
