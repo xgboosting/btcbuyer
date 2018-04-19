@@ -16,7 +16,7 @@ export const UPDATE_ORDERS = 'UPDATE_ORDERS';
 
 
 
-const BASE_URL = 'http://http://167.99.175.200/'
+const BASE_URL = 'http://167.99.175.200/'
 
 export const helloWorld = () => {
   return {
@@ -250,7 +250,7 @@ return (dispatch) => {
     dispatch({type: CHANGE_MESSAGE, payload: 'password changed'})
   }).catch(function (error) {
     console.log(error);
-    dispatch({type: CHANGE_MESSAGE, payload: 'hmmm something broke, message the admins please'})
+    dispatch({type: CHANGE_MESSAGE, payload: 'bad password'})
   })
 }
 }
