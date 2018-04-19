@@ -71,7 +71,7 @@ class orders(APIView):
          except:
              return Response({'message':'make order error'}, status=status.HTTP_400_BAD_REQUEST)
 
-class returnOrders(APIView):
+class getOrders(APIView):
 
      def post(self, request, format=None):
          try:
