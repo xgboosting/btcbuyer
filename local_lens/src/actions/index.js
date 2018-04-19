@@ -16,7 +16,7 @@ export const UPDATE_ORDERS = 'UPDATE_ORDERS';
 
 
 
-const BASE_URL = 'http://localhost:8000/'
+const BASE_URL = 'http://167.99.175.200/'
 
 export const helloWorld = () => {
   return {

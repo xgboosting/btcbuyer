@@ -50,11 +50,12 @@ isDefaultChange() {
   }
 
 renderImage() {
-  console.log(this.props.imageUrl);
-  console.log(localStorage.getItem('screenshot_url'));
+  
+  console.log(localStorage.getItem('screenshot_uuid'));
   if (localStorage.getItem('screenshot_url') !== null) {
+    const imgUrl = `http://167.99.175.200/photos/${localStorage.getItem('screenshot_uuid')}.png`
     return (
-      <img src={this.props.imageUrl} alt="loaded" />
+      <img src={imgUrl} alt="loaded" />
       )
     } return (
       <img src={hourglass} alt="spinner" />

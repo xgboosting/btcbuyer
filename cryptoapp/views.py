@@ -12,17 +12,18 @@ from knox.models import AuthToken
 from knox.auth import TokenAuthentication
 import hashlib, random, string, uuid, json, datetime
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import requests
 
-#'02a86b5b-fec4-4418-81e5-5b137c0a7c94'
+#
 #place order
 #dashboard
 #send message
 #
-#06bb581d-4ca4-4cf5-8724-54c3dce2c741
+#
 #
 def main(request):
-    with open('/home/conlloc/btcbuy/btcbuyer/local_lens/build/index.html') as f:
+    with open('/home/connlloc/btcbuyer/local_lens/build/index.html') as f:
         return HttpResponse(f.read())
 
 class returnPaymentAddress(APIView):
@@ -133,11 +134,13 @@ class getScreenCap(APIView):
         try:
             print('here')
             url = request.data['url']
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
             DRIVER = 'chromedriver'
-            driver = webdriver.Chrome('/home/conlloc/btcbuy/venv/selenium/webdriver/chrome/chromedriver')
+            driver = webdriver.Chrome('/home/connlloc/chromedriver', chrome_options=chrome_options)
             driver.get(url)
             uu = uuid.uuid4()
-            location = '/home/conlloc/btcbuy/btcbuyer/photos/%s.png' % uu
+            location = '/home/connlloc/btcbuyer/photos/%s.png' % uu
             screenshot = driver.save_screenshot(location)
             driver.quit()
             return_data = {'screenshot_uuid': str(uu), 'screenshot_url': str(url)}
@@ -431,9 +434,10 @@ class Misc(APIView):
                         order.order_status = 'PAID'
                         order.paid_for = True
                         order.save()
-            except Exception as e:
-                print('try as i might %s' % e)
+            except:
+                print('try as i might')
                 paymentAdd = ''
+                pass
             if paymentAdd != '':
                 message = Message.objects.filter(order_uuid=order.uuid).order_by('created')
                 add = Address.objects.get(uuid=order.address_uuid)
