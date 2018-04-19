@@ -117,7 +117,7 @@ renderOrders () {
 
   if (this.props.orders.objects !== undefined) {
   const ordersToMap = this.props.orders.objects
-  if (this.props.orders.objects.length === 0 && ) {
+  if (this.props.orders.objects.length === 0) {
     return (
     <p><b>you have no unpaid orders</b></p>
   )
