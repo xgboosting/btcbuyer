@@ -78,14 +78,14 @@ getState() {
       )
     }
   return (
-<Panel>
+<Panel style={{marginLeft:'5%', marginRight: '5%'}}>
   <Panel.Heading>
 <Panel.Title componentClass="h3">Create Account</Panel.Title>
 </Panel.Heading>
 <br />
 
  <Form horizontal onSubmit={this.handleSubmit}>
-   <ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalEmail">
     <Col componentClass={ControlLabel} sm={2}>
       Email
@@ -95,7 +95,7 @@ getState() {
     </Col>
   </FormGroup>
 </ListGroupItem>
-<ListGroupItem>
+<ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword" validationState={this.getState()}>
     <Col componentClass={ControlLabel} sm={2}>
       Password
@@ -105,7 +105,7 @@ getState() {
     </Col>
   </FormGroup>
   </ListGroupItem>
-  <ListGroupItem>
+  <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword1" validationState={this.getRepeatState()}>
     <Col componentClass={ControlLabel} sm={2}>
       Password

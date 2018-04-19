@@ -43,13 +43,13 @@ passwordChange(event) {
 
   render () {
   return (
-    <Panel>
+    <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
       <Panel.Heading>
     <Panel.Title componentClass="h3">Change Email</Panel.Title>
     </Panel.Heading>
     <br />
  <Form horizontal onSubmit={this.handleSubmit}>
-   <ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword">
     <Col componentClass={ControlLabel} sm={2}>
       Password
@@ -59,7 +59,7 @@ passwordChange(event) {
     </Col>
   </FormGroup>
   </ListGroupItem>
-  <ListGroupItem>
+  <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalEmail">
     <Col componentClass={ControlLabel} sm={2}>
       New Email
@@ -69,7 +69,7 @@ passwordChange(event) {
     </Col>
   </FormGroup>
   </ListGroupItem>
-  <ListGroupItem>
+  <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <HelpBlock>{this.props.changeMessage}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
