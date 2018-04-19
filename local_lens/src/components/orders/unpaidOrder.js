@@ -93,7 +93,7 @@ return (
     <Panel style={{marginLeft:'20%'}}>
       <ListGroup>
       <ListGroupItem><b> please send a payment to one of the addresses below <br />expires <Moment fromNow>{object.expires}</Moment><br /></b></ListGroupItem>
-      <ListGroupItem><b>confirmations needed:<br />ltc: 2<br />btc: 1<br />btc cash:1<br />eth: 8</b></ListGroupItem>
+      <ListGroupItem><b>confirmations needed:<br />ltc: 2, btc: 1, btc cash:1, eth: 8</b></ListGroupItem>
        <ListGroupItem><span><b>{object.btc} </b> </span></ListGroupItem>
        <ListGroupItem><span><b>{object.eth} </b> </span></ListGroupItem>
        <ListGroupItem><span><b>{object.ltc} </b> </span></ListGroupItem>
@@ -105,10 +105,19 @@ return (
 
 }
 
+renderImage(object) {
+  const imgURL = `http://167.99.175.200/photos/${object.screenshotUUID}.png`
+  return (
+    <img style={{width: '250px', height: '250px', marginLeft: '40%'}} src={imgURL} />
+  )
+
+}
+
 renderOrders () {
 
   if (this.props.orders.objects !== undefined) {
   const ordersToMap = this.props.orders.objects
+
   return (
     <div style={{ marginTop: '5%', marginBottom: '3%', width:'100%', flex: 1}}>
 
@@ -134,8 +143,7 @@ renderOrders () {
 
               </Media.Left>
                <Media.Right>
-
-                 <img style={{marginLeft: '40%'}} src="http://via.placeholder.com/250x250" />
+                 {this.renderImage(object)}
                  {this.renderMessages(object)}
 
                </Media.Right>
@@ -147,7 +155,9 @@ renderOrders () {
     </div>
 
 )
-}
+} return (
+  <p><b>you have no unpaid orders</b></p>
+)
 }
 
   render () {

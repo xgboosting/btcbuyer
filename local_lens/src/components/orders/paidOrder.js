@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
-import { getOrders, sendMessage } from '../../actions';
+import { getOrders, sendMessage, getPaymentAddress } from '../../actions';
 import { connect } from 'react-redux';
 import { Form,
          FormGroup,
@@ -38,11 +38,18 @@ handleMessageSubmit(event, orderUUID) {
 
 }
 
+getPayment(object) {
+  console.log(object)
+  this.props.getPaymentAddress(object.orderUUID);
+}
+
+
+
 renderMessages(object) {
   if (object.messages !== undefined) {
   const messToMap = object.messages
   return (
-    <div style={{"borderWidth":"1px", 'borderRadius': '1%',  'borderStyle':'solid', margin: '10%', width:'140%', marginLeft: '50%'}}>
+    <div style={{"borderWidth":"1px", 'borderRadius': '1%',  'borderStyle':'solid', margin: '10%', width:'140%', marginLeft: '5%'}}>
 
       <ListGroup>
         <Panel.Heading>
@@ -74,14 +81,45 @@ renderMessages(object) {
 }
 }
 
+renderAddress(object) {
+  console.log(object.btc);
+  if (object.btc === undefined) {
+  return(
+  <Button onClick={() => this.getPayment(object)} bsStyle="primary" style={{marginLeft:'20%', marginBottom: '4%'}}>make payment</Button>
+  )
+}
+return (
+  <div>
+    <Panel style={{marginLeft:'20%'}}>
+      <ListGroup>
+      <ListGroupItem><b> please send a payment to one of the addresses below <br />expires <Moment fromNow>{object.expires}</Moment><br /></b></ListGroupItem>
+      <ListGroupItem><b>confirmations needed:<br />ltc: 2, btc: 1, btc cash:1, eth: 8</b></ListGroupItem>
+       <ListGroupItem><span><b>{object.btc} </b> </span></ListGroupItem>
+       <ListGroupItem><span><b>{object.eth} </b> </span></ListGroupItem>
+       <ListGroupItem><span><b>{object.ltc} </b> </span></ListGroupItem>
+       <ListGroupItem><span><b>{object.cash} </b> </span></ListGroupItem>
+      </ListGroup>
+     </Panel>
+  </div>
+)
 
+}
+
+renderImage(object) {
+  const imgURL = `http://167.99.175.200/photos/${object.screenshotUUID}.png`
+  return (
+    <img style={{width: '250px', height: '250px', marginLeft: '40%'}} src={imgURL} />
+  )
+
+}
 
 renderOrders () {
 
   if (this.props.orders.objects !== undefined) {
   const ordersToMap = this.props.orders.objects
+
   return (
-    <div style={{ marginTop: '5%', marginBottom: '3%', width:'80%', flex: 1}}>
+    <div style={{ marginTop: '5%', marginBottom: '3%', width:'100%', flex: 1}}>
 
       {ordersToMap.map((object, i) =>
        <div key={i} style={{"borderWidth":"1px", 'borderRadius': '1%',  'borderStyle':'solid', margin: '10%'}}>
@@ -89,19 +127,7 @@ renderOrders () {
 
           <Media>
               <Media.Left>
-                <ButtonToolbar style={{marginLeft:'20%', marginBottom: '4%'}}>
-                  <DropdownButton
-                    bsStyle="primary"
-                bsSize="small"
-                title="make payment"
-                id="dropdown-size-medium"
-              >
-                 <MenuItem onSelect={(e) => console.log('btc')} eventKey="1">BTC</MenuItem>
-                 <MenuItem  onSelect={(e) => console.log('eth')} eventKey="2">ETH</MenuItem>
-                 <MenuItem onSelect={(e) => console.log('ltc')} eventKey="3">LTC</MenuItem>
-                 <MenuItem onSelect={(e) => console.log('cash')} eventKey="4">BTC cash</MenuItem>
-               </DropdownButton>
-               </ButtonToolbar>
+                {this.renderAddress(object)}
                 <Panel style={{marginLeft:'20%'}}>
                   <ListGroup>
                    <ListGroupItem><span><b>name: </b> {object.name} </span></ListGroupItem>
@@ -117,7 +143,7 @@ renderOrders () {
 
               </Media.Left>
                <Media.Right>
-                 <img style={{marginLeft: '40%'}} src="http://via.placeholder.com/250x250" />
+                 {this.renderImage(object)}
                  {this.renderMessages(object)}
 
                </Media.Right>
@@ -129,7 +155,9 @@ renderOrders () {
     </div>
 
 )
-}
+} return (
+  <p><b>you have no paid orders</b></p>
+)
 }
 
   render () {
@@ -153,5 +181,6 @@ return {
 
 export default connect(mapStateToProps, {
  getOrders,
- sendMessage
+ sendMessage,
+ getPaymentAddress
 })(paidOrder);
