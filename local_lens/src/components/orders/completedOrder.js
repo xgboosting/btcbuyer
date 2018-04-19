@@ -119,7 +119,7 @@ renderOrders () {
   const ordersToMap = this.props.orders.objects
   if (this.props.orders.objects.length === 0) {
     return (
-    <p><b>you have no completed orders</b></p>
+    <p><b>you have no shipped orders</b></p>
   )
   }
   return (
