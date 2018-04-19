@@ -160,7 +160,7 @@ renderOrders () {
 
 )
 } return (
-  <p><b>you have no paid orders</b></p>
+  <p><b>you have no unpaid orders</b></p>
 )
 }
 
