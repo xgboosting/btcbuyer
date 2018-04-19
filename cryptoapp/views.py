@@ -71,13 +71,14 @@ class orders(APIView):
          except:
              return Response({'message':'make order error'}, status=status.HTTP_400_BAD_REQUEST)
 
+class returnOrders(APIView):
 
-     def get(self, request, *args, format=None):
+     def post(self, request, format=None):
          try:
              user = request._auth.user
              profile = Profile.objects.get(user=user)
-             print(args[0])
-             return_data = Misc.get_orders(self, args[0], profile.uuid)
+             print(request.data['option'])
+             return_data = Misc.get_orders(self, request.data['option'], profile.uuid)
              return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
          except Exception as e:
              print(e)

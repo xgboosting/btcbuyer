@@ -69,8 +69,10 @@ export const getOrders = (status) => {
     console.log(status)
     const token = localStorage.getItem('token');
     axios.defaults.headers.common.Authorization = `Token ${token}`;
-    const url = `${BASE_URL}api/orders/${status}`;
-    axios.get(url).then(function (response) {
+    const url = `${BASE_URL}api/get-orders/`;
+    axios.post(url, {
+      option: status
+    }).then(function (response) {
       console.log(response.data);
       dispatch({type: UPDATE_ORDERS, payload: response.data});
     }).catch(function (error) {
