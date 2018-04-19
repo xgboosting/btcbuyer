@@ -7,7 +7,9 @@ import { Form,
          ControlLabel,
          FormControl,
          Button,
-         HelpBlock
+         HelpBlock,
+         Panel,
+         ListGroupItem
  } from 'react-bootstrap';
 
 
@@ -41,8 +43,13 @@ passwordChange(event) {
 
   render () {
   return (
-
+    <Panel>
+      <Panel.Heading>
+    <Panel.Title componentClass="h3">Change Email</Panel.Title>
+    </Panel.Heading>
+    <br />
  <Form horizontal onSubmit={this.handleSubmit}>
+   <ListGroupItem>
   <FormGroup controlId="formHorizontalPassword">
     <Col componentClass={ControlLabel} sm={2}>
       Password
@@ -51,6 +58,8 @@ passwordChange(event) {
       <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
     </Col>
   </FormGroup>
+  </ListGroupItem>
+  <ListGroupItem>
   <FormGroup controlId="formHorizontalEmail">
     <Col componentClass={ControlLabel} sm={2}>
       New Email
@@ -59,13 +68,17 @@ passwordChange(event) {
       <FormControl value={this.state.newEmailValue} onChange={this.newEmailChange} type="email" placeholder="Email@example.com" />
     </Col>
   </FormGroup>
+  </ListGroupItem>
+  <ListGroupItem>
   <HelpBlock>{this.props.changeMessage}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
-      <Button type="submit">Change Email</Button>
+      <Button bsStyle='primary' type="submit">Change Email</Button>
     </Col>
   </FormGroup>
+</ListGroupItem>
 </Form>
+</Panel>
 
   )
 }

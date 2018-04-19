@@ -8,7 +8,9 @@ import { Form,
          ControlLabel,
          FormControl,
          Button,
-         HelpBlock
+         HelpBlock,
+         Panel,
+         ListGroupItem
  } from 'react-bootstrap';
 
 
@@ -76,8 +78,14 @@ getState() {
       )
     }
   return (
+<Panel>
+  <Panel.Heading>
+<Panel.Title componentClass="h3">Create Account</Panel.Title>
+</Panel.Heading>
+<br />
 
  <Form horizontal onSubmit={this.handleSubmit}>
+   <ListGroupItem>
   <FormGroup controlId="formHorizontalEmail">
     <Col componentClass={ControlLabel} sm={2}>
       Email
@@ -86,7 +94,8 @@ getState() {
       <FormControl value={this.state.emailValue} onChange={this.emailChange} type="email" placeholder="Email" />
     </Col>
   </FormGroup>
-
+</ListGroupItem>
+<ListGroupItem>
   <FormGroup controlId="formHorizontalPassword" validationState={this.getState()}>
     <Col componentClass={ControlLabel} sm={2}>
       Password
@@ -95,6 +104,8 @@ getState() {
       <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
     </Col>
   </FormGroup>
+  </ListGroupItem>
+  <ListGroupItem>
   <FormGroup controlId="formHorizontalPassword1" validationState={this.getRepeatState()}>
     <Col componentClass={ControlLabel} sm={2}>
       Password
@@ -103,6 +114,7 @@ getState() {
       <FormControl value={this.state.repeatPasswordValue} onChange={this.repeatPasswordChange} type="password" placeholder="repeat password" />
     </Col>
   </FormGroup>
+  </ListGroupItem>
   <HelpBlock>{this.props.message}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
@@ -110,6 +122,7 @@ getState() {
     </Col>
   </FormGroup>
 </Form>
+</Panel>
 
   )
 }

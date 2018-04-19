@@ -8,7 +8,9 @@ import { Form,
          ControlLabel,
          FormControl,
          Button,
-         HelpBlock
+         HelpBlock,
+         Panel,
+         ListGroupItem
  } from 'react-bootstrap';
 
 
@@ -47,7 +49,13 @@ passwordChange(event) {
     }
   return (
      <div>
+       <Panel>
+         <Panel.Heading>
+       <Panel.Title componentClass="h3">Change Email</Panel.Title>
+       </Panel.Heading>
+       <br />
      <Form horizontal onSubmit={this.handleSubmit}>
+       <ListGroupItem>
   <FormGroup controlId="formHorizontalEmail">
     <Col componentClass={ControlLabel} sm={2}>
       Email
@@ -56,7 +64,8 @@ passwordChange(event) {
       <FormControl value={this.state.emailValue} onChange={this.emailChange} type="email" placeholder="Email" />
     </Col>
   </FormGroup>
-
+</ListGroupItem>
+<ListGroupItem>
   <FormGroup controlId="formHorizontalPassword">
     <Col componentClass={ControlLabel} sm={2}>
       Password
@@ -65,14 +74,19 @@ passwordChange(event) {
       <FormControl  value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="Password" />
     </Col>
   </FormGroup>
+  </ListGroupItem>
   <HelpBlock>{this.props.loginMessage}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
-      <Button type="submit">login</Button>
+      <Button bsStyle='primary' type="submit">login</Button>
+
     </Col>
+    <Col smOffset={0} sm={10}>
+    <a href='/password-recover'>forgot your password?</a>
+        </Col>
   </FormGroup>
 </Form>
-   <a href='/password-recover'>forgot your password?</a>
+   </Panel>
     </div>
   )
 }

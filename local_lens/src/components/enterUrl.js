@@ -69,14 +69,12 @@ urlChange(event) {
    URL
  </Col>
  <Col sm={4}>
-   <FormControl value={this.state.urlValue} onChange={this.urlChange} type="url" placeholder="http://www.example.com/" style={inputSize}/>
+    <FormControl value={this.state.urlValue} onChange={this.urlChange} type="url" placeholder="http://www.example.com/" style={inputSize}/>
+    <Button style={{marginTop: '2%'}} bsStyle='primary' type="submit">create order</Button>
  </Col>
 </FormGroup>
-<FormGroup>
-  <Col smOffset={0} sm={10}>
-    <Button type="submit">create order</Button>
-  </Col>
-</FormGroup>
+
+
 
 </Form>
 <Showtext />
