@@ -34,6 +34,18 @@ class Message(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=255, default='')
 
+class PaymentAddress(models.Model):
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    charge_id =  models.CharField(max_length=20, default='')
+    order_uuid = models.UUIDField()
+    created = models.DateTimeField()
+    expires = models.DateTimeField()
+    btc = models.CharField(max_length=255, default='')
+    eth = models.CharField(max_length=255, default='')
+    ltc = models.CharField(max_length=255, default='')
+    cash = models.CharField(max_length=255, default='')
+    address_type = models.CharField(max_length=10, default='')
+
 class Order(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_uuid = models.UUIDField()

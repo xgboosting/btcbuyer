@@ -55,7 +55,7 @@ const NavBar = () => {
          <MenuItem href="/" eventKey={3.5}>new order</MenuItem>
          <MenuItem href="/paid-orders" eventKey={3.7}>paid orders</MenuItem>
          <MenuItem href="/unpaid-orders" eventKey={3.6}>unpaid orders</MenuItem>
-         <MenuItem href="/completed-orders" eventKey={3.2}>completed orders</MenuItem>
+         <MenuItem href="/completed-orders" eventKey={3.2}>shipped orders</MenuItem>
         </NavDropdown>
       </Nav>
     </Navbar>

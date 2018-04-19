@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from cryptoapp.models import Profile, Address, Message, Order, Validation_token
+from cryptoapp.models import Profile, Address, Message, Order, Validation_token, PaymentAddress
 
 
 class AddressAdmin(admin.ModelAdmin):
@@ -18,3 +18,7 @@ admin.site.register(Message, MessageAdmin)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('priority', 'order_status')
 admin.site.register(Order, OrderAdmin)
+
+class PaymentAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(PaymentAddress, PaymentAdmin)

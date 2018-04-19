@@ -7,6 +7,7 @@ import AddressForm from '../noRedirect/addressForm';
 import { Button,
          Checkbox
  } from 'react-bootstrap';
+ import hourglass from './../assets/hourglass.gif';
 
 //name
 //address
@@ -56,7 +57,7 @@ renderImage() {
       <img src={this.props.imageUrl} alt="loaded" />
       )
     } return (
-      <img src="/home/conlloc/btcbuy/btcbuyer/spiral.gif" alt="spinner" />
+      <img src={hourglass} alt="spinner" />
     )
   }
 

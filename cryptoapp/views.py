@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from cryptoapp.models import Profile, Address, Message, Order, Validation_token
+from cryptoapp.models import Profile, Address, Message, Order, Validation_token, PaymentAddress
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,18 +12,20 @@ from knox.models import AuthToken
 from knox.auth import TokenAuthentication
 import hashlib, random, string, uuid, json, datetime
 from selenium import webdriver
+import requests
 
+#'02a86b5b-fec4-4418-81e5-5b137c0a7c94'
 #place order
 #dashboard
 #send message
 #
-#
+#06bb581d-4ca4-4cf5-8724-54c3dce2c741
 #
 def main(request):
     with open('/home/conlloc/btcbuy/btcbuyer/local_lens/build/index.html') as f:
         return HttpResponse(f.read())
 
-class Payment(APIView):
+class returnPaymentAddress(APIView):
      authentication_classes = (TokenAuthentication,)
      permission_classes = (IsAuthenticated,)
 
@@ -31,10 +33,12 @@ class Payment(APIView):
          try:
              user = request._auth.user
              profile = Profile.objects.get(user=user)
-             return_data = {'address': str(request.data['cryptoType'])}
+             Misc.get_payment_address(self, request.data['orderUUID'])
+             return_data = Misc.get_orders(self, 'unpaid', profile.uuid)
              return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
-         except:
-             return Response({'message':'create message'}, status=status.HTTP_400_BAD_REQUEST)
+         except Exception as e:
+             print(e)
+             return Response({'message':'failed to retrieve payment address'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class createMessage(APIView):
@@ -46,7 +50,6 @@ class createMessage(APIView):
              user = request._auth.user
              profile = Profile.objects.get(user=user)
              Message.objects.create(order_uuid=request.data['orderUUID'], by_user=user, content=request.data['content'])
-             print('1')
              return_data = Misc.get_orders(self, request.data['option'], profile.uuid)
              return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
          except:
@@ -406,23 +409,71 @@ class Misc(APIView):
             orders = Order.objects.filter(user_uuid=uuid, order_status='UNPAID').order_by('created').reverse()
         elif option == 'paid':
             orders = Order.objects.filter(user_uuid=uuid, order_status='PAID').order_by('created').reverse()
-            print(orders)
         elif option == 'completed':
             orders = Order.objects.filter(user_uuid=uuid, order_status='COMPLETED').order_by('created').reverse()
         else:
             orders = Order.objects.filter(user_uuid=uuid).order_by('created').reverse()
         ords = []
-
         for order in orders:
-            message = Message.objects.filter(order_uuid=order.uuid).order_by('created')
-            add = Address.objects.get(uuid=order.address_uuid)
-            data = {'name': add.name, 'address': add.address, 'apartment': add.apartment, 'country': add.country, 'zipCode': add.zip_code, 'additional': add.additional_info, 'isDefault': add.is_default, 'phoneNumber': add.phone_number, 'addressUUID': add.uuid, 'orderUUID': order.uuid, \
-            'shipped': order.shipped, 'url': order.url, 'price': order.price, 'paidFor': order.paid_for, 'created': order.created, 'screenshotUUID': order.screenshot_uuid, 'priority': order.priority, 'orderStatus': order.order_status, 'orderCreated': order.created, \
-            'messages':[{'content':mess.content,'created':mess.created, 'byUser': mess.by_user} for mess in message]}
-            ords.append(data)
+            try:
+                paymentAdd = PaymentAddress.objects.get(order_uuid=order.uuid)
+                print(paymentAdd.expires.replace(tzinfo=None))
+                print(datetime.datetime.utcnow())
+                if datetime.datetime.utcnow() > paymentAdd.expires.replace(tzinfo=None):
+                    if Misc.check_payment(self, paymentAdd.charge_id):
+                        order.order_status = 'PAID'
+                        order.paid_for = True
+                        order.save()
+                    else:
+                        paymentAdd.delete()
+                else:
+                    if Misc.check_payment(self, paymentAdd.charge_id):
+                        order.order_status = 'PAID'
+                        order.paid_for = True
+                        order.save()
+            except Exception as e:
+                print('try as i might %s' % e)
+                paymentAdd = ''
+            if paymentAdd != '':
+                message = Message.objects.filter(order_uuid=order.uuid).order_by('created')
+                add = Address.objects.get(uuid=order.address_uuid)
+                data = {'btc': paymentAdd.btc, 'eth': paymentAdd.eth, 'cash': paymentAdd.cash, 'ltc': paymentAdd.ltc,\
+                'expires': paymentAdd.expires, 'name': add.name, 'address': add.address, 'apartment': add.apartment, \
+                'country': add.country, 'zipCode': add.zip_code, 'additional': add.additional_info,\
+                'isDefault': add.is_default, 'phoneNumber': add.phone_number, 'addressUUID': add.uuid, 'orderUUID': order.uuid, \
+                'shipped': order.shipped, 'url': order.url, 'price': order.price, 'paidFor': order.paid_for,\
+                'created': order.created, 'screenshotUUID': order.screenshot_uuid, 'priority': order.priority, 'orderStatus': order.order_status, 'orderCreated': order.created, \
+                'messages':[{'content':mess.content,'created':mess.created, 'byUser': mess.by_user} for mess in message]}
+                ords.append(data)
+            else:
+                message = Message.objects.filter(order_uuid=order.uuid).order_by('created')
+                add = Address.objects.get(uuid=order.address_uuid)
+                data = {'name': add.name, 'address': add.address, 'apartment': add.apartment, \
+                'country': add.country, 'zipCode': add.zip_code, 'additional': add.additional_info,\
+                'isDefault': add.is_default, 'phoneNumber': add.phone_number, 'addressUUID': add.uuid, 'orderUUID': order.uuid, \
+                'shipped': order.shipped, 'url': order.url, 'price': order.price, 'paidFor': order.paid_for,\
+                'created': order.created, 'screenshotUUID': order.screenshot_uuid, 'priority': order.priority, 'orderStatus': order.order_status, 'orderCreated': order.created, \
+                'messages':[{'content':mess.content,'created':mess.created, 'byUser': mess.by_user} for mess in message]}
+                ords.append(data)
         return_data = {}
         return_data['objects'] = ords
         return return_data
+
+
+    def check_payment(self, order_id):
+        try:
+            url = "https://api.commerce.coinbase.com/charges/%s" % order_id
+            print(url)
+            headers = {'X-CC-Api-Key': '02a86b5b-fec4-4418-81e5-5b137c0a7c94', 'X-CC-Version': '2018-03-22'}
+            response = requests.get(url, headers=headers)
+            data = response.json()
+            try:
+                data['data']['confirmed_at']
+                return True
+            except:
+                return False
+        except Exception as e:
+            print('check payment %s' % e)
 
 
     def create_order(self, request, user_uuid):
@@ -450,4 +501,33 @@ class Misc(APIView):
                     print('get one address %' % e)
         except Exception as e:
             print('except %s' %e)
+            return False
+
+
+    def get_payment_address(self, order_uuid):
+        try:
+            url = "https://api.commerce.coinbase.com/charges"
+            headers = {'X-CC-Api-Key': '02a86b5b-fec4-4418-81e5-5b137c0a7c94', 'X-CC-Version': '2018-03-22'}
+            order = Order.objects.get(uuid=order_uuid)
+            print(order.uuid)
+            print(order_uuid)
+            payload = {'name': order_uuid,'description': order.url, 'local_price': {'amount':order.price,'currency':'USD'},'pricing_type': 'fixed_price','metadata': {'customer_id': str(order.user_uuid) }}
+            response = requests.post(url, headers=headers, json=payload)
+            data = response.json()
+            btc_add = data['data']['addresses']['bitcoin']
+            eth_add = data['data']['addresses']['ethereum']
+            cash_add = data['data']['addresses']['bitcoincash']
+            ltc_add = data['data']['addresses']['litecoin']
+            charge_id = data['data']['code']
+            #order_uuid
+            created = data['data']['created_at']
+            expires = data['data']['expires_at']
+            btc = '%s btc to %s' % (str(data['data']['pricing']['bitcoin']['amount']), str(btc_add))
+            eth = '%s eth to %s' % (str(data['data']['pricing']['ethereum']['amount']), str(eth_add))
+            cash = '%s bitcoin cash to %s' % (str(data['data']['pricing']['bitcoincash']['amount']), str(cash_add))
+            ltc = '%s ltc to %s' % (str(data['data']['pricing']['litecoin']['amount']), str(ltc_add))
+            PaymentAddress.objects.create(btc=btc, eth=eth, cash=cash, ltc=ltc, order_uuid=order_uuid, created=created, expires=expires, charge_id=charge_id)
+            print('here')
+        except Exception as e:
+            print('get payment address %s' % e)
             return False

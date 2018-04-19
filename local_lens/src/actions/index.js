@@ -24,6 +24,25 @@ export const helloWorld = () => {
   }
 }
 
+export const getPaymentAddress = (theorderUUID) => {
+  return (dispatch) => {
+    //axios.defaults.withCredentials = false;
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+    const url = `${BASE_URL}api/get-address/`;
+    axios.post(url, {
+       orderUUID: theorderUUID
+    }).then(function (response) {
+      console.log(response.data);
+      dispatch({type: UPDATE_ORDERS, payload: response.data});
+    }).catch(function (error) {
+      console.log(error);
+      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
+    })
+  }
+}
+
+
 export const sendMessage = (theorderUUID, themessage, theoption) => {
   return (dispatch) => {
     //axios.defaults.withCredentials = false;
