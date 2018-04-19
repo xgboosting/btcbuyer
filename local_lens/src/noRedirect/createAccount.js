@@ -8,7 +8,9 @@ import { Form,
          ControlLabel,
          FormControl,
          Button,
-         HelpBlock
+         HelpBlock,
+         Panel,
+         ListGroupItem
  } from 'react-bootstrap';
 
 
@@ -77,39 +79,51 @@ getState() {
     }
   return (
 
- <Form horizontal onSubmit={this.handleSubmit}>
-  <FormGroup controlId="formHorizontalEmailcreate">
-    <Col componentClass={ControlLabel} sm={2}>
-      Email
-    </Col>
-    <Col sm={4}>
-      <FormControl value={this.state.emailValue} onChange={this.emailChange} type="email" placeholder="Email" />
-    </Col>
-  </FormGroup>
+    <Panel style={{marginLeft:'5%', marginRight: '5%'}}>
+      <Panel.Heading>
+    <Panel.Title componentClass="h3">Create Account</Panel.Title>
+    </Panel.Heading>
+    <br />
 
-  <FormGroup controlId="formHorizontalPasswordcreate" validationState={this.getState()}>
-    <Col componentClass={ControlLabel} sm={2}>
-      Password
-    </Col>
-    <Col sm={2}>
-      <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
-    </Col>
-  </FormGroup>
-  <FormGroup controlId="formHorizontalPassword1create" validationState={this.getRepeatState()}>
-    <Col componentClass={ControlLabel} sm={2}>
-      Password
-    </Col>
-    <Col sm={2}>
-      <FormControl value={this.state.repeatPasswordValue} onChange={this.repeatPasswordChange} type="password" placeholder="repeat password" />
-    </Col>
-  </FormGroup>
-  <HelpBlock>{this.props.message}</HelpBlock>
-  <FormGroup>
-    <Col smOffset={0} sm={10}>
-      <Button type="submit">Create account</Button>
-    </Col>
-  </FormGroup>
-</Form>
+     <Form horizontal onSubmit={this.handleSubmit}>
+       <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
+      <FormGroup controlId="formHorizontalEmail">
+        <Col componentClass={ControlLabel} sm={2}>
+          Email
+        </Col>
+        <Col sm={4}>
+          <FormControl value={this.state.emailValue} onChange={this.emailChange} type="email" placeholder="Email" />
+        </Col>
+      </FormGroup>
+    </ListGroupItem>
+    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
+      <FormGroup controlId="formHorizontalPassword" validationState={this.getState()}>
+        <Col componentClass={ControlLabel} sm={2}>
+          Password
+        </Col>
+        <Col sm={2}>
+          <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
+        </Col>
+      </FormGroup>
+      </ListGroupItem>
+      <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
+      <FormGroup controlId="formHorizontalPassword1" validationState={this.getRepeatState()}>
+        <Col componentClass={ControlLabel} sm={2}>
+          Password
+        </Col>
+        <Col sm={2}>
+          <FormControl value={this.state.repeatPasswordValue} onChange={this.repeatPasswordChange} type="password" placeholder="repeat password" />
+        </Col>
+      </FormGroup>
+      </ListGroupItem>
+      <HelpBlock>{this.props.message}</HelpBlock>
+      <FormGroup>
+        <Col smOffset={0} sm={10}>
+          <Button bsStyle='primary' type="submit">Create account</Button>
+        </Col>
+      </FormGroup>
+    </Form>
+    </Panel>
 
   )
 }

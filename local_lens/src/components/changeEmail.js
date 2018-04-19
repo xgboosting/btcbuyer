@@ -69,14 +69,14 @@ passwordChange(event) {
     </Col>
   </FormGroup>
   </ListGroupItem>
-  <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
+
   <HelpBlock>{this.props.changeMessage}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
       <Button bsStyle='primary' type="submit">Change Email</Button>
     </Col>
   </FormGroup>
-</ListGroupItem>
+
 </Form>
 </Panel>
 

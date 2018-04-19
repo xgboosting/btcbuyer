@@ -118,7 +118,7 @@ getState() {
   <HelpBlock>{this.props.message}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
-      <Button type="submit">Create account</Button>
+      <Button bsStyle='primary' type="submit">Create account</Button>
     </Col>
   </FormGroup>
 </Form>

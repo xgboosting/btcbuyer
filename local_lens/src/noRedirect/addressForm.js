@@ -9,7 +9,9 @@ import { Form,
          Button,
          HelpBlock,
          Grid,
-         Row
+         Row,
+         Panel,
+         ListGroupItem
  } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
@@ -168,28 +170,42 @@ useAddress(object, event) {
    if (this.props.addresses.objects !== undefined) {
      const addressesToMap = this.props.addresses.objects
    return (
-     <Grid style={{ marginTop: '5%', marginBottom: '3%'}}>
+     <Grid style={{ marginTop: '1%', marginBottom: '1%'}}>
        <Row className="show-grid">
        {addressesToMap.map((object, i) =>
-         <div style={{colStyle}} key={i}>
-
-        <Col sm={6} md={3} key={i} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '2%'}}>
-          <br />
-          {object.name} <br />
-          {object.address} <br />
-          {object.apartment}<br />
-          {object.country}<br />
-           {object.zipCode}<br />
-           {object.phoneNumber} <br />
-           {object.additionalInfo}
-            <Button style={{"marginBottom": '2%'}} onClick={() => this.useAddress(object)}>use this address</Button>
+         <div style={{colStyle}}>
+           <Col sm={6} md={3} key={i} >
+        <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
+          <Panel.Heading>
+        <Panel.Title componentClass="h3">Address</Panel.Title>
+        </Panel.Heading>
+         <br />
 
           <br />
-        </Col>
+          <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>name: </b>
+          {object.name}</ListGroupItem>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>address: </b>
+          {object.address} </ListGroupItem>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>apartment: </b>
+          {object.apartment}</ListGroupItem>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>country: </b>
+          {object.country}</ListGroupItem>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>zip: </b>
+           {object.zipCode}</ListGroupItem>
+         <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>additional info: </b>
+         {object.additional}</ListGroupItem>
+       <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>phone: </b>
+       {object.phoneNumber}</ListGroupItem> <br />
+     <Button style={{"marginBottom": '2%'}} onClick={() => this.useAddress(object)}>use this address</Button>
+          <br />
+
+        </Panel>
+      </Col>
         </div>
        )}
        </Row>
      </Grid>
+
 
  )
 }
@@ -207,12 +223,19 @@ useAddress(object, event) {
      }
    return (
     <div style={divStyle}>
+
     <Grid>
       <Row className="show-grid">
        {this.returnAddresses()}
       </Row>
     </Grid>
-  <Form horizontal onSubmit={this.handleSubmitOrder} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '2%'}}>
+    <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
+      <Panel.Heading>
+    <Panel.Title componentClass="h3">Create Order</Panel.Title>
+    </Panel.Heading>
+    <br />
+  <Form horizontal onSubmit={this.handleSubmitOrder}>
+    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup style={{ 'marginTop': '2%'}} >
     <Col componentClass={ControlLabel} sm={2}>
       name
@@ -221,7 +244,8 @@ useAddress(object, event) {
       <FormControl value={this.state.nameValue} onChange={this.nameChange} type="text" placeholder="john smith" />
     </Col>
   </FormGroup>
-
+  </ListGroupItem>
+<ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword" >
      <Col componentClass={ControlLabel} sm={2}>
        address
@@ -230,6 +254,8 @@ useAddress(object, event) {
        <FormControl value={this.state.addressValue} onChange={this.addressChange} componentClass="textarea" placeholder="1000 Wayne Manor         Gotham City, USA" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword12">
      <Col componentClass={ControlLabel} sm={2}>
       apartment
@@ -238,6 +264,8 @@ useAddress(object, event) {
        <FormControl value={this.state.apartmentValue} onChange={this.apartmentChange} type="text" placeholder="b5" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword12" >
      <Col componentClass={ControlLabel} sm={2}>
       country
@@ -246,6 +274,8 @@ useAddress(object, event) {
        <FormControl value={this.state.countryValue} onChange={this.countryChange} type="text" placeholder="country" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword12" >
      <Col componentClass={ControlLabel} sm={2}>
       zip code
@@ -254,6 +284,8 @@ useAddress(object, event) {
        <FormControl value={this.state.zipValue} onChange={this.zipChange} type="text" placeholder="zip code" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" >
      <Col componentClass={ControlLabel} sm={2}>
       phone number
@@ -262,6 +294,8 @@ useAddress(object, event) {
        <FormControl value={this.state.phoneValue} onChange={this.phoneChange} type="text" placeholder="+1-541-754-3010" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword12" >
      <Col componentClass={ControlLabel} sm={2}>
       additional info
@@ -270,9 +304,8 @@ useAddress(object, event) {
        <FormControl value={this.state.additionalValue} onChange={this.additionalChange} componentClass="textarea" placeholder="additional info" />
      </Col>
    </FormGroup>
-
-
-
+   </ListGroupItem>
+<ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
 
  <FormGroup style={{ 'marginTop': '2%'}} >
    <Col componentClass={ControlLabel} sm={2}>
@@ -282,7 +315,8 @@ useAddress(object, event) {
      <FormControl value={this.state.urlValue} onChange={this.urlChange} type="text" placeholder="http://example.com/product" />
    </Col>
  </FormGroup>
-
+ </ListGroupItem>
+<ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword" >
     <Col componentClass={ControlLabel} sm={2}>
       product name
@@ -291,6 +325,8 @@ useAddress(object, event) {
       <FormControl value={this.state.productNameValue} onChange={this.productNameChange} type="text" placeholder="the name of the product" />
     </Col>
   </FormGroup>
+  </ListGroupItem>
+  <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword12">
     <Col componentClass={ControlLabel} sm={2}>
      quantity
@@ -299,6 +335,8 @@ useAddress(object, event) {
       <FormControl value={this.state.quantityValue} onChange={this.quantityChange} type="number" placeholder="1" />
     </Col>
   </FormGroup>
+  </ListGroupItem>
+  <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword12" >
     <Col componentClass={ControlLabel} sm={2}>
      price total (USD) include shipping!
@@ -307,6 +345,8 @@ useAddress(object, event) {
       <FormControl value={this.state.priceValue} onChange={this.priceChange} type="number" placeholder="10.00" />
     </Col>
   </FormGroup>
+  </ListGroupItem>
+  <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword12" >
     <Col componentClass={ControlLabel} sm={2}>
      additional info
@@ -315,13 +355,16 @@ useAddress(object, event) {
       <FormControl value={this.state.additionalOrderValue} onChange={this.additionalOrderChange} componentClass="textarea" placeholder="this is where you should enter any information about color, size, and any other options" />
     </Col>
   </FormGroup>
+</ListGroupItem>
   <HelpBlock>{this.props.changeMessage}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
-      <Button type="submit">continue to payment</Button>
+      <Button bsStyle='primary' type="submit">continue to payment</Button>
     </Col>
   </FormGroup>
+
 </Form>
+</Panel>
  </div>
    )
  }

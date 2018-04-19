@@ -46,7 +46,7 @@ emailChange(event) {
   <HelpBlock>{this.props.recoverMessage}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
-      <Button type="submit">send me a secret</Button>
+      <Button bsStyle='primary' type="submit">send me a secret</Button>
     </Col>
   </FormGroup>
 </Form>

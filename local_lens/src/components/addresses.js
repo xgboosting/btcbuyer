@@ -10,7 +10,9 @@ import { Form,
          HelpBlock,
          Grid,
          Row,
-         Checkbox
+         Checkbox,
+         Panel,
+         ListGroupItem
  } from 'react-bootstrap';
 
 //name
@@ -124,22 +126,37 @@ isDefaultChange() {
    if (this.props.addresses.objects !== undefined) {
      const addressesToMap = this.props.addresses.objects
    return (
-     <Grid style={{ marginTop: '5%', marginBottom: '3%'}}>
+
+     <Grid style={{ marginTop: '1%', marginBottom: '1%'}}>
        <Row className="show-grid">
        {addressesToMap.map((object, i) =>
          <div style={{colStyle}}>
+           <Col sm={6} md={3} key={i} >
+        <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
+          <Panel.Heading>
+        <Panel.Title componentClass="h3">Address</Panel.Title>
+        </Panel.Heading>
+         <br />
 
-        <Col sm={6} md={3} key={i} style={{"borderWidth":"1px", 'borderRadius': '3%',  'borderStyle':'solid', margin: '1%'}}>
           <br />
-          {object.name} <br />
-          {object.address} <br />
-          {object.apartment}<br />
-          {object.country}<br />
-           {object.zipCode}<br />
-         {object.additionalInfo}<br />
-       {object.phoneNumber}
+          <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>name: </b>
+          {object.name}</ListGroupItem>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>address: </b>
+          {object.address} </ListGroupItem>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>apartment: </b>
+          {object.apartment}</ListGroupItem>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>country: </b>
+          {object.country}</ListGroupItem>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>zip: </b>
+           {object.zipCode}</ListGroupItem>
+         <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>additional info: </b>
+         {object.additional}</ListGroupItem>
+       <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>phone: </b>
+       {object.phoneNumber}</ListGroupItem>
           <br />
-        </Col>
+
+        </Panel>
+      </Col>
         </div>
        )}
        </Row>
@@ -158,7 +175,14 @@ isDefaultChange() {
        {this.returnAddresses()}
       </Row>
     </Grid>
+    <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
+      <Panel.Heading>
+    <Panel.Title componentClass="h3">Addresses</Panel.Title>
+    </Panel.Heading>
+      <br />
+
   <Form horizontal onSubmit={this.handleSubmit}>
+    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup  >
     <Col componentClass={ControlLabel} sm={2}>
       name
@@ -167,7 +191,8 @@ isDefaultChange() {
       <FormControl value={this.state.nameValue} onChange={this.nameChange} type="text" placeholder="john smith" />
     </Col>
   </FormGroup>
-
+  </ListGroupItem>
+<ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword" >
      <Col componentClass={ControlLabel} sm={2}>
        address
@@ -176,6 +201,8 @@ isDefaultChange() {
        <FormControl value={this.state.addressValue} onChange={this.addressChange} componentClass="textarea" placeholder="1000 Wayne Manor         Gotham City, USA" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1">
      <Col componentClass={ControlLabel} sm={2}>
       apartment
@@ -184,6 +211,8 @@ isDefaultChange() {
        <FormControl value={this.state.apartmentValue} onChange={this.apartmentChange} type="text" placeholder="b5" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" >
      <Col componentClass={ControlLabel} sm={2}>
       country
@@ -192,6 +221,8 @@ isDefaultChange() {
        <FormControl value={this.state.countryValue} onChange={this.countryChange} type="text" placeholder="country" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" >
      <Col componentClass={ControlLabel} sm={2}>
       zip code
@@ -200,6 +231,8 @@ isDefaultChange() {
        <FormControl value={this.state.zipValue} onChange={this.zipChange} type="text" placeholder="zip code" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" >
      <Col componentClass={ControlLabel} sm={2}>
       phone number
@@ -208,6 +241,8 @@ isDefaultChange() {
        <FormControl value={this.state.phoneValue} onChange={this.phoneChange} type="text" placeholder="+1-541-754-3010" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" >
      <Col componentClass={ControlLabel} sm={2}>
       additional info
@@ -216,13 +251,15 @@ isDefaultChange() {
        <FormControl value={this.state.additionalValue} onChange={this.additionalChange} componentClass="textarea" placeholder="additional info" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
    <HelpBlock>{this.props.changeMessage}</HelpBlock>
    <FormGroup>
      <Col smOffset={0} sm={10}>
-       <Button type="submit">Save Address</Button>
+       <Button bsStyle='primary' type="submit">Save Address</Button>
      </Col>
    </FormGroup>
  </Form>
+</Panel>
  </div>
    )
  }

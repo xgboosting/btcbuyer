@@ -11,7 +11,9 @@ import { Form,
          ControlLabel,
          FormControl,
          Button,
-         HelpBlock
+         HelpBlock,
+         Panel,
+         ListGroupItem
  } from 'react-bootstrap';
 
 
@@ -79,8 +81,13 @@ import { Form,
      )
      }
    return (
-
+  <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
+    <Panel.Heading>
+  <Panel.Title componentClass="h3">Change Password</Panel.Title>
+  </Panel.Heading>
+  <br />
   <Form horizontal onSubmit={this.handleSubmit}>
+  <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword" >
     <Col componentClass={ControlLabel} sm={2}>
       Password
@@ -89,7 +96,8 @@ import { Form,
       <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
     </Col>
   </FormGroup>
-
+  </ListGroupItem>
+<ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword" validationState={this.getState()}>
      <Col componentClass={ControlLabel} sm={2}>
        New Password
@@ -98,6 +106,8 @@ import { Form,
        <FormControl value={this.state.newPasswordValue} onChange={this.newPasswordChange} type="password" placeholder=" new password" />
      </Col>
    </FormGroup>
+   </ListGroupItem>
+   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" validationState={this.getRepeatState()}>
      <Col componentClass={ControlLabel} sm={2}>
       Repeat Password
@@ -106,13 +116,15 @@ import { Form,
        <FormControl value={this.state.newRepeatPasswordValue} onChange={this.newRepeatPasswordChange} type="password" placeholder="repeat new password" />
      </Col>
    </FormGroup>
+ </ListGroupItem>
    <HelpBlock>{this.props.changeMessage}</HelpBlock>
    <FormGroup>
      <Col smOffset={0} sm={10}>
-       <Button type="submit">Change password</Button>
+       <Button bsStyle='primary' type="submit">Change password</Button>
      </Col>
    </FormGroup>
  </Form>
+</Panel>
    )
  }
  }

@@ -160,7 +160,7 @@ renderOrders () {
 
 )
 } return (
-  <p><b>you have no completed orders</b></p>
+  <p><b>you have no shipped orders</b></p>
 )
 }
 

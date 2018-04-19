@@ -51,7 +51,7 @@ passwordChange(event) {
      <div>
        <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
          <Panel.Heading>
-       <Panel.Title componentClass="h3">Change Email</Panel.Title>
+       <Panel.Title componentClass="h3">Login</Panel.Title>
        </Panel.Heading>
        <br />
      <Form horizontal onSubmit={this.handleSubmit}>

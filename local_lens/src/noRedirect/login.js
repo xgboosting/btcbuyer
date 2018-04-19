@@ -8,7 +8,9 @@ import { Form,
          ControlLabel,
          FormControl,
          Button,
-         HelpBlock
+         HelpBlock,
+         Panel,
+         ListGroupItem
  } from 'react-bootstrap';
 
 
@@ -46,34 +48,47 @@ passwordChange(event) {
     )
     }
   return (
-     <div>
-     <Form horizontal onSubmit={this.handleSubmit}>
-  <FormGroup controlId="formHorizontalEmail">
-    <Col componentClass={ControlLabel} sm={2}>
-      Email
-    </Col>
-    <Col sm={4}>
-      <FormControl value={this.state.emailValue} onChange={this.emailChange} type="email" placeholder="Email" />
-    </Col>
-  </FormGroup>
+    <div>
+      <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
+        <Panel.Heading>
+      <Panel.Title componentClass="h3">Login</Panel.Title>
+      </Panel.Heading>
+      <br />
+    <Form horizontal onSubmit={this.handleSubmit}>
+      <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
+ <FormGroup controlId="formHorizontalEmail">
+   <Col componentClass={ControlLabel} sm={2}>
+     Email
+   </Col>
+   <Col sm={4}>
+     <FormControl value={this.state.emailValue} onChange={this.emailChange} type="email" placeholder="Email" />
+   </Col>
+ </FormGroup>
+</ListGroupItem>
+<ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
+ <FormGroup controlId="formHorizontalPassword">
+   <Col componentClass={ControlLabel} sm={2}>
+     Password
+   </Col>
+   <Col sm={2}>
+     <FormControl  value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="Password" />
+   </Col>
+ </FormGroup>
+ </ListGroupItem>
+ <HelpBlock>{this.props.loginMessage}</HelpBlock>
+ <FormGroup>
+   <Col smOffset={0} sm={10}>
+     <Button bsStyle='primary' type="submit">login</Button>
 
-  <FormGroup controlId="formHorizontalPassword">
-    <Col componentClass={ControlLabel} sm={2}>
-      Password
-    </Col>
-    <Col sm={2}>
-      <FormControl  value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="Password" />
-    </Col>
-  </FormGroup>
-  <HelpBlock>{this.props.loginMessage}</HelpBlock>
-  <FormGroup>
-    <Col smOffset={0} sm={10}>
-      <Button type="submit">login</Button>
-    </Col>
-  </FormGroup>
-</Form>
+   </Col>
+   <Col smOffset={0} sm={10}>
    <a href='/password-recover'>forgot your password?</a>
-    </div>
+       </Col>
+ </FormGroup>
+</Form>
+  </Panel>
+   </div>
+
   )
 }
 }
