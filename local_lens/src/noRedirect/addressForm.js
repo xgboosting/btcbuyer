@@ -22,6 +22,7 @@ import { Redirect } from 'react-router-dom';
 
    const myuuid = localStorage.getItem('screenshot_uuid');
    const myurl = localStorage.getItem('screenshot_url');
+   
 
    this.state = {
     nameValue: '',

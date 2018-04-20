@@ -50,7 +50,7 @@ isDefaultChange() {
   }
 
 renderImage() {
-  
+
   console.log(localStorage.getItem('screenshot_uuid'));
   if (localStorage.getItem('screenshot_url') !== null) {
     const imgUrl = `http://167.99.175.200/photos/${localStorage.getItem('screenshot_uuid')}.png`
@@ -63,6 +63,12 @@ renderImage() {
   }
 
   render() {
+    if (localStorage.getItem('screenshot_url') === null) {
+       return (
+        <img src={hourglass} alt="spinner" />
+      )
+    }
+    
      if (localStorage.getItem('token') === null) {
        return (
        <div>
