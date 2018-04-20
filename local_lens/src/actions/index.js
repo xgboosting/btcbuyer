@@ -83,6 +83,8 @@ export const getOrders = (status) => {
 export const sendOrderWithAddress = (thePrice, uuid, theUrl, theScreenshotUUID) => {
   return (dispatch) => {
     //axios.defaults.withCredentials = false;
+    const localScreenshotUUID = localStorage.getItem('screenshot_uuid');
+    console.log(`local screenshot${localScreenshotUUID}`);
     const token = localStorage.getItem('token');
     axios.defaults.headers.common.Authorization = `Token ${token}`;
     const url = `${BASE_URL}api/orders/`;
@@ -90,7 +92,7 @@ export const sendOrderWithAddress = (thePrice, uuid, theUrl, theScreenshotUUID) 
       addressUUID: uuid,
       price: thePrice,
       url: theUrl,
-      screenshotUUID: theScreenshotUUID,
+      screenshotUUID: localScreenshotUUID,
       creatingOrder: true
     }).then(function (response) {
       console.log(response.data);
@@ -117,8 +119,9 @@ export const sendOrderNewAddress = (
   theScreenshotUUID) => {
 
   return (dispatch) => {
-    console.log('#############################')
     const token = localStorage.getItem('token');
+    const localScreenshotUUID = localStorage.getItem('screenshot_uuid')
+    console.log(`local screenshot${localScreenshotUUID}`)
     console.log(token);
     axios.defaults.headers.common.Authorization = `Token ${token}`;
     const url = `${BASE_URL}api/orders/`;
@@ -133,7 +136,7 @@ export const sendOrderNewAddress = (
       addressUUID: uuid,
       price: thePrice,
       url: theUrl,
-      screenshotUUID: theScreenshotUUID,
+      screenshotUUID: localScreenshotUUID,
       creatingOrder: true
     }).then(function (response) {
       console.log(response.data);

@@ -38,6 +38,7 @@ class enterUrl extends Component {
   super(props);
   localStorage.removeItem('screenshot_uuid');
   localStorage.removeItem('screenshot_url');
+  console.log(`this should alwaysbe be undefined ${localStorage.getItem('screenshot_uuid')}`)
   this.state = {urlValue: '', fireRedirect: false};
   this.urlChange = this.urlChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
