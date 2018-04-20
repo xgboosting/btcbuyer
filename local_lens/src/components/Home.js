@@ -8,7 +8,6 @@ const divStyle = {
    textAlign: 'center'
 };
 
-const isMobile = window.innerWidth <= 500;
 
 const Home = () => {
 

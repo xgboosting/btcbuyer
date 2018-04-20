@@ -11,6 +11,9 @@ import { Form,
          Button
  } from 'react-bootstrap';
 
+
+const isMobile = window.innerWidth <= 500;
+
 const divStyle = {
    flex: 1,
    justifyContent: 'center',
@@ -62,6 +65,24 @@ urlChange(event) {
   render () {
     if (this.state.fireRedirect === true) {
       return (<Redirect to='/order-form'/>)
+    }
+    if (isMobile) {
+      return (
+        <div style={divStyle}>
+      <Form horizontal onSubmit={this.handleSubmit}>
+    <FormGroup controlId="formHorizontalEmail">
+     <Col componentClass={ControlLabel} sm={1}>
+       URL
+     </Col>
+     <Col sm={4}>
+        <FormControl value={this.state.urlValue} onChange={this.urlChange} type="url" placeholder="http://www.example.com/" style={inputSize}/>
+        <Button style={{marginTop: '2%'}} bsStyle='primary' type="submit">create order</Button>
+     </Col>
+    </FormGroup>
+    </Form>
+    <Showtext />
+      </div>
+      )
     }
   return (
     <div style={divStyle}>
