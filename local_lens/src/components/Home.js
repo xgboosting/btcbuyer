@@ -11,7 +11,7 @@ const divStyle = {
 
 const Home = () => {
 
-  if (isMobile) {
+  if (window.innerWidth <= 500) {
     return (
       <div>
     <NavBar />
