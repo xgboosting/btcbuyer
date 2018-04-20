@@ -36,6 +36,7 @@ class enterUrl extends Component {
 
   constructor(props) {
   super(props);
+  localStorage.removeItem('screenshot_uuid');
   localStorage.removeItem('screenshot_url');
   this.state = {urlValue: '', fireRedirect: false};
   this.urlChange = this.urlChange.bind(this);
