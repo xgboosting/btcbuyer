@@ -54,7 +54,7 @@ renderMessages(object) {
 
       <ListGroup>
         <Panel.Heading>
-  <Panel.Title componentClass="h3">Messages</Panel.Title>
+  <Panel.Title componentClass="h3">Message the admins<br />response within 24 hours</Panel.Title>
 </Panel.Heading>
 
      {messToMap.map((message, i) =>
@@ -152,10 +152,10 @@ renderOrders () {
        <Panel.Title componentClass="h3">Unpaid Order created  <b><Moment fromNow>{object.orderCreated}</Moment></b></Panel.Title>
        </Panel.Heading>
        <br />
-              {this.renderImage(object)}
+                {this.renderImage(object)}
                 {this.renderMessages(object)}
-                {this.renderAddress(object)}
                 {this.renderShippingAddress(object)}
+                {this.renderAddress(object)}
        </Panel>
       )}
 

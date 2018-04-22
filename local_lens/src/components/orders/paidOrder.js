@@ -34,6 +34,7 @@ messageChange(event) {
 handleMessageSubmit(event, orderUUID) {
   console.log(orderUUID)
   event.preventDefault();
+  this.setState({messageValue: ''})
   this.props.sendMessage(orderUUID, this.state.messageValue, 'paid');
 
 }
@@ -49,11 +50,11 @@ renderMessages(object) {
   if (object.messages !== undefined) {
   const messToMap = object.messages
   return (
-    <div style={{"borderWidth":"1px", 'borderRadius': '1%',  'borderStyle':'solid', margin: '10%', width:'140%', marginLeft: '5%'}}>
+    <Panel style={{width: '50%', marginLeft: '5%'}}>
 
       <ListGroup>
         <Panel.Heading>
-  <Panel.Title componentClass="h3">Messages</Panel.Title>
+  <Panel.Title componentClass="h3">Message the admins<br />response within 24 hours</Panel.Title>
 </Panel.Heading>
 
      {messToMap.map((message, i) =>
@@ -76,7 +77,7 @@ renderMessages(object) {
        </FormGroup>
 
      </Form>
-    </div>
+   </Panel>
   )
 }
 }
@@ -85,22 +86,23 @@ renderAddress(object) {
   console.log(object.btc);
   if (object.btc === undefined) {
   return(
-  <Button onClick={() => this.getPayment(object)} bsStyle="primary" style={{marginLeft:'20%', marginBottom: '4%'}}>make payment</Button>
+  <Button onClick={() => this.getPayment(object)} bsStyle="primary" style={{marginRight:'5%', marginBottom: '4%'}}>make payment</Button>
   )
 }
 return (
-  <div>
-    <Panel style={{marginLeft:'20%'}}>
-      <ListGroup>
-      <ListGroupItem><b> please send a payment to one of the addresses below <br />expires <Moment fromNow>{object.expires}</Moment><br /></b></ListGroupItem>
+
+    <Panel style={{marginLeft:'20%', width: '50%'}}>
+      <Panel.Heading>
+    <Panel.Title componentClass="h3">please send a payment to one of the addresses below <br />expires <Moment fromNow>{object.expires}</Moment></Panel.Title>
+    </Panel.Heading>
+    <br />
       <ListGroupItem><b>confirmations needed:<br />ltc: 2, btc: 1, btc cash:1, eth: 8</b></ListGroupItem>
        <ListGroupItem><span><b>{object.btc} </b> </span></ListGroupItem>
        <ListGroupItem><span><b>{object.eth} </b> </span></ListGroupItem>
        <ListGroupItem><span><b>{object.ltc} </b> </span></ListGroupItem>
        <ListGroupItem><span><b>{object.cash} </b> </span></ListGroupItem>
-      </ListGroup>
      </Panel>
-  </div>
+
 )
 
 }
@@ -108,9 +110,28 @@ return (
 renderImage(object) {
   const imgURL = `http://167.99.175.200/photos/${object.screenshotUUID}.png`
   return (
-    <img style={{width: '250px', height: '250px', marginLeft: '40%'}} src={imgURL} />
+    <img style={{width: '250px', height: '250px', marginLeft: '5%'}} src={imgURL} />
   )
 
+}
+
+renderShippingAddress(object) {
+  return (
+    <Panel style={{marginLeft:'20%', width: '50%'}}>
+      <Panel.Heading>
+    <Panel.Title componentClass="h3">shipping to</Panel.Title>
+    </Panel.Heading>
+    <br />
+       <ListGroupItem><span><b>name: </b> {object.name} </span></ListGroupItem>
+       <ListGroupItem><span><b>Address: </b> {object.address}</span></ListGroupItem>
+       <ListGroupItem> <span><b>Apartment: </b>{object.apartment}</span></ListGroupItem>
+       <ListGroupItem><span><b>country: </b>{object.country}</span></ListGroupItem>
+       <ListGroupItem><span><b>zip code: </b>{object.zipCode}</span></ListGroupItem>
+       <ListGroupItem><span><b>price: {object.price} </b></span></ListGroupItem>
+       <ListGroupItem><span><b>url: </b>{object.url}</span></ListGroupItem>
+       <ListGroupItem><span><b>additional info: </b>{object.additional}</span></ListGroupItem>
+     </Panel>
+  )
 }
 
 renderOrders () {
@@ -126,34 +147,15 @@ renderOrders () {
     <div style={{ marginTop: '5%', marginBottom: '3%', width:'100%', flex: 1}}>
 
       {ordersToMap.map((object, i) =>
-       <div key={i} style={{"borderWidth":"1px", 'borderRadius': '1%',  'borderStyle':'solid', margin: '10%'}}>
-         <b><Moment fromNow>{object.orderCreated}</Moment></b>
-
-          <Media>
-              <Media.Left>
-                {this.renderAddress(object)}
-                <Panel style={{marginLeft:'20%'}}>
-                  <ListGroup>
-                   <ListGroupItem><span><b>name: </b> {object.name} </span></ListGroupItem>
-                   <ListGroupItem><span><b>Address: </b> {object.address}</span></ListGroupItem>
-                   <ListGroupItem> <span><b>Apartment: </b>{object.apartment}</span></ListGroupItem>
-                   <ListGroupItem><span><b>country: </b>{object.country}</span></ListGroupItem>
-                   <ListGroupItem><span><b>zip code: </b>{object.zipCode}</span></ListGroupItem>
-                   <ListGroupItem><span><b>price: {object.price} </b></span></ListGroupItem>
-                   <ListGroupItem><span><b>url: </b>{object.url}</span></ListGroupItem>
-                   <ListGroupItem><span><b>additional info: </b>{object.additional}</span></ListGroupItem>
-                  </ListGroup>
-                 </Panel>
-
-              </Media.Left>
-               <Media.Right>
-                 {this.renderImage(object)}
-                 {this.renderMessages(object)}
-
-               </Media.Right>
-            </Media>
-
-       </div>
+       <Panel key={i} style={{marginLeft:'5%', marginRight:'5%'}}>
+         <Panel.Heading>
+       <Panel.Title componentClass="h3">paid Order created  <b><Moment fromNow>{object.orderCreated}</Moment></b></Panel.Title>
+       </Panel.Heading>
+       <br />
+                {this.renderImage(object)}
+                {this.renderMessages(object)}
+                {this.renderShippingAddress(object)}
+       </Panel>
       )}
 
     </div>

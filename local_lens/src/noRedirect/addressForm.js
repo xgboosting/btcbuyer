@@ -22,7 +22,7 @@ import { Redirect } from 'react-router-dom';
 
    const myuuid = localStorage.getItem('screenshot_uuid');
    const myurl = localStorage.getItem('screenshot_url');
-   
+
 
    this.state = {
     nameValue: '',
@@ -232,7 +232,7 @@ useAddress(object, event) {
     </Grid>
     <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
       <Panel.Heading>
-    <Panel.Title componentClass="h3">Create Order</Panel.Title>
+    <Panel.Title componentClass="h3">Create Order <br />if your order can be delivered digitally don't worry about all the inputs</Panel.Title>
     </Panel.Heading>
     <br />
   <Form horizontal onSubmit={this.handleSubmitOrder}>

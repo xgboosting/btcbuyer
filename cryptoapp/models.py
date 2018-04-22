@@ -32,7 +32,7 @@ class Message(models.Model):
     order_uuid = models.UUIDField()
     by_user = models.CharField(max_length=255, default='admin')
     created = models.DateTimeField(auto_now_add=True)
-    content = models.CharField(max_length=255, default='')
+    content = models.TextField()
 
 class PaymentAddress(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

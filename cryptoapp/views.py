@@ -138,10 +138,10 @@ class getScreenCap(APIView):
             chrome_options = Options()
             chrome_options.add_argument("--headless")
             DRIVER = 'chromedriver'
-            driver = webdriver.Chrome('/home/connlloc/chromedriver', chrome_options=chrome_options)
+            driver = webdriver.Chrome('/home/conlloc/btcbuy/venv/selenium/webdriver/chrome/chromedriver', chrome_options=chrome_options)
             driver.get(url)
             uu = uuid.uuid4()
-            location = '/home/connlloc/btcbuyer/photos/%s.png' % uu
+            location = '/home/conlloc/btcbuy/btcbuyer/photos/%s.png' % uu
             screenshot = driver.save_screenshot(location)
             driver.quit()
             return_data = {'screenshot_uuid': str(uu), 'screenshot_url': str(url)}
