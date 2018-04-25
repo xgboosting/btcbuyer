@@ -5,6 +5,7 @@
   "homepage": "http://167.99.175.200/",
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^5.0.1",
     "moment": "^2.22.1",
     "moment-timezone": "^0.5.14",
     "prop-types": "^15.6.0",

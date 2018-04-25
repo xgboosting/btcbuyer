@@ -26,18 +26,20 @@ const divStyle = {
    textAlign: 'center'
 };
 
-
+let SITE_NAME = process.env.SITE_NAME
+SITE_NAME = 'example.com'
 
 //const isMobile = window.innerWidth <= 500;
 
 const NavBar = () => {
+
   if (localStorage.getItem('token')) {
     return (
        <div style={divStyle} >
          <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="/">NAME</a>
+          <a href="/">{SITE_NAME}</a>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
@@ -83,7 +85,7 @@ const NavBar = () => {
        <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="/">NAME</a>
+        <a href="/">{SITE_NAME}</a>
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>

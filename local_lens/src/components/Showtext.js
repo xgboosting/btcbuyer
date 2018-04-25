@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactRevealText from 'react-reveal-text';
 
+
 class Showtext extends React.Component {
 
   constructor() {
