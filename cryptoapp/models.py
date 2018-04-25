@@ -1,6 +1,7 @@
 from django.db import models
 from knox.models import AuthToken
 from django.contrib.auth.models import User
+from django.utils.html import format_html
 import uuid
 
 class SiteName(models.Model):
@@ -52,7 +53,8 @@ class Order(models.Model):
     address_uuid = models.UUIDField()
     shipped = models.BooleanField(default=False)
     url = models.TextField()
-    price = models.CharField(max_length=10, default='')
+    price = models.CharField(max_length=20, default='')
+    quantity = models.CharField(max_length=20, default='')
     paid_for = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     screenshot_uuid = models.CharField(max_length=255, default='')
@@ -69,6 +71,23 @@ class Order(models.Model):
 
     )
     order_status = models.CharField(max_length=255, choices=STATUS)
+
+    def return_messages(self):
+        try:
+            messages = Message.objects.filter(order_uuid=self.uuid).exclude(by_user='admin').order_by('created')[0]
+            return messages.content
+        except:
+            return 'no message'
+
+    def return_address(self):
+        address = Address.objects.get(uuid=self.address_uuid)
+        return address.address
+        #for message in messages:
+        #    return format_html('<span >{}</span>', message.content )
+
+    def return_user(self):
+        profile = Profile.objects.get(uuid=self.user_uuid)
+        return profile.user
 
 
 class Validation_token(models.Model):

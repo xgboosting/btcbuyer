@@ -38,7 +38,8 @@ import { Redirect } from 'react-router-dom';
    productNameValue: '',
    priceValue: '',
    additionalOrderValue: '',
-   uuid: ''
+   uuid: '',
+   quantityValue: ''
   };
    this.props.getAddresses();
    this.nameChange = this.nameChange.bind(this);
@@ -56,6 +57,7 @@ import { Redirect } from 'react-router-dom';
    this.priceChange = this.priceChange.bind(this);
    this.additionalOrderChange = this.additionalOrderChange.bind(this);
    this.phoneChange = this.phoneChange.bind(this);
+   this.quantityChange = this.quantityChange.bind(this);
  }
 
 
@@ -83,6 +85,9 @@ additionalChange(event) {
   this.setState({additionalValue: event.target.value, uuid: '' });
 }
 
+quantityChange(event) {
+     this.setState({quantityValue: event.target.value});
+   }
 
 urlChange(event) {
   this.setState({ urlValue: event.target.value });
@@ -112,7 +117,7 @@ handleSubmitOrder(event) {
   console.log('does this fire')
   if (this.state.uuid !== '') {
     console.log('address has uuid')
-    this.props.sendOrderWithAddress(this.state.priceValue, this.state.uuid, this.state.urlValue, this.state.screenshotUUID);
+    this.props.sendOrderWithAddress(this.state.priceValue, this.state.uuid, this.state.urlValue, this.state.screenshotUUID, this.state.quantityValue);
   } else {
   console.log('address no uuid')
   this.props.sendOrderNewAddress(
@@ -126,7 +131,8 @@ handleSubmitOrder(event) {
   this.state.priceValue,
   this.state.uuid,
   this.state.urlValue,
-  this.state.screenshotUUID);
+  this.state.screenshotUUID,
+  this.state.quantityValue);
 }
 }
 

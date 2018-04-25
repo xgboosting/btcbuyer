@@ -486,7 +486,7 @@ class Misc(APIView):
             if request.data['addressUUID'] != '':
                 try:
                     print('uuid is true')
-                    order = Order.objects.create(user_uuid=user_uuid, price=request.data['price'], address_uuid=request.data['addressUUID'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='low', order_status='UNPAID')
+                    order = Order.objects.create(user_uuid=user_uuid, quantity=request.data['quantity'], price=request.data['price'], address_uuid=request.data['addressUUID'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='low', order_status='UNPAID')
                     return_data = Misc.get_orders(self, 'unpaid', user_uuid)
                     return return_data
                 except Exception as e:
@@ -499,7 +499,7 @@ class Misc(APIView):
                     print(address_uuid)
                     print(request.data['price'])
                     print(request.data['screenshotUUID'])
-                    order = Order.objects.create(user_uuid=user_uuid, address_uuid=address_uuid, price=request.data['price'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='low', order_status='UNPAID')
+                    order = Order.objects.create(user_uuid=user_uuid, address_uuid=address_uuid, quantity=request.data['quantity'], price=request.data['price'], shipped=False, url=request.data['url'], screenshot_uuid=request.data['screenshotUUID'], paid_for=False, priority='low', order_status='UNPAID')
                     return_data = Misc.get_orders(self, 'unpaid', user_uuid)
                     return return_data
                 except Exception as e:

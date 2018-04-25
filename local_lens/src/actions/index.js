@@ -80,7 +80,12 @@ export const getOrders = (status) => {
     })
   }
 }
-export const sendOrderWithAddress = (thePrice, uuid, theUrl, theScreenshotUUID) => {
+export const sendOrderWithAddress = (
+  thePrice,
+  uuid,
+  theUrl,
+  theScreenshotUUID,
+  quantityValue) => {
   return (dispatch) => {
     //axios.defaults.withCredentials = false;
     const localScreenshotUUID = localStorage.getItem('screenshot_uuid');
@@ -93,7 +98,8 @@ export const sendOrderWithAddress = (thePrice, uuid, theUrl, theScreenshotUUID) 
       price: thePrice,
       url: theUrl,
       screenshotUUID: localScreenshotUUID,
-      creatingOrder: true
+      creatingOrder: true,
+      quantity: quantityValue
     }).then(function (response) {
       console.log(response.data);
       dispatch({type: UPDATE_ADDRESSES, payload: response.data});
@@ -116,7 +122,8 @@ export const sendOrderNewAddress = (
   thePrice,
   uuid,
   theUrl,
-  theScreenshotUUID) => {
+  theScreenshotUUID,
+  quantityValue) => {
 
   return (dispatch) => {
     const token = localStorage.getItem('token');
@@ -137,7 +144,8 @@ export const sendOrderNewAddress = (
       price: thePrice,
       url: theUrl,
       screenshotUUID: localScreenshotUUID,
-      creatingOrder: true
+      creatingOrder: true,
+      quantity: quantityValue
     }).then(function (response) {
       console.log(response.data);
       localStorage.setItem('orders', response.data);
