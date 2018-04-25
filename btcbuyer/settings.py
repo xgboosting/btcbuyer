@@ -20,9 +20,11 @@ REACT_APP_DIR = os.path.join(BASE_DIR, 'local_lens')
 
 STATICFILES_DIRS = [
     os.path.join(REACT_APP_DIR, 'build', 'static'),
+    'home/connlloc/btcbuyer/static/',
 ]
 
-STATIC_ROOT = "home/connlloc/btcbuyer/static"
+STATIC_ROOT = '/home/connlloc/btcbuyer/static/'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -30,11 +32,11 @@ STATIC_ROOT = "home/connlloc/btcbuyer/static"
 SECRET_KEY = '$fb(9!0*t9858&*b(x&v$x3(sj^25&y98@2ox#s3xty9dtp#xq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-STATIC_ROOT = '/'
+
 # Application definition
 
 INSTALLED_APPS = [
