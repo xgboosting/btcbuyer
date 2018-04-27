@@ -34,7 +34,7 @@ SECRET_KEY = '$fb(9!0*t9858&*b(x&v$x3(sj^25&y98@2ox#s3xty9dtp#xq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['167.99.175.200']
 
 
 # Application definition
@@ -79,14 +79,14 @@ MIDDLEWARE = [
 ]
 
 
-CORS_ORIGIN_WHITELIST = (
-    'google.com',
-    'hostname.example.com',
-    'localhost:8000',
-    'localhost:3000',
-    'http://localhost:3000/',
-    '127.0.0.1:9000',
-)
+#CORS_ORIGIN_WHITELIST = (
+#    'google.com',
+#    'hostname.example.com',
+#    'localhost:8000',
+#    'localhost:3000',
+#    'http://localhost:3000/',
+#    '127.0.0.1:9000',
+#)
 
 ROOT_URLCONF = 'btcbuyer.urls'
 
@@ -157,3 +157,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+
