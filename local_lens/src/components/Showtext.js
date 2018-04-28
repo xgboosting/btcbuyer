@@ -26,12 +26,12 @@ class Showtext extends React.Component {
       <div style={{ textAlign: 'center', fontSize: '200%', width: '80%', color: 'white' }}>
 
           <ReactRevealText show={this.state.show}>
-             welcome to example.com, this site allows you to buy anything on the web with crypto currency!
+             welcome to bitagora.co, this site allows you to buy anything on the web with crypto currency!
           </ReactRevealText>
 
 
           <ReactRevealText show={this.state.secondshow}>
-             simply paste the url of what you want to buy into ^^ that box up there, verify it is the correct product, enter your shipping info and send us a payment!!
+             simply paste the url of what you want to into ^^ that box up there, verify it is the correct product, enter your shipping info and send us a payment!!
           </ReactRevealText>
 
           <ReactRevealText show={this.state.thirdshow} style={{ textAlign: 'center', fontSize: '300%' }}>

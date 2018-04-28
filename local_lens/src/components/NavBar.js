@@ -18,6 +18,9 @@ import {
   Route
 } from 'react-router-dom';
 import styles from '../assets/styling.css';
+import kab from './../assets/kabuto.png'
+import kableft from './../assets/kabutoleft.png'
+import name from './../assets/name.png'
 
 
 
@@ -31,7 +34,7 @@ const divStyle = {
 };
 
 let SITE_NAME = process.env.SITE_NAME
-SITE_NAME = 'example.com'
+SITE_NAME = 'bitagora.co'
 
 //const isMobile = window.innerWidth <= 500;
 
@@ -42,14 +45,13 @@ const NavBar = () => {
        <div style={divStyle} >
          <Navbar style={{ backgroundColor: '#ff8bac', color: 'white'}}>
       <Navbar.Header>
+        <a href="/"><img src={kableft} alt="kabuto" /></a>
         <Navbar.Brand>
-          <a href="/" style={{color: '#ffffff'}}><b>{SITE_NAME}</b></a>
+          <a href="/"><img src={name} alt="kabuto" /></a>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
-        <NavItem eventKey={3} href="/faq">
-          <b style={{ color: '#ffffff'}}>contact</b>
-        </NavItem>
+
         <NavDropdown style={{ color: '#ffffff' }} eventKey={3.1} title="Settings" id="basic-nav-dropdown" class="ndd">
           <MenuItem href="/change-password" eventKey={3.6}><b style={{ color: '#eec500'}}>change password</b></MenuItem>
           <MenuItem href="/change-email" eventKey={3.7}><b style={{ color: '#eec500'}}>change email</b></MenuItem>
@@ -63,10 +65,17 @@ const NavBar = () => {
          <MenuItem href="/completed-orders" eventKey={3.2}><b style={{ color: '#eec500'}}>shipped orders</b></MenuItem>
         </NavDropdown>
       </Nav>
+      <Nav pullRight>
+        <NavItem eventKey={3} href="/faq">
+          <b style={{ color: '#ffffff'}}>contact</b>
+        </NavItem>
+        <a href="http://pokepalettes.com/#kabuto"><img src={kab} alt="kabuto" /></a>
+      </Nav>
     </Navbar>
      <div>
        <Switch>
        <Route path="/faq" component={FAQ} />
+
        <Route path="/logOut" component={logOut} />
        <Route path="/change-password" component={changePassword} />
        <Route path="/change-email" component={changeEmail} />
@@ -86,11 +95,14 @@ const NavBar = () => {
   return (
      <div style={divStyle} >
        <Navbar style={{ backgroundColor: '#ff8bac', color: 'white'}}>
+
     <Navbar.Header>
-      <Navbar.Brand style={{ color: 'white' }}>
-        <a href="/" style={{color: '#ffffff'}}><b>{SITE_NAME}</b></a>
+      <a href="/"><img src={kableft} alt="kabuto" /></a>
+      <Navbar.Brand style={{ color: '#4a2900' }}>
+        <a href="/"><img src={name} alt="kabuto" /></a>
       </Navbar.Brand>
     </Navbar.Header>
+
     <Nav>
       <NavItem eventKey={1} href="/createAccount">
         <b style={{ color: '#ffffff'}}>create account</b>
@@ -98,9 +110,13 @@ const NavBar = () => {
       <NavItem eventKey={2} href="/login">
         <b style={{ color: '#ffffff'}}>login</b>
       </NavItem>
+
+    </Nav>
+    <Nav pullRight>
       <NavItem eventKey={3} href="/faq">
         <b style={{ color: '#ffffff'}}>contact</b>
       </NavItem>
+        <a href="http://pokepalettes.com/#kabuto"><img src={kab} alt="kabuto" /></a>
     </Nav>
   </Navbar>
    <div>

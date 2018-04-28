@@ -32,7 +32,7 @@ const formStyle = {
 const inputSize = {
   width: '120%',
   fontSize: '140%',
-  backgroundColor: '#10396a',
+  backgroundColor: '#eacb94',
   color: 'white'
 }
 
