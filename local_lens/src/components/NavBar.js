@@ -48,14 +48,14 @@ const NavBar = () => {
         <NavItem eventKey={3} href="/faq">
           FAQ
         </NavItem>
-        <NavDropdown eventKey={3.1} title="Settings" id="basic-nav-dropdown">
+        <NavDropdown style={{ backgroundColor: '#eec500', color: '#ffffff' }} eventKey={3.1} title="Settings" id="basic-nav-dropdown">
           <MenuItem href="/faq" eventKey={3.5}><b style={{ color: '#ffffff'}}>create account</b></MenuItem>
           <MenuItem href="/change-password" eventKey={3.6}><b style={{ color: '#ffffff'}}>change password</b></MenuItem>
           <MenuItem href="/change-email" eventKey={3.7}><b style={{ color: '#ffffff'}}>change email</b></MenuItem>
           <MenuItem href="/addresses" eventKey={3.8}><b style={{ color: '#ffffff'}}>addresses</b></MenuItem>
           <MenuItem href="/logOut" eventKey={3.2}><b style={{ color: '#ffffff'}}>logout</b></MenuItem>
         </NavDropdown>
-        <NavDropdown eventKey={3.1} title="Orders" id="basic-nav-dropdown">
+        <NavDropdown style={{ backgroundColor: '#eec500', color: '#ffffff'}} eventKey={3.1} title="Orders" id="basic-nav-dropdown">
          <MenuItem href="/" eventKey={3.5}><b style={{ color: '#ffffff'}}>new order</b></MenuItem>
          <MenuItem href="/paid-orders" eventKey={3.7}><b style={{ color: '#ffffff'}}>paid orders</b></MenuItem>
          <MenuItem href="/unpaid-orders" eventKey={3.6}><b style={{ color: '#ffffff'}}>unpaid orders</b></MenuItem>
