@@ -90,7 +90,7 @@ import { Form,
   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword" >
     <Col componentClass={ControlLabel} sm={2}>
-      Password
+      <b style={{color:'black'}}>Password</b>
     </Col>
     <Col sm={3}>
       <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
@@ -100,7 +100,7 @@ import { Form,
 <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword" validationState={this.getState()}>
      <Col componentClass={ControlLabel} sm={2}>
-       New Password
+       <b style={{color:'black'}}>New Password</b>
      </Col>
      <Col sm={3}>
        <FormControl value={this.state.newPasswordValue} onChange={this.newPasswordChange} type="password" placeholder=" new password" />
@@ -110,7 +110,7 @@ import { Form,
    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" validationState={this.getRepeatState()}>
      <Col componentClass={ControlLabel} sm={2}>
-      Repeat Password
+      <b style={{color:'black'}}>Repeat Password</b>
      </Col>
      <Col sm={3}>
        <FormControl value={this.state.newRepeatPasswordValue} onChange={this.newRepeatPasswordChange} type="password" placeholder="repeat new password" />

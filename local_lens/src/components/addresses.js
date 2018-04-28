@@ -185,7 +185,7 @@ isDefaultChange() {
     <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup  >
     <Col componentClass={ControlLabel} sm={2}>
-      name
+      <b style={{color:'black'}}>name</b>
     </Col>
     <Col sm={3}>
       <FormControl value={this.state.nameValue} onChange={this.nameChange} type="text" placeholder="john smith" />
@@ -195,7 +195,7 @@ isDefaultChange() {
 <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword" >
      <Col componentClass={ControlLabel} sm={2}>
-       address
+       <b style={{color:'black'}}>address</b>
      </Col>
      <Col sm={2}>
        <FormControl value={this.state.addressValue} onChange={this.addressChange} componentClass="textarea" placeholder="1000 Wayne Manor         Gotham City, USA" />
@@ -205,7 +205,7 @@ isDefaultChange() {
    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1">
      <Col componentClass={ControlLabel} sm={2}>
-      apartment
+      <b style={{color:'black'}}>apartment</b>
      </Col>
      <Col sm={3}>
        <FormControl value={this.state.apartmentValue} onChange={this.apartmentChange} type="text" placeholder="b5" />
@@ -215,7 +215,7 @@ isDefaultChange() {
    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" >
      <Col componentClass={ControlLabel} sm={2}>
-      country
+      <b style={{color:'black'}}>country</b>
      </Col>
      <Col sm={4}>
        <FormControl value={this.state.countryValue} onChange={this.countryChange} type="text" placeholder="country" />
@@ -225,7 +225,7 @@ isDefaultChange() {
    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" >
      <Col componentClass={ControlLabel} sm={2}>
-      zip code
+      <b style={{color:'black'}}>zip code</b>
      </Col>
      <Col sm={2}>
        <FormControl value={this.state.zipValue} onChange={this.zipChange} type="text" placeholder="zip code" />
@@ -235,7 +235,7 @@ isDefaultChange() {
    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" >
      <Col componentClass={ControlLabel} sm={2}>
-      phone number
+      <b style={{color:'black'}}>phone number</b>
      </Col>
      <Col sm={2}>
        <FormControl value={this.state.phoneValue} onChange={this.phoneChange} type="text" placeholder="+1-541-754-3010" />
@@ -245,7 +245,7 @@ isDefaultChange() {
    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
    <FormGroup controlId="formHorizontalPassword1" >
      <Col componentClass={ControlLabel} sm={2}>
-      additional info
+      <b style={{color:'black'}}>additional info</b>
      </Col>
      <Col sm={3}>
        <FormControl value={this.state.additionalValue} onChange={this.additionalChange} componentClass="textarea" placeholder="additional info" />

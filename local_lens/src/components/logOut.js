@@ -18,7 +18,7 @@ class logOut extends Component {
   return (
      <div>
      <div style={logoutStyle}>
-         <p>are you sure you want to logout?</p>
+         <b style={{color:'black'}}>are you sure you want to logout?</b>
       <a href="/"><Button bsStyle='primary' onClick={() => localStorage.removeItem('token')}>Log Out</Button></a>
     </div>
     <div>

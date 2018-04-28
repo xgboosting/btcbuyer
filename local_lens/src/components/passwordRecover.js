@@ -37,7 +37,7 @@ emailChange(event) {
      <Form horizontal onSubmit={this.handleSubmit}>
   <FormGroup controlId="formHorizontalEmail">
     <Col componentClass={ControlLabel} sm={2}>
-      Email
+      <b style={{color:'black'}}>Email</b>
     </Col>
     <Col sm={4}>
       <FormControl value={this.state.emailValue} onChange={this.emailChange} type="email" placeholder="Email" />

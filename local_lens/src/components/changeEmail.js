@@ -52,7 +52,7 @@ passwordChange(event) {
    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword">
     <Col componentClass={ControlLabel} sm={2}>
-      Password
+      <b style={{color:'black'}}>Password</b>
     </Col>
     <Col sm={2}>
       <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
@@ -62,7 +62,7 @@ passwordChange(event) {
   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalEmail">
     <Col componentClass={ControlLabel} sm={2}>
-      New Email
+      <b style={{color:'black'}}>New Email</b>l
     </Col>
     <Col sm={4}>
       <FormControl value={this.state.newEmailValue} onChange={this.newEmailChange} type="email" placeholder="Email@example.com" />

@@ -23,6 +23,5 @@ urlpatterns = [
     url(r'^api/validate-email/([0-9a-f]{30})$', views.validateEmail.as_view(), name='validateEmail'),
     url(r'^api/login/$', views.login.as_view(), name='login'), #
     url(r'^api/logout/$', views.logout.as_view(), name='logout'), #
-
     url(r'api/auth/', include('knox.urls'))# login, logout
 ]
