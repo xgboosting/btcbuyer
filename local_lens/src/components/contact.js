@@ -52,19 +52,7 @@ subjectChange(event) {
    this.props.sendEmail(this.state.emailValue, this.state.subjectValue, this.state.messageValue);
  }
 
- getRepeatState() {
-  const length = this.state.messageValue.length;
-  if (length > 1) return 'success';
-  else if (length < 1) return 'error';
-  return null;
-}
 
-getState() {
- const length = this.state.subjectValue.length;
- if (length > 1) return 'success';
- else if (length < 1) return 'error';
- return null;
-}
 
 
   render () {
@@ -113,7 +101,7 @@ getState() {
 
  <Form horizontal onSubmit={this.handleSubmit}>
    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
-  <FormGroup controlId="formHorizontalEmail">
+  <FormGroup controlId="formHorizontalFrom">
     <Col componentClass={ControlLabel} sm={2}>
        <b style={{color:'black'}}>your email</b>
     </Col>
@@ -123,21 +111,21 @@ getState() {
   </FormGroup>
 </ListGroupItem>
 <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
-  <FormGroup controlId="formHorizontalPassword" validationState={this.getState()}>
+  <FormGroup controlId="formHorizontalSubject" >
     <Col componentClass={ControlLabel} sm={2}>
        <b style={{color:'black'}}>subject</b>
     </Col>
     <Col sm={2}>
-      <FormControl value={this.state.subjectValue} onChange={this.subjectChange} type="password" placeholder="subject" />
+      <FormControl value={this.state.subjectValue} onChange={this.subjectChange} type="text" placeholder="subject" />
     </Col>
   </FormGroup>
   </ListGroupItem>
   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
-  <FormGroup controlId="formHorizontalPassword1" validationState={this.getRepeatState()}>
+  <FormGroup controlId="formHorizontalMessage" >
     <Col componentClass={ControlLabel} sm={2}>
        <b style={{color:'black'}}>message</b>
     </Col>
-    <Col sm={2}>
+    <Col sm={8}>
       <FormControl value={this.state.messageValue} onChange={this.messageChange} componentClass="textarea" placeholder="message" />
     </Col>
   </FormGroup>
