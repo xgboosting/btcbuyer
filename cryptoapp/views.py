@@ -32,7 +32,7 @@ class contactMe(APIView):
         try:
             subject = "from: %s, subject: %s" % (request.data['from'], request.data['subject'])
             send_mail(subject, request.data['message'], 'gonnellcough@gmail.com', 'gonnellcough@gmail.com', fail_silently=False)
-            return Response({'message': 'email sent'}}, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
+            return Response({'message': 'email sent'}, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
          except Exception as e:
              print(e)
              return Response({'message':'failed to send mail'}, status=status.HTTP_400_BAD_REQUEST)

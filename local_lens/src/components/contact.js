@@ -95,7 +95,7 @@ subjectChange(event) {
     </div>
 <Panel style={{marginLeft:'5%', marginRight: '5%'}}>
   <Panel.Heading>
-<Panel.Title componentClass="h3">Create Account</Panel.Title>
+<Panel.Title componentClass="h3">Contact us</Panel.Title>
 </Panel.Heading>
 <br />
 
@@ -133,7 +133,7 @@ subjectChange(event) {
   <HelpBlock>{this.props.message}</HelpBlock>
   <FormGroup>
     <Col smOffset={0} sm={10}>
-      <Button bsStyle='primary' type="submit">Create account</Button>
+      <Button bsStyle='primary' type="submit">Send email</Button>
     </Col>
   </FormGroup>
 </Form>
