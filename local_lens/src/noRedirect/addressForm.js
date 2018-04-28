@@ -238,7 +238,11 @@ useAddress(object, event) {
     </Grid>
     <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
       <Panel.Heading>
-    <Panel.Title componentClass="h3">Create Order <br />if your order can be delivered digitally don't worry about all the inputs</Panel.Title>
+    <Panel.Title componentClass="h3">Create Order <br />if your order can be delivered digitally don't worry about all the inputs<br />
+    if you feel inclined to encrypt your info please head over to my <a href='/contact'>contact page</a> to obtain a copy of my public key<br />
+  if you're encrypting your info just put it all in the address field<br />
+  note: all of the fields do not need to be filled out just make sure I have enough info to get the item to you.
+    </Panel.Title>
     </Panel.Heading>
     <br />
   <Form horizontal onSubmit={this.handleSubmitOrder}>

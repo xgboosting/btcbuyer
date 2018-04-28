@@ -8,6 +8,7 @@ from rest_framework import routers
 urlpatterns = [
     url(r'^$', views.main, name='main'), ## serve react app
     url(r'^api/get-address/$', views.returnPaymentAddress.as_view(), name='returnPaymenAddress'), #
+    url(r'^api/contact/$', views.contactMe.as_view(), name='contactMe'), #
     url(r'^api/orders/$', views.orders.as_view(), name='orders'), #
     url(r'^api/get-orders/$', views.getOrders.as_view(), name='getOrders'), #
     url(r'^api/message/$', views.createMessage.as_view(), name='message'), #

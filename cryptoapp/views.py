@@ -26,6 +26,18 @@ def main(request):
     with open('/home/connlloc/btcbuyer/local_lens/build/index.html') as f:
         return HttpResponse(f.read())
 
+class contactMe(APIView):
+
+    def post(self, request, format=None):
+        try:
+            subject = "from: %s, subject: %s" % (request.data['from'], request.data['subject'])
+            send_mail(subject, request.data['message'], 'gonnellcough@gmail.com', 'gonnellcough@gmail.com', fail_silently=False)
+            return Response({'message': 'email sent'}}, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
+         except Exception as e:
+             print(e)
+             return Response({'message':'failed to send mail'}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class returnPaymentAddress(APIView):
      authentication_classes = (TokenAuthentication,)
      permission_classes = (IsAuthenticated,)

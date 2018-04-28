@@ -13,7 +13,7 @@ export const CHANGE_MESSAGE = 'CHANGE_MESSAGE';
 export const UPDATE_ADDRESSES = 'UPDATE_ADDRESSES';
 export const SET_ORDER_IMAGE = 'SET_ORDER_IMAGE';
 export const UPDATE_ORDERS = 'UPDATE_ORDERS';
-
+export const SEND_EMAIL = 'SEND_EMAIL';
 
 
 //const BASE_URL = 'http://127.0.0.1:8000/'
@@ -21,6 +21,12 @@ const BASE_URL = 'https://bitagora.co/'
 
 
 export const helloWorld = () => {
+  return {
+    type: HELLO_WORLD
+  }
+}
+
+export const sendEmail = () => {
   return {
     type: HELLO_WORLD
   }

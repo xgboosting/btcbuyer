@@ -1,5 +1,5 @@
 import React from 'react';
-import FAQ from './FAQ';
+import contact from './contact';
 import login from './login';
 import enterUrl from './enterUrl';
 import logOut from './logOut';
@@ -66,7 +66,7 @@ const NavBar = () => {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
-        <NavItem eventKey={3} href="/faq">
+        <NavItem eventKey={3} href="/contact">
           <b style={{ color: '#ffffff'}}>contact</b>
         </NavItem>
         <a href="http://pokepalettes.com/#kabuto"><img src={kab} alt="kabuto" /></a>
@@ -74,7 +74,7 @@ const NavBar = () => {
     </Navbar>
      <div>
        <Switch>
-       <Route path="/faq" component={FAQ} />
+       <Route path="/contact" component={contact} />
 
        <Route path="/logOut" component={logOut} />
        <Route path="/change-password" component={changePassword} />
@@ -113,7 +113,7 @@ const NavBar = () => {
 
     </Nav>
     <Nav pullRight>
-      <NavItem eventKey={3} href="/faq">
+      <NavItem eventKey={3} href="/contact">
         <b style={{ color: '#ffffff'}}>contact</b>
       </NavItem>
         <a href="http://pokepalettes.com/#kabuto"><img src={kab} alt="kabuto" /></a>
@@ -121,7 +121,7 @@ const NavBar = () => {
   </Navbar>
    <div>
      <Switch>
-     <Route path="/faq" component={FAQ}/>
+     <Route path="/contact" component={contact}/>
      <Route path="/login" component={login}/>
      <Route path="/createAccount" component={createAccount}/>
      <Route path="/password-recover" component={passwordRecover}/>
