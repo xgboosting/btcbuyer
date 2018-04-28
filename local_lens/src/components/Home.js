@@ -16,12 +16,24 @@ const divStyle = {
    color: 'white'
 };
 
+const mobileStyle = {
+   flex: 1,
+   justifyContent: 'center',
+   alignItems: 'center',
+   textAlign: 'center',
+   backgroundColor: '#ff4a83',
+   color: 'white',
+   height: '100%',
+   width: '100%',
+   color: 'white'
+};
+
 
 const Home = () => {
 
   if (window.innerWidth <= 500) {
     return (
-      <div style={divStyle}>
+      <div style={mobileStyle}>
     <NavBar />
     </div>
     )
