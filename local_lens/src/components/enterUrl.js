@@ -33,7 +33,7 @@ const inputSize = {
   width: '120%',
   fontSize: '140%',
   backgroundColor: '#eacb94',
-  color: 'white'
+  color: 'black'
 }
 
 class enterUrl extends Component {
