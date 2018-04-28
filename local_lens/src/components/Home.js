@@ -21,7 +21,7 @@ const Home = () => {
 
   if (window.innerWidth <= 500) {
     return (
-      <div>
+      <div style={divStyle}>
     <NavBar />
     </div>
     )
