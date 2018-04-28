@@ -17,13 +17,7 @@ export const UPDATE_ORDERS = 'UPDATE_ORDERS';
 
 
 //const BASE_URL = 'http://127.0.0.1:8000/'
-let BASE_URL = process.env.BASE_URL
-
-if (process.env.NODE_ENV === 'production') {
-  BASE_URL = 'http://167.99.175.200/'
-} else {
-  BASE_URL = 'http://127.0.0.1:8000/'
-}
+const BASE_URL = 'https://bitagora.co/'
 
 
 export const helloWorld = () => {

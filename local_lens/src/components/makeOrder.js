@@ -53,7 +53,7 @@ renderImage() {
 
   console.log(localStorage.getItem('screenshot_uuid'));
   if (localStorage.getItem('screenshot_url') !== null) {
-    const imgUrl = `http://167.99.175.200/photos/${localStorage.getItem('screenshot_uuid')}.png`
+    const imgUrl = `https://bitagora.co/photos/${localStorage.getItem('screenshot_uuid')}.png`
     return (
       <img src={imgUrl} alt="loaded" />
       )

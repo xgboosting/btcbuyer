@@ -472,7 +472,7 @@ class Misc(APIView):
         try:
             url = "https://api.commerce.coinbase.com/charges/%s" % order_id
             print(url)
-            headers = {'X-CC-Api-Key': '02a86b5b-fec4-4418-81e5-5b137c0a7c94', 'X-CC-Version': '2018-03-22'}
+            headers = {'X-CC-Api-Key': os.environ['COINBASE'], 'X-CC-Version': '2018-03-22'}
             response = requests.get(url, headers=headers)
             data = response.json()
             try:

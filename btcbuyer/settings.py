@@ -20,7 +20,6 @@ REACT_APP_DIR = os.path.join(BASE_DIR, 'local_lens')
 
 STATICFILES_DIRS = [
     os.path.join(REACT_APP_DIR, 'build', 'static'),
-    'home/connlloc/btcbuyer/static/',
 ]
 
 STATIC_ROOT = '/home/connlloc/btcbuyer/static/'
@@ -29,12 +28,12 @@ STATIC_ROOT = '/home/connlloc/btcbuyer/static/'
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$fb(9!0*t9858&*b(x&v$x3(sj^25&y98@2ox#s3xty9dtp#xq'
-
+#SECRET_KEY = os.environ['KEY']
+SECRET_KEY = "$fb(9!0*t9858&*b(x&v$x3(sj^25&y98@2ox#s3xty9dtp#xq"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['167.99.175.200']
+ALLOWED_HOSTS = ['.bitagora.co']
 
 
 # Application definition
@@ -157,6 +156,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'gonnellcough@gmail.com'
+
+#Must generate specific password for your app in [gmail settings][1]
+#EMAIL_HOST_PASSWORD = ''
+#EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASS']
+
+EMAIL_PORT = 587
+
+#This did the trick
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 

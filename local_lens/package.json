@@ -2,7 +2,7 @@
   "name": "v2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://167.99.175.200/",
+  "homepage": "https://bitagora.co/",
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^5.0.1",

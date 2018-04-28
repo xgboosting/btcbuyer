@@ -108,7 +108,7 @@ return (
 }
 
 renderImage(object) {
-  const imgURL = `http://167.99.175.200/photos/${object.screenshotUUID}.png`
+  const imgURL = `https://bitagora.co/photos/${object.screenshotUUID}.png`
   return (
     <img style={{width: '250px', height: '250px', marginLeft: '5%'}} src={imgURL} />
   )
