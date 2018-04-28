@@ -31,7 +31,9 @@ const formStyle = {
 
 const inputSize = {
   width: '120%',
-  fontSize: '140%'
+  fontSize: '140%',
+  backgroundColor: '#10396a',
+  color: 'white'
 }
 
 class enterUrl extends Component {

@@ -23,7 +23,9 @@ const divStyle = {
    flex: 1,
    justifyContent: 'center',
    alignItems: 'center',
-   textAlign: 'center'
+   textAlign: 'center',
+   backgroundColor: '#ff4a83',
+   color: '#f5f5f5'
 };
 
 let SITE_NAME = process.env.SITE_NAME
@@ -36,10 +38,10 @@ const NavBar = () => {
   if (localStorage.getItem('token')) {
     return (
        <div style={divStyle} >
-         <Navbar>
+         <Navbar style={{ backgroundColor: '#ff8bac', color: 'white'}}>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="/">{SITE_NAME}</a>
+          <a href="/" style={{color: '#ffffff'}}><b>{SITE_NAME}</b></a>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
@@ -47,17 +49,17 @@ const NavBar = () => {
           FAQ
         </NavItem>
         <NavDropdown eventKey={3.1} title="Settings" id="basic-nav-dropdown">
-          <MenuItem href="/faq" eventKey={3.5}>FAQ</MenuItem>
-          <MenuItem href="/change-password" eventKey={3.6}>change password</MenuItem>
-          <MenuItem href="/change-email" eventKey={3.7}>change email</MenuItem>
-          <MenuItem href="/addresses" eventKey={3.8}>addresses</MenuItem>
-          <MenuItem href="/logOut" eventKey={3.2}>logout</MenuItem>
+          <MenuItem href="/faq" eventKey={3.5}><b style={{ color: '#ffffff'}}>create account</b></MenuItem>
+          <MenuItem href="/change-password" eventKey={3.6}><b style={{ color: '#ffffff'}}>change password</b></MenuItem>
+          <MenuItem href="/change-email" eventKey={3.7}><b style={{ color: '#ffffff'}}>change email</b></MenuItem>
+          <MenuItem href="/addresses" eventKey={3.8}><b style={{ color: '#ffffff'}}>addresses</b></MenuItem>
+          <MenuItem href="/logOut" eventKey={3.2}><b style={{ color: '#ffffff'}}>logout</b></MenuItem>
         </NavDropdown>
         <NavDropdown eventKey={3.1} title="Orders" id="basic-nav-dropdown">
-         <MenuItem href="/" eventKey={3.5}>new order</MenuItem>
-         <MenuItem href="/paid-orders" eventKey={3.7}>paid orders</MenuItem>
-         <MenuItem href="/unpaid-orders" eventKey={3.6}>unpaid orders</MenuItem>
-         <MenuItem href="/completed-orders" eventKey={3.2}>shipped orders</MenuItem>
+         <MenuItem href="/" eventKey={3.5}><b style={{ color: '#ffffff'}}>new order</b></MenuItem>
+         <MenuItem href="/paid-orders" eventKey={3.7}><b style={{ color: '#ffffff'}}>paid orders</b></MenuItem>
+         <MenuItem href="/unpaid-orders" eventKey={3.6}><b style={{ color: '#ffffff'}}>unpaid orders</b></MenuItem>
+         <MenuItem href="/completed-orders" eventKey={3.2}><b style={{ color: '#ffffff'}}>shipped orders</b></MenuItem>
         </NavDropdown>
       </Nav>
     </Navbar>
@@ -82,21 +84,21 @@ const NavBar = () => {
   }
   return (
      <div style={divStyle} >
-       <Navbar>
+       <Navbar style={{ backgroundColor: '#ff8bac', color: 'white'}}>
     <Navbar.Header>
-      <Navbar.Brand>
-        <a href="/">{SITE_NAME}</a>
+      <Navbar.Brand style={{ color: 'white' }}>
+        <a href="/" style={{color: '#ffffff'}}><b>{SITE_NAME}</b></a>
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>
       <NavItem eventKey={1} href="/createAccount">
-        create account
+        <b style={{ color: '#ffffff'}}>create account</b>
       </NavItem>
       <NavItem eventKey={2} href="/login">
-        login
+        <b style={{ color: '#ffffff'}}>login</b>
       </NavItem>
       <NavItem eventKey={3} href="/faq">
-        FAQ
+        <b style={{ color: '#ffffff'}}>contact</b>
       </NavItem>
     </Nav>
   </Navbar>

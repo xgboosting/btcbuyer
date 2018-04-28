@@ -68,7 +68,7 @@ renderImage() {
         <img src={hourglass} alt="spinner" />
       )
     }
-    
+
      if (localStorage.getItem('token') === null) {
        return (
        <div>

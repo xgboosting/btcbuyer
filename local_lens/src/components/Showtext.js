@@ -23,7 +23,7 @@ class Showtext extends React.Component {
 
   render() {
     return (
-      <div style={{ textAlign: 'center', fontSize: '200%', width: '80%' }}>
+      <div style={{ textAlign: 'center', fontSize: '200%', width: '80%', color: 'white' }}>
 
           <ReactRevealText show={this.state.show}>
              welcome to example.com, this site allows you to buy anything on the web with crypto currency!

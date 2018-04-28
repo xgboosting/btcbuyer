@@ -7,7 +7,6 @@ import helloReducer from './reducers'
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom'
 import thunk from 'redux-thunk';
-import './assets/styling.css';
 import './bootstrap/dist/css/bootstrap.css';
 
 
