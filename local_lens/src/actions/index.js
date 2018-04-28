@@ -26,9 +26,21 @@ export const helloWorld = () => {
   }
 }
 
-export const sendEmail = () => {
-  return {
-    type: HELLO_WORLD
+export const sendEmail = (theemail, thesubject, themessage) => {
+  console.log(theemail, thesubject, themessage);
+  return (dispatch) => {
+    const url = `${BASE_URL}api/contact/`;
+    axios.post(url, {
+       from: theemail,
+       subject: thesubject,
+       message: themessage
+    }).then(function (response) {
+      console.log(response.data);
+      dispatch({type: MESSAGE, payload: 'success'});
+    }).catch(function (error) {
+      console.log(error);
+      dispatch({type: MESSAGE, payload: 'something went wrong'})
+    })
   }
 }
 

@@ -26,10 +26,10 @@ class contact extends Component {
 
   constructor(props) {
   super(props);
-  this.state = {emailValue: '', passwordValue: '', repeatPasswordValue: ''};
+  this.state = {emailValue: '', subjectValue: '', messageValue: ''};
   this.emailChange = this.emailChange.bind(this);
-  this.passwordChange = this.passwordChange.bind(this);
-  this.repeatPasswordChange = this.repeatPasswordChange.bind(this);
+  this.subjectChange = this.subjectChange.bind(this);
+  this.messageChange = this.messageChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
 }
 
@@ -38,34 +38,31 @@ emailChange(event) {
    this.setState({emailValue: event.target.value});
  }
 
-repeatPasswordChange(event) {
-   this.setState({repeatPasswordValue: event.target.value});
+messageChange(event) {
+   this.setState({messageValue: event.target.value});
  }
 
-passwordChange(event) {
-    this.setState({passwordValue: event.target.value});
+subjectChange(event) {
+    this.setState({subjectValue: event.target.value});
   }
 
 
  handleSubmit(event) {
-   console.log('here');
    event.preventDefault();
+   this.props.sendEmail(this.state.emailValue, this.state.subjectValue, this.state.messageValue);
  }
 
  getRepeatState() {
-   console.log(this.state)
-  const length = this.state.repeatPasswordValue.length;
-  if (length > 9 && this.state.passwordValue === this.state.repeatPasswordValue) return 'success';
-  else if (length > 5) return 'error';
-  else if (length > 0) return 'error';
+  const length = this.state.messageValue.length;
+  if (length > 1) return 'success';
+  else if (length < 1) return 'error';
   return null;
 }
 
 getState() {
- const length = this.state.passwordValue.length;
- if (length > 9) return 'success';
- else if (length > 5) return 'error';
- else if (length > 0) return 'error';
+ const length = this.state.subjectValue.length;
+ if (length > 1) return 'success';
+ else if (length < 1) return 'error';
  return null;
 }
 
@@ -118,7 +115,7 @@ getState() {
    <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalEmail">
     <Col componentClass={ControlLabel} sm={2}>
-      Email
+       <b style={{color:'black'}}>your email</b>
     </Col>
     <Col sm={4}>
       <FormControl value={this.state.emailValue} onChange={this.emailChange} type="email" placeholder="Email" />
@@ -128,20 +125,20 @@ getState() {
 <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword" validationState={this.getState()}>
     <Col componentClass={ControlLabel} sm={2}>
-      Password
+       <b style={{color:'black'}}>subject</b>
     </Col>
     <Col sm={2}>
-      <FormControl value={this.state.passwordValue} onChange={this.passwordChange} type="password" placeholder="password" />
+      <FormControl value={this.state.subjectValue} onChange={this.subjectChange} type="password" placeholder="subject" />
     </Col>
   </FormGroup>
   </ListGroupItem>
   <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}>
   <FormGroup controlId="formHorizontalPassword1" validationState={this.getRepeatState()}>
     <Col componentClass={ControlLabel} sm={2}>
-      Password
+       <b style={{color:'black'}}>message</b>
     </Col>
     <Col sm={2}>
-      <FormControl value={this.state.repeatPasswordValue} onChange={this.repeatPasswordChange} type="password" placeholder="repeat password" />
+      <FormControl value={this.state.messageValue} onChange={this.messageChange} componentClass="textarea" placeholder="message" />
     </Col>
   </FormGroup>
   </ListGroupItem>
