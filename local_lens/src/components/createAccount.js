@@ -14,6 +14,7 @@ import { Form,
  } from 'react-bootstrap';
 
 
+
 class createAccount extends Component {
 
   constructor(props) {
@@ -78,6 +79,7 @@ getState() {
       )
     }
   return (
+    
 <Panel style={{marginLeft:'5%', marginRight: '5%'}}>
   <Panel.Heading>
 <Panel.Title componentClass="h3">Create Account</Panel.Title>

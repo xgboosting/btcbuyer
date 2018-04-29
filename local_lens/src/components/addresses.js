@@ -271,7 +271,7 @@ isDefaultChange() {
     alignItems: 'center',
     textAlign: 'center',
     marginLeft: '5%',
-    
+    height: '100%',
     overflow: 'auto'
  };
 

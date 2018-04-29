@@ -8,6 +8,7 @@ import { Button,
          Checkbox
  } from 'react-bootstrap';
  import hourglass from './../assets/hourglass.gif';
+ 
 
 //name
 //address
