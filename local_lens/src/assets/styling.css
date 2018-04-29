@@ -9,6 +9,6 @@ html, body, #app, #app>div {
 }
 
 
-#basic-nav-dropdown {
+a#basic-nav-dropdown.dropdown-toggle {
   color: #ffffff;
 }
