@@ -387,8 +387,7 @@ useAddress(object, event) {
     alignItems: 'center',
     textAlign: 'center',
     marginLeft: '5%',
-    position: 'fixed',
-    overflow: 'auto'
+
  };
 
  const colStyle = {

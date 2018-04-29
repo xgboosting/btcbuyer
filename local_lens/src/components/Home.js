@@ -12,7 +12,6 @@ const divStyle = {
    color: 'white',
    height: '100%',
    width: '100%',
-   position: 'fixed',
    color: 'white'
 };
 
