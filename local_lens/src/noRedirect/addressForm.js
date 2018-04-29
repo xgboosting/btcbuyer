@@ -386,7 +386,8 @@ useAddress(object, event) {
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    marginLeft: '5%'
+    marginLeft: '5%',
+    position: 'fixed'
  };
 
  const colStyle = {
