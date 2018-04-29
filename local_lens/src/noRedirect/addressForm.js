@@ -182,26 +182,26 @@ useAddress(object, event) {
        {addressesToMap.map((object, i) =>
          <div style={{colStyle}}>
            <Col sm={6} md={3} key={i} >
-        <Panel style={{marginLeft: '5%',  marginRight: '5%'}}>
+        <Panel style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}>
           <Panel.Heading>
         <Panel.Title componentClass="h3">Address</Panel.Title>
         </Panel.Heading>
          <br />
 
           <br />
-          <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>name: </b>
+          <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>name: </b>
           {object.name}</ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>address: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>address: </b>
           {object.address} </ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>apartment: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>apartment: </b>
           {object.apartment}</ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>country: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>country: </b>
           {object.country}</ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>zip: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>zip: </b>
            {object.zipCode}</ListGroupItem>
-         <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>additional info: </b>
+         <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>additional info: </b>
          {object.additional}</ListGroupItem>
-       <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>phone: </b>
+       <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>phone: </b>
        {object.phoneNumber}</ListGroupItem> <br />
      <Button style={{"marginBottom": '2%'}} onClick={() => this.useAddress(object)}>use this address</Button>
           <br />

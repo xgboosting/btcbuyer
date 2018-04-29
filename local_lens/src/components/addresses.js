@@ -139,19 +139,19 @@ isDefaultChange() {
          <br />
 
           <br />
-          <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>name: </b>
+          <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>name: </b>
           {object.name}</ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>address: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>address: </b>
           {object.address} </ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>apartment: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>apartment: </b>
           {object.apartment}</ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>country: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>country: </b>
           {object.country}</ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>zip: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>zip: </b>
            {object.zipCode}</ListGroupItem>
-         <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>additional info: </b>
+         <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>additional info: </b>
          {object.additional}</ListGroupItem>
-       <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>phone: </b>
+       <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%', color:'black'}}><b style={{color:'black'}}>phone: </b>
        {object.phoneNumber}</ListGroupItem>
           <br />
 
