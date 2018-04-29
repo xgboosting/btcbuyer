@@ -12,6 +12,9 @@ import { Form,
          Panel,
          ListGroupItem
  } from 'react-bootstrap';
+ import telegram from './../assets/telegram.png'
+ import reddit from './../assets/reddit.png'
+
 
 const divStyle = {
    flex: 1,
@@ -59,6 +62,7 @@ subjectChange(event) {
   return (
     <div>
     <div style={divStyle} >
+      <a href='/terms' style={{color:'white'}}>please see the site terms here</a>
      <pre style={{whiteSpace: 'pre-wrap', marginLeft: '5%', marginRight: '5%', marginTop:'2%'}}>-----BEGIN PGP PUBLIC KEY BLOCK-----
     Version: GnuPG v1
 
@@ -92,6 +96,10 @@ subjectChange(event) {
     -----END PGP PUBLIC KEY BLOCK-----
     </pre>
     <a style={{color: 'white'}} href='http://keyserver.ubuntu.com/pks/lookup?op=vindex&search=bitagora&fingerprint=on'>make sure it matches on the ubuntu key server</a>
+    </div>
+    <div>
+     <a style={{margin: '2%'}} href="https://t.me/bitagora"><img src={telegram} alt="kabuto" /></a>
+     <a style={{margin: '2%'}}  href="https://reddit.com/r/bitagora"><img src={reddit} alt="kabuto" /></a>
     </div>
 <Panel style={{marginLeft:'5%', marginRight: '5%'}}>
   <Panel.Heading>

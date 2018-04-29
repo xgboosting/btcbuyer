@@ -3,6 +3,7 @@ import contact from './contact';
 import login from './login';
 import enterUrl from './enterUrl';
 import logOut from './logOut';
+import terms from './terms';
 import createAccount from './createAccount';
 import passwordRecover from './passwordRecover';
 import changePassword from './changePassword';
@@ -84,7 +85,7 @@ const NavBar = () => {
        <Route path="/paid-orders" component={paidOrder} />
        <Route path="/completed-orders" component={completedOrder} />
        <Route path="/order-form" component={makeOrder}/>
-
+       <Route path="/terms" component={terms}/>
        <Route path="/" component={enterUrl} />
        </Switch>
      </div>
@@ -126,6 +127,7 @@ const NavBar = () => {
      <Route path="/createAccount" component={createAccount}/>
      <Route path="/password-recover" component={passwordRecover}/>
      <Route path="/order-form" component={makeOrder}/>
+     <Route path="/terms" component={terms}/>
      <Route path="/" component={enterUrl}/>
      </Switch>
    </div>

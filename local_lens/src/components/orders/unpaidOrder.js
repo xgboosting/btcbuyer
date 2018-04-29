@@ -110,7 +110,7 @@ return (
 renderImage(object) {
   const imgURL = `https://bitagora.co/photos/${object.screenshotUUID}.png`
   return (
-    <img style={{width: '250px', height: '250px', marginLeft: '5%'}} src={imgURL} />
+    <img style={{width: '250px', height: '250px', margin: '5%'}} src={imgURL} />
   )
 
 }
