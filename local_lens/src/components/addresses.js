@@ -139,19 +139,19 @@ isDefaultChange() {
          <br />
 
           <br />
-          <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>name: </b>
+          <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>name: </b>
           {object.name}</ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>address: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>address: </b>
           {object.address} </ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>apartment: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>apartment: </b>
           {object.apartment}</ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>country: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>country: </b>
           {object.country}</ListGroupItem>
-        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>zip: </b>
+        <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>zip: </b>
            {object.zipCode}</ListGroupItem>
-         <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>additional info: </b>
+         <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>additional info: </b>
          {object.additional}</ListGroupItem>
-       <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b>phone: </b>
+       <ListGroupItem style={{marginLeft: '5%',  marginRight: '5%'}}><b style={{color:'black'}}>phone: </b>
        {object.phoneNumber}</ListGroupItem>
           <br />
 
@@ -270,7 +270,8 @@ isDefaultChange() {
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    marginLeft: '5%'
+    marginLeft: '5%',
+    position: 'fixed'
  };
 
  const colStyle = {
