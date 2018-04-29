@@ -271,7 +271,8 @@ isDefaultChange() {
     alignItems: 'center',
     textAlign: 'center',
     marginLeft: '5%',
-    position: 'fixed'
+    position: 'fixed',
+    overflow: 'auto'
  };
 
  const colStyle = {
