@@ -31,7 +31,7 @@ class contactMe(APIView):
     def post(self, request, format=None):
         try:
             subject = "from: %s, subject: %s" % (request.data['from'], request.data['subject'])
-            send_mail(subject, request.data['message'], 'gonnellcough@gmail.com', 'gonnellcough@gmail.com', fail_silently=False)
+            send_mail(subject, request.data['message'], 'gonnellcough@gmail.com', ['gonnellcough@gmail.com'], fail_silently=False)
             return Response({'message': 'email sent'}, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
         except Exception as e:
             print(e)
@@ -261,7 +261,7 @@ class recoverPassword(APIView):
             user.save()
             message = 'this is your new password, please login and change it %s' % str(salt)
             print(message);
-            #send_mail('btc buyer recover password', message, 'defaultemail@email.com', [str(email)], fail_silently=False)
+            send_mail('btc buyer recover password', message, 'gonnellcough@gmail.com', [str(user)], fail_silently=False)
             return Response({'message': 'email sent'}, status=status.HTTP_200_OK)
         except Exception as e:
             print('recover password post %s' % e)
