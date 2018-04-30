@@ -16,6 +16,7 @@ class MessageAdmin(admin.ModelAdmin):
 admin.site.register(Message, MessageAdmin)
 
 class OrderAdmin(admin.ModelAdmin):
+#   pass
     list_display = ('return_user', 'return_address', 'price', 'quantity', 'created', 'priority', 'order_status', 'return_messages')
 admin.site.register(Order, OrderAdmin)
 

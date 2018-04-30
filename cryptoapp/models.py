@@ -74,23 +74,29 @@ class Order(models.Model):
 
     def return_messages(self):
         try:
+            print(self.uuid)
             messages = Message.objects.filter(order_uuid=self.uuid).exclude(by_user='admin').order_by('created')[0]
             return messages.content
-        except:
+        except Exception as e:
+            print('messages %s' % e)
             return 'no message'
 
     def return_address(self):
         try:
+            print(self)
             address = Address.objects.get(uuid=self.address_uuid)
             return address.address
-        except:
+        except Exception as e:
+            print('address %s' % e)
             return 'nothing'
 
     def return_user(self):
         try:
+            print(self.user_uuid)
             profile = Profile.objects.get(uuid=self.user_uuid)
             return profile.user
-        except:
+        except Exception as e:
+            print('user %s' % e)
             return 'nothing'
 
 class Validation_token(models.Model):
