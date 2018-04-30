@@ -122,14 +122,14 @@ renderShippingAddress(object) {
     <Panel.Title componentClass="h3">shipping to</Panel.Title>
     </Panel.Heading>
     <br />
-       <ListGroupItem><span><b style={{color:'black'}}>name: </b> {object.name} </span></ListGroupItem>
-       <ListGroupItem><span><b style={{color:'black'}}>Address: </b> {object.address}</span></ListGroupItem>
-       <ListGroupItem> <span><b style={{color:'black'}}>Apartment: </b>{object.apartment}</span></ListGroupItem>
-       <ListGroupItem><span><b style={{color:'black'}}>country: </b>{object.country}</span></ListGroupItem>
-       <ListGroupItem><span><b style={{color:'black'}}>zip code: </b>{object.zipCode}</span></ListGroupItem>
-       <ListGroupItem><span><b style={{color:'black'}}>price: {object.price} </b></span></ListGroupItem>
-       <ListGroupItem><span><b style={{color:'black'}}>url: </b>{object.url}</span></ListGroupItem>
-       <ListGroupItem><span><b style={{color:'black'}}>additional info: </b>{object.additional}</span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>name: {object.name}</b>  </span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>Address: {object.address</b> }</span></ListGroupItem>
+       <ListGroupItem> <span><b style={{color:'black'}}>Apartment: {object.apartment}</b> </span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>country: {object.country}</b> </span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>zip code: {object.zipCode}</b> </span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>price: {object.price}</b> </b></span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>url: {object.url}</b> </span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>additional info: {object.additional}</b> </span></ListGroupItem>
      </Panel>
   )
 }

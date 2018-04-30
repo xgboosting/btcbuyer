@@ -80,15 +80,18 @@ class Order(models.Model):
             return 'no message'
 
     def return_address(self):
-        address = Address.objects.get(uuid=self.address_uuid)
-        return address.address
-        #for message in messages:
-        #    return format_html('<span >{}</span>', message.content )
+        try:
+            address = Address.objects.get(uuid=self.address_uuid)
+            return address.address
+        except:
+            return 'nothing'
 
     def return_user(self):
-        profile = Profile.objects.get(uuid=self.user_uuid)
-        return profile.user
-
+        try:
+            profile = Profile.objects.get(uuid=self.user_uuid)
+            return profile.user
+        except:
+            return 'nothing'
 
 class Validation_token(models.Model):
     token = models.CharField(max_length=255, default='')
