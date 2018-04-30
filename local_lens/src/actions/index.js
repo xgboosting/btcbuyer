@@ -37,7 +37,7 @@ export const sendEmail = (theemail, thesubject, themessage) => {
       dispatch({type: MESSAGE, payload: 'success'});
     }).catch(function (error) {
       console.log(error);
-      dispatch({type: MESSAGE, payload: 'something went wrong'})
+      dispatch({type: MESSAGE, payload: 'something went wrong'});
     })
   }
 }
@@ -54,7 +54,7 @@ export const getPaymentAddress = (theorderUUID) => {
       dispatch({type: UPDATE_ORDERS, payload: response.data});
     }).catch(function (error) {
       console.log(error);
-      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
+      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'});
     })
   }
 }
@@ -74,7 +74,7 @@ export const sendMessage = (theorderUUID, themessage, theoption) => {
       dispatch({type: UPDATE_ORDERS, payload: response.data});
     }).catch(function (error) {
       console.log(error);
-      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
+      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'});
     })
   }
 }
@@ -223,11 +223,11 @@ export const sendNewAddress = (nameValue, apartmentValue, addressValue, countryV
       isDefault: isDefaultValue,
       phone: phoneValue
     }).then(function (response) {
-      dispatch({type: UPDATE_ADDRESSES, payload: response.data})
-      dispatch({type: CHANGE_MESSAGE, payload: 'address saved'})
+      dispatch({type: UPDATE_ADDRESSES, payload: response.data});
+      dispatch({type: CHANGE_MESSAGE, payload: 'address saved'});
     }).catch(function (error) {
       console.log(error);
-      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'})
+      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'});
     })
   }
 }
@@ -260,10 +260,10 @@ return (dispatch) => {
     password: currentPassword,
     newPassword: theNewPassword
   }).then(function (response) {
-    dispatch({type: CHANGE_MESSAGE, payload: 'password changed'})
+    dispatch({type: CHANGE_MESSAGE, payload: 'password changed'});
   }).catch(function (error) {
     console.log(error);
-    dispatch({type: CHANGE_MESSAGE, payload: 'bad password'})
+    dispatch({type: CHANGE_MESSAGE, payload: 'bad password'});
   })
 }
 }
@@ -276,9 +276,9 @@ export const recoverPassword = (theemail) => {
     axios.post(url, {
       email: theemail
     }).then(function (response) {
-      dispatch({type: RECOVER_PASSWORD, payload: 'email sent'})
+      dispatch({type: RECOVER_PASSWORD, payload: 'email sent'});
     }).catch(function (error) {
-      dispatch({type: RECOVER_PASSWORD, payload: 'we did not find that email please message the admins'})
+      dispatch({type: RECOVER_PASSWORD, payload: 'we did not find that email please message the admins'});
     })
   }
 }
@@ -330,9 +330,10 @@ export const sendCreateAccount = (theemail, thepassword) => {
        email: theemail,
        password: thepassword
      }).then(function (response) {
+       console.log(response.data);
        localStorage.setItem('token', response.data.token);
        localStorage.setItem('isAuthed', true);
-       dispatch({type: MESSAGE, payload:'success! email sent'})
+       dispatch({type: MESSAGE, payload:'success! email sent'});
      }).catch(function (error) {
        console.log(error);
      })
