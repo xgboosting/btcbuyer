@@ -36,7 +36,7 @@ import { Redirect } from 'react-router-dom';
    urlValue: myurl,
    screenshotUUID: myuuid,
    productNameValue: '',
-   priceValue: '',
+   priceValue: 0.0,
    additionalOrderValue: '',
    uuid: '',
    quantityValue: ''
