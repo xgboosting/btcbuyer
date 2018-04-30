@@ -53,7 +53,7 @@ class Order(models.Model):
     address_uuid = models.UUIDField()
     shipped = models.BooleanField(default=False)
     url = models.TextField()
-    price = models.CharField(max_length=20, default='')
+    price = models.FloatField(null=True, blank=True, default=None)
     quantity = models.CharField(max_length=20, default='')
     paid_for = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
