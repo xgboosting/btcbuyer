@@ -529,8 +529,8 @@ class Misc(APIView):
             url = "https://api.commerce.coinbase.com/charges"
             headers = {'X-CC-Api-Key': '02a86b5b-fec4-4418-81e5-5b137c0a7c94', 'X-CC-Version': '2018-03-22'}
             order = Order.objects.get(uuid=order_uuid)
-            print(order.uuid)
-            print(order_uuid)
+            print(type(order.price))
+            print(order.price)
             percent = float(order.price) * 0.031
             amount = percent + order.price
             payload = {'name': order_uuid,'description': order.url, 'local_price': {'amount':amount,'currency':'USD'},'pricing_type': 'fixed_price','metadata': {'customer_id': str(order.user_uuid) }}
