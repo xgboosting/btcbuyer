@@ -123,7 +123,7 @@ renderShippingAddress(object) {
     </Panel.Heading>
     <br />
        <ListGroupItem><span><b style={{color:'black'}}>name: {object.name}</b>  </span></ListGroupItem>
-       <ListGroupItem><span><b style={{color:'black'}}>Address: {object.address</b> }</span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>Address: {object.address}</b></span></ListGroupItem>
        <ListGroupItem> <span><b style={{color:'black'}}>Apartment: {object.apartment}</b> </span></ListGroupItem>
        <ListGroupItem><span><b style={{color:'black'}}>country: {object.country}</b> </span></ListGroupItem>
        <ListGroupItem><span><b style={{color:'black'}}>zip code: {object.zipCode}</b> </span></ListGroupItem>
