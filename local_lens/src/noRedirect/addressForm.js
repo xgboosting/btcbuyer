@@ -114,7 +114,9 @@ phoneChange(event) {
 
 handleSubmitOrder(event) {
   event.preventDefault();
-  if (this.state.uuid !== '') {
+  if (this.state.priceValue === 0) {
+    this.props.updateChangeMessage('you must enter a price greater than 0');
+  } else if (this.state.uuid !== '') {
     this.props.sendOrderWithAddress(this.state.priceValue, this.state.uuid, this.state.urlValue, this.state.screenshotUUID, this.state.quantityValue);
   } else {
   this.props.sendOrderNewAddress(
