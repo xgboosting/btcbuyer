@@ -167,12 +167,9 @@ EMAIL_HOST_USER = 'gonnellcough@gmail.com'
 
 #Must generate specific password for your app in [gmail settings][1]
 #EMAIL_HOST_PASSWORD = ''
-#EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASS']
+EMAIL_HOST_PASSWORD = os.environ['Rioran13']
 
 EMAIL_PORT = 587
 
 #This did the trick
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-
-
