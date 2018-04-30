@@ -114,7 +114,7 @@ phoneChange(event) {
 
 handleSubmitOrder(event) {
   event.preventDefault();
-  console.log(this.stat.priceValue);
+  console.log(this.state.priceValue);
   if (this.state.priceValue === 0) {
     this.props.updateChangeMessage('you must enter a price greater than 0');
   } else if (this.state.uuid !== '') {
