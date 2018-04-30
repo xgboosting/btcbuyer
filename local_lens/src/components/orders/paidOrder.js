@@ -96,7 +96,7 @@ return (
     <Panel.Title style={{color:'black'}} componentClass="h3">please send a payment to one of the addresses below <br />expires <Moment fromNow>{object.expires}</Moment></Panel.Title>
     </Panel.Heading>
     <br />
-      <ListGroupItem><b>confirmations needed:<br />ltc: 2, btc: 1, btc cash:1, eth: 8</b></ListGroupItem>
+      <ListGroupItem><b style={{color:'black'}}>confirmations needed:<br />ltc: 2, btc: 1, btc cash:1, eth: 8</b></ListGroupItem>
        <ListGroupItem><span><b>{object.btc} </b> </span></ListGroupItem>
        <ListGroupItem><span><b>{object.eth} </b> </span></ListGroupItem>
        <ListGroupItem><span><b>{object.ltc} </b> </span></ListGroupItem>
