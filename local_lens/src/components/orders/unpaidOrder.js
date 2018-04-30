@@ -58,7 +58,7 @@ renderMessages(object) {
 </Panel.Heading>
 
      {messToMap.map((message, i) =>
-      <ListGroupItem key={i}><bstyle={{color:'black'}}>{message.byUser}:</b> <br />
+      <ListGroupItem key={i}><b style={{color:'black'}}>{message.byUser}:</b> <br />
        <b style={{color:'black'}}>{message.content}</b><br />
        <b style={{color:'black'}}><Moment fromNow>{message.created}</Moment></b></ListGroupItem>
 
