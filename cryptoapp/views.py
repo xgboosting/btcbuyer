@@ -527,7 +527,7 @@ class Misc(APIView):
     def get_payment_address(self, order_uuid):
         try:
             url = "https://api.commerce.coinbase.com/charges"
-            headers = {'X-CC-Api-Key': '02a86b5b-fec4-4418-81e5-5b137c0a7c94', 'X-CC-Version': '2018-03-22'}
+            headers = {'X-CC-Api-Key': '5e429073-2a6d-4d2b-91e7-f6fc45108eed', 'X-CC-Version': '2018-03-22'}
             order = Order.objects.get(uuid=order_uuid)
             print(type(order.price))
             print(order.price)
