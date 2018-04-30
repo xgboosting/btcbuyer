@@ -43,7 +43,6 @@ class enterUrl extends Component {
   super(props);
   localStorage.removeItem('screenshot_uuid');
   localStorage.removeItem('screenshot_url');
-  console.log(`this should alwaysbe be undefined ${localStorage.getItem('screenshot_uuid')}`)
   this.state = {urlValue: '', fireRedirect: false};
   this.urlChange = this.urlChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,7 +50,7 @@ class enterUrl extends Component {
 }
 
 handleSubmit(event) {
-  console.log('here');
+
   event.preventDefault();
   if (this.state.urlValue.length > 1) {
     this.setState({ fireRedirect: true })
@@ -61,7 +60,6 @@ handleSubmit(event) {
 }
 
 urlChange(event) {
-  console.log(this.state.urlValue);
   this.setState({urlValue: event.target.value});
 }
 
@@ -117,7 +115,6 @@ urlChange(event) {
 
 }*/
 const mapStateToProps = state => {
-  console.log(state)
 return {
   message: state.auth.message,
  };

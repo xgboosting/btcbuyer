@@ -26,7 +26,6 @@ emailChange(event) {
  }
 
   handleSubmit(event) {
-    console.log('here');
     event.preventDefault();
     this.props.recoverPassword(this.state.emailValue)
   }
@@ -57,7 +56,6 @@ emailChange(event) {
 
 
 const mapStateToProps = state => {
-  console.log(state)
 return {
   recoverMessage: state.auth.recoverMessage,
  };

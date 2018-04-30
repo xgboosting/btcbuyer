@@ -114,12 +114,9 @@ phoneChange(event) {
 
 handleSubmitOrder(event) {
   event.preventDefault();
-  console.log('does this fire')
   if (this.state.uuid !== '') {
-    console.log('address has uuid')
     this.props.sendOrderWithAddress(this.state.priceValue, this.state.uuid, this.state.urlValue, this.state.screenshotUUID, this.state.quantityValue);
   } else {
-  console.log('address no uuid')
   this.props.sendOrderNewAddress(
   this.state.nameValue,
   this.state.apartmentValue,
@@ -220,7 +217,6 @@ useAddress(object, event) {
 
 
    render () {
-     console.log(this.props)
      if (this.props.changeMessage === 'success') {
        return (
          <div>
@@ -401,7 +397,6 @@ useAddress(object, event) {
  };
 
 const mapStateToProps = state => {
-  console.log(state)
 return {
   changeMessage: state.auth.changeMessage,
   addresses: state.auth.addresses

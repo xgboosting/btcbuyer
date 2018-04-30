@@ -8,7 +8,7 @@ import { Button,
          Checkbox
  } from 'react-bootstrap';
  import hourglass from './../assets/hourglass.gif';
- 
+
 
 //name
 //address
@@ -26,12 +26,11 @@ import { Button,
    if (localStorage.getItem('token')) {
      this.props.getAddresses();
    }
-   console.log(this.props.addresses);
+
  }
 
 
 isDefaultChange() {
-  console.log(this.state.isDefaultValue)
   if (this.state.isDefaultValue === true) {
   this.setState({isDefaultValue: false});
 } else if (this.state.isDefaultValue === false) {
@@ -51,8 +50,6 @@ isDefaultChange() {
   }
 
 renderImage() {
-
-  console.log(localStorage.getItem('screenshot_uuid'));
   if (localStorage.getItem('screenshot_url') !== null) {
     const imgUrl = `https://bitagora.co/photos/${localStorage.getItem('screenshot_uuid')}.png`
     return (
@@ -92,7 +89,6 @@ renderImage() {
 
 
 const mapStateToProps = state => {
-  console.log(state)
 return {
   changeMessage: state.auth.changeMessage,
   addresses: state.auth.addresses,

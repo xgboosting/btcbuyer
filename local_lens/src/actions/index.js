@@ -27,7 +27,6 @@ export const helloWorld = () => {
 }
 
 export const sendEmail = (theemail, thesubject, themessage) => {
-  console.log(theemail, thesubject, themessage);
   return (dispatch) => {
     const url = `${BASE_URL}api/contact/`;
     axios.post(url, {
@@ -35,7 +34,6 @@ export const sendEmail = (theemail, thesubject, themessage) => {
        subject: thesubject,
        message: themessage
     }).then(function (response) {
-      console.log(response.data);
       dispatch({type: MESSAGE, payload: 'success'});
     }).catch(function (error) {
       console.log(error);
@@ -53,7 +51,6 @@ export const getPaymentAddress = (theorderUUID) => {
     axios.post(url, {
        orderUUID: theorderUUID
     }).then(function (response) {
-      console.log(response.data);
       dispatch({type: UPDATE_ORDERS, payload: response.data});
     }).catch(function (error) {
       console.log(error);
@@ -74,7 +71,6 @@ export const sendMessage = (theorderUUID, themessage, theoption) => {
        content: themessage,
        option: theoption
     }).then(function (response) {
-      console.log(response.data);
       dispatch({type: UPDATE_ORDERS, payload: response.data});
     }).catch(function (error) {
       console.log(error);
@@ -86,14 +82,12 @@ export const sendMessage = (theorderUUID, themessage, theoption) => {
 export const getOrders = (status) => {
   return (dispatch) => {
     //axios.defaults.withCredentials = false;
-    console.log(status)
     const token = localStorage.getItem('token');
     axios.defaults.headers.common.Authorization = `Token ${token}`;
     const url = `${BASE_URL}api/get-orders/`;
     axios.post(url, {
       option: status
     }).then(function (response) {
-      console.log(response.data);
       dispatch({type: UPDATE_ORDERS, payload: response.data});
     }).catch(function (error) {
       console.log(error);
@@ -109,7 +103,6 @@ export const sendOrderWithAddress = (
   return (dispatch) => {
     //axios.defaults.withCredentials = false;
     const localScreenshotUUID = localStorage.getItem('screenshot_uuid');
-    console.log(`local screenshot${localScreenshotUUID}`);
     const token = localStorage.getItem('token');
     axios.defaults.headers.common.Authorization = `Token ${token}`;
     const url = `${BASE_URL}api/orders/`;
@@ -121,7 +114,6 @@ export const sendOrderWithAddress = (
       creatingOrder: true,
       quantity: quantityValue
     }).then(function (response) {
-      console.log(response.data);
       dispatch({type: UPDATE_ADDRESSES, payload: response.data});
       dispatch({type: CHANGE_MESSAGE, payload: 'success'});
     }).catch(function (error) {
@@ -148,8 +140,6 @@ export const sendOrderNewAddress = (
   return (dispatch) => {
     const token = localStorage.getItem('token');
     const localScreenshotUUID = localStorage.getItem('screenshot_uuid')
-    console.log(`local screenshot${localScreenshotUUID}`)
-    console.log(token);
     axios.defaults.headers.common.Authorization = `Token ${token}`;
     const url = `${BASE_URL}api/orders/`;
     axios.post(url, {
@@ -167,7 +157,6 @@ export const sendOrderNewAddress = (
       creatingOrder: true,
       quantity: quantityValue
     }).then(function (response) {
-      console.log(response.data);
       localStorage.setItem('orders', response.data);
       dispatch({type: UPDATE_ADDRESSES, payload: response.data})
       dispatch({type: CHANGE_MESSAGE, payload: 'success'})
@@ -190,7 +179,6 @@ export const getScreenCap = (theurl) => {
     axios.post(url, {
       url: theurl
     }).then(function (response) {
-      console.log(response.data);
       localStorage.setItem('screenshot_url', response.data.screenshot_url);
       localStorage.setItem('screenshot_uuid', response.data.screenshot_uuid);
 
@@ -211,7 +199,6 @@ export const getAddresses = () => {
     axios.defaults.headers.common.Authorization = `Token ${token}`;
     const url = `${BASE_URL}api/addresses/`;
     axios.get(url).then(function (response) {
-      console.log(response.data);
       dispatch({type: UPDATE_ADDRESSES, payload: response.data})
     }).catch(function (error) {
       console.log(error);
@@ -222,7 +209,6 @@ export const getAddresses = () => {
 
 export const sendNewAddress = (nameValue, apartmentValue, addressValue, countryValue, zipValue, additionalValue, isDefaultValue, phoneValue) => {
   return (dispatch) => {
-    console.log(isDefaultValue)
     //axios.defaults.withCredentials = false;
     const token = localStorage.getItem('token');
     axios.defaults.headers.common.Authorization = `Token ${token}`;
@@ -237,7 +223,6 @@ export const sendNewAddress = (nameValue, apartmentValue, addressValue, countryV
       isDefault: isDefaultValue,
       phone: phoneValue
     }).then(function (response) {
-      console.log(response.data);
       dispatch({type: UPDATE_ADDRESSES, payload: response.data})
       dispatch({type: CHANGE_MESSAGE, payload: 'address saved'})
     }).catch(function (error) {
@@ -249,7 +234,6 @@ export const sendNewAddress = (nameValue, apartmentValue, addressValue, countryV
 
 export const sendChangeEmail = (thePassword, theNewEmail) => {
   return (dispatch) => {
-    console.log(theNewEmail);
     //axios.defaults.withCredentials = false;
     const token = localStorage.getItem('token');
     axios.defaults.headers.common.Authorization = `Token ${token}`;
@@ -258,7 +242,6 @@ export const sendChangeEmail = (thePassword, theNewEmail) => {
       password: thePassword,
       newEmail: theNewEmail
     }).then(function (response) {
-      console.log(response.data);
       dispatch({type: CHANGE_MESSAGE, payload: 'email changed'})
     }).catch(function (error) {
       console.log(error);
@@ -277,7 +260,6 @@ return (dispatch) => {
     password: currentPassword,
     newPassword: theNewPassword
   }).then(function (response) {
-    console.log(response.data);
     dispatch({type: CHANGE_MESSAGE, payload: 'password changed'})
   }).catch(function (error) {
     console.log(error);
@@ -289,13 +271,11 @@ return (dispatch) => {
 
 export const recoverPassword = (theemail) => {
   return (dispatch) => {
-    console.log(theemail)
     axios.defaults.withCredentials = false;
     const url = `${BASE_URL}api/recover-password/`;
     axios.post(url, {
       email: theemail
     }).then(function (response) {
-      console.log(response.data);
       dispatch({type: RECOVER_PASSWORD, payload: 'email sent'})
     }).catch(function (error) {
       dispatch({type: RECOVER_PASSWORD, payload: 'we did not find that email please message the admins'})
@@ -304,7 +284,6 @@ export const recoverPassword = (theemail) => {
 }
 
 export const reset = () => {
-  console.log('reset');
   return {
     type: RESET
 
@@ -312,7 +291,6 @@ export const reset = () => {
 }
 
 export const updateChangeMessage = (message) => {
-  console.log(message);
   return {
     type: CHANGE_MESSAGE,
     payload: message
@@ -320,7 +298,6 @@ export const updateChangeMessage = (message) => {
 }
 
 export const updateMessage = (message) => {
-  console.log(message);
   return {
     type: MESSAGE,
     payload: message
@@ -330,15 +307,12 @@ export const updateMessage = (message) => {
 
 export const loginUser = (theemail, thepassword) => {
    return (dispatch) => {
-     console.log(theemail)
-     console.log(thepassword)
      axios.defaults.withCredentials = false;
      const url = `${BASE_URL}api/login/`;
      axios.post(url, {
        email: theemail,
        password: thepassword
      }).then(function (response) {
-       console.log(response.data);
        localStorage.setItem('token', response.data.token);
        localStorage.setItem('isAuthed', true);
        dispatch({type: LOGIN_MESSAGE, payload: 'you are now logged in'})
@@ -356,7 +330,6 @@ export const sendCreateAccount = (theemail, thepassword) => {
        email: theemail,
        password: thepassword
      }).then(function (response) {
-       console.log(response.data);
        localStorage.setItem('token', response.data.token);
        localStorage.setItem('isAuthed', true);
        dispatch({type: MESSAGE, payload:'success! email sent'})
@@ -369,14 +342,12 @@ export const sendCreateAccount = (theemail, thepassword) => {
 //UNUSED
 export const getInitialState = (token) => {
    return (dispatch) => {
-     console.log(token);
      if (token === 'notavalidtoken') {
      axios.defaults.withCredentials = false;
      const url = `${BASE_URL}api/create-user/`;
      axios.post(url, {
        guest: 'True'
      }).then(function (response) {
-       console.log(response.data);
        dispatch({ type: SET_AUTHTOKEN, payload: response.data.token });
        dispatch({ type: SET_GUEST, payload: true });
        dispatch({ type: HELLO_WORLD });

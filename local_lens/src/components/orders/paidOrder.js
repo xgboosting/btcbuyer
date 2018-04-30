@@ -32,7 +32,7 @@ messageChange(event) {
 }
 
 handleMessageSubmit(event, orderUUID) {
-  console.log(orderUUID)
+
   event.preventDefault();
   this.setState({messageValue: ''})
   this.props.sendMessage(orderUUID, this.state.messageValue, 'paid');
@@ -40,7 +40,7 @@ handleMessageSubmit(event, orderUUID) {
 }
 
 getPayment(object) {
-  console.log(object)
+
   this.props.getPaymentAddress(object.orderUUID);
 }
 
@@ -83,7 +83,7 @@ renderMessages(object) {
 }
 
 renderAddress(object) {
-  console.log(object.btc);
+
   if (object.btc === undefined) {
   return(
   <Button onClick={() => this.getPayment(object)} bsStyle="primary" style={{marginRight:'5%', marginBottom: '4%'}}>make payment</Button>
@@ -97,10 +97,10 @@ return (
     </Panel.Heading>
     <br />
       <ListGroupItem><b style={{color:'black'}}>confirmations needed:<br />ltc: 2, btc: 1, btc cash:1, eth: 8</b></ListGroupItem>
-       <ListGroupItem><span><b>{object.btc} </b> </span></ListGroupItem>
-       <ListGroupItem><span><b>{object.eth} </b> </span></ListGroupItem>
-       <ListGroupItem><span><b>{object.ltc} </b> </span></ListGroupItem>
-       <ListGroupItem><span><b>{object.cash} </b> </span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>{object.btc} </b> </span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>{object.eth} </b> </span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>{object.ltc} </b> </span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>{object.cash} </b> </span></ListGroupItem>
      </Panel>
 
 )
@@ -177,7 +177,7 @@ renderOrders () {
 
 
 const mapStateToProps = state => {
-  console.log(state)
+
 return {
   changeMessage: state.auth.changeMessage,
   addresses: state.auth.addresses,

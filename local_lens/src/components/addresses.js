@@ -71,7 +71,7 @@ phoneChange(event) {
 }
 
 isDefaultChange() {
-  console.log(this.state.isDefaultValue)
+
   if (this.state.isDefaultValue === true) {
   this.setState({isDefaultValue: false});
 } else if (this.state.isDefaultValue === false) {
@@ -285,7 +285,7 @@ isDefaultChange() {
  };
 
 const mapStateToProps = state => {
-  console.log(state)
+
 return {
   changeMessage: state.auth.changeMessage,
   addresses: state.auth.addresses

@@ -40,7 +40,6 @@ passwordChange(event) {
 
 
  handleSubmit(event) {
-   console.log('here');
    event.preventDefault();
    if (this.state.repeatPasswordValue !== this.state.passwordValue) {
      this.props.updateMessage('passwords must match');
@@ -52,7 +51,6 @@ passwordChange(event) {
  }
 
  getRepeatState() {
-   console.log(this.state)
   const length = this.state.repeatPasswordValue.length;
   if (length > 9 && this.state.passwordValue === this.state.repeatPasswordValue) return 'success';
   else if (length > 5) return 'error';
@@ -131,7 +129,6 @@ getState() {
 
 
 const mapStateToProps = state => {
-  console.log(state)
 return {
   message: state.auth.message,
  };

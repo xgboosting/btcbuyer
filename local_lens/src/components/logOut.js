@@ -35,7 +35,7 @@ const logoutStyle = {
 };
 
 const mapStateToProps = state => {
-  console.log(state)
+
 return {
   message: state.auth.message,
  };

@@ -79,7 +79,7 @@ getState() {
       )
     }
   return (
-    
+
 <Panel style={{marginLeft:'5%', marginRight: '5%'}}>
   <Panel.Heading>
 <Panel.Title componentClass="h3">Create Account</Panel.Title>
@@ -132,7 +132,7 @@ getState() {
 
 
 const mapStateToProps = state => {
-  console.log(state)
+
 return {
   message: state.auth.message,
  };

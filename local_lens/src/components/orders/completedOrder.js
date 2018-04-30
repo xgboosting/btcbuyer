@@ -32,7 +32,7 @@ messageChange(event) {
 }
 
 handleMessageSubmit(event, orderUUID) {
-  console.log(orderUUID)
+
   event.preventDefault();
   this.setState({messageValue: ''})
   this.props.sendMessage(orderUUID, this.state.messageValue, 'completed');
@@ -40,7 +40,7 @@ handleMessageSubmit(event, orderUUID) {
 }
 
 getPayment(object) {
-  console.log(object)
+
   this.props.getPaymentAddress(object.orderUUID);
 }
 
@@ -83,7 +83,7 @@ renderMessages(object) {
 }
 
 renderAddress(object) {
-  console.log(object.btc);
+
   if (object.btc === undefined) {
   return(
   <Button onClick={() => this.getPayment(object)} bsStyle="primary" style={{marginRight:'5%', marginBottom: '4%'}}>make payment</Button>
@@ -177,7 +177,7 @@ renderOrders () {
 
 
 const mapStateToProps = state => {
-  console.log(state)
+
 return {
   changeMessage: state.auth.changeMessage,
   addresses: state.auth.addresses,

@@ -155,7 +155,7 @@ subjectChange(event) {
 
 
 const mapStateToProps = state => {
-  console.log(state)
+
 return {
   message: state.auth.message,
  };

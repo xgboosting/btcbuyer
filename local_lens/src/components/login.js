@@ -34,7 +34,7 @@ passwordChange(event) {
  }
 
   handleSubmit(event) {
-    console.log('here');
+
     event.preventDefault();
     this.props.loginUser(this.state.emailValue, this.state.passwordValue)
   }
@@ -94,7 +94,7 @@ passwordChange(event) {
 
 
 const mapStateToProps = state => {
-  console.log(state)
+
 return {
   loginMessage: state.auth.loginMessage,
  };

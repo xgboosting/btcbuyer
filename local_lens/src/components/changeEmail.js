@@ -86,7 +86,6 @@ passwordChange(event) {
 
 
 const mapStateToProps = state => {
-  console.log(state)
 return {
   changeMessage: state.auth.changeMessage,
  };
