@@ -54,13 +54,13 @@ renderMessages(object) {
 
       <ListGroup>
         <Panel.Heading>
-  <Panel.Title componentClass="h3">Message the admins<br />response within 24 hours</Panel.Title>
+  <Panel.Title style={{color:'black'}} componentClass="h3">Message the admins<br />response within 24 hours</Panel.Title>
 </Panel.Heading>
 
      {messToMap.map((message, i) =>
-      <ListGroupItem key={i}><b>{message.byUser}:</b> <br />
-       {message.content}<br />
-       <b><Moment fromNow>{message.created}</Moment></b></ListGroupItem>
+      <ListGroupItem key={i}><b style={{color:'black'}}>{message.byUser}:</b> <br />
+       <b style={{color:'black'}}>{message.content}</b><br />
+       <b style={{color:'black'}}><Moment fromNow>{message.created}</Moment></b></ListGroupItem>
 
      )}
      </ListGroup>
@@ -93,7 +93,7 @@ return (
 
     <Panel style={{marginLeft:'20%', width: '50%'}}>
       <Panel.Heading>
-    <Panel.Title componentClass="h3">please send a payment to one of the addresses below <br />expires <Moment fromNow>{object.expires}</Moment></Panel.Title>
+    <Panel.Title style={{color:'black'}} componentClass="h3">please send a payment to one of the addresses below <br />expires <Moment fromNow>{object.expires}</Moment></Panel.Title>
     </Panel.Heading>
     <br />
       <ListGroupItem><b>confirmations needed:<br />ltc: 2, btc: 1, btc cash:1, eth: 8</b></ListGroupItem>
@@ -122,14 +122,14 @@ renderShippingAddress(object) {
     <Panel.Title componentClass="h3">shipping to</Panel.Title>
     </Panel.Heading>
     <br />
-       <ListGroupItem><span><b>name: </b> {object.name} </span></ListGroupItem>
-       <ListGroupItem><span><b>Address: </b> {object.address}</span></ListGroupItem>
-       <ListGroupItem> <span><b>Apartment: </b>{object.apartment}</span></ListGroupItem>
-       <ListGroupItem><span><b>country: </b>{object.country}</span></ListGroupItem>
-       <ListGroupItem><span><b>zip code: </b>{object.zipCode}</span></ListGroupItem>
-       <ListGroupItem><span><b>price: {object.price} </b></span></ListGroupItem>
-       <ListGroupItem><span><b>url: </b>{object.url}</span></ListGroupItem>
-       <ListGroupItem><span><b>additional info: </b>{object.additional}</span></ListGroupItem>
+      <ListGroupItem><span><b style={{color:'black'}}>name: </b> {object.name} </span></ListGroupItem>
+      <ListGroupItem><span><b style={{color:'black'}}>Address: </b> {object.address}</span></ListGroupItem>
+      <ListGroupItem> <span><b style={{color:'black'}}>Apartment: </b>{object.apartment}</span></ListGroupItem>
+      <ListGroupItem><span><b style={{color:'black'}}>country: </b>{object.country}</span></ListGroupItem>
+      <ListGroupItem><span><b style={{color:'black'}}>zip code: </b>{object.zipCode}</span></ListGroupItem>
+      <ListGroupItem><span><b style={{color:'black'}}>price: {object.price} </b></span></ListGroupItem>
+      <ListGroupItem><span><b style={{color:'black'}}>url: </b>{object.url}</span></ListGroupItem>
+      <ListGroupItem><span><b style={{color:'black'}}>additional info: </b>{object.additional}</span></ListGroupItem>
      </Panel>
   )
 }
