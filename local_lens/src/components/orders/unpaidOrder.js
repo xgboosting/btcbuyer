@@ -127,7 +127,7 @@ renderShippingAddress(object) {
        <ListGroupItem> <span><b style={{color:'black'}}>Apartment: {object.apartment}</b> </span></ListGroupItem>
        <ListGroupItem><span><b style={{color:'black'}}>country: {object.country}</b> </span></ListGroupItem>
        <ListGroupItem><span><b style={{color:'black'}}>zip code: {object.zipCode}</b> </span></ListGroupItem>
-       <ListGroupItem><span><b style={{color:'black'}}>price: {object.price}</b> </b></span></ListGroupItem>
+       <ListGroupItem><span><b style={{color:'black'}}>price: {object.price} </b></span></ListGroupItem>
        <ListGroupItem><span><b style={{color:'black'}}>url: {object.url}</b> </span></ListGroupItem>
        <ListGroupItem><span><b style={{color:'black'}}>additional info: {object.additional}</b> </span></ListGroupItem>
      </Panel>
