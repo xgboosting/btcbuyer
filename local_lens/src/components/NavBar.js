@@ -67,6 +67,9 @@ const NavBar = () => {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
+        <NavItem eventKey={4} href="https://github.com/llennox/bitagoraAPI/blob/master/README.md">
+          <b style={{ color: '#ffffff'}}>API</b>
+        </NavItem>
         <NavItem eventKey={3} href="/contact">
           <b style={{ color: '#ffffff'}}>contact</b>
         </NavItem>
@@ -114,6 +117,9 @@ const NavBar = () => {
 
     </Nav>
     <Nav pullRight>
+      <NavItem eventKey={4} href="https://github.com/llennox/bitagoraAPI/blob/master/README.md">
+        <b style={{ color: '#ffffff'}}>API</b>
+      </NavItem>
       <NavItem eventKey={3} href="/contact">
         <b style={{ color: '#ffffff'}}>contact</b>
       </NavItem>
