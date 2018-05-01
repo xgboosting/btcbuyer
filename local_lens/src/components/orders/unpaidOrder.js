@@ -144,7 +144,7 @@ renderOrders () {
   )
   }
   return (
-    <div style={{ marginTop: '5%', marginBottom: '3%', width:'100%', flex: 1}}>
+    <div style={{ marginTop: '5%', marginBottom: '3%', width:'100%', flex: 1, alignItems: 'center'}}>
 
       {ordersToMap.map((object, i) =>
        <Panel key={i} style={{marginLeft:'5%', marginRight:'5%'}}>

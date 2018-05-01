@@ -8,7 +8,8 @@ import { Form,
          Col,
          ControlLabel,
          FormControl,
-         Button
+         Button,
+         Panel
  } from 'react-bootstrap';
 
 
@@ -16,11 +17,7 @@ import { Form,
 
 const divStyle = {
    flex: 1,
-   justifyContent: 'center',
-   alignItems: 'center',
-   textAlign: 'center',
    marginTop: '12%',
-   marginLeft: '20%'
 };
 
 const formStyle = {
@@ -32,8 +29,8 @@ const formStyle = {
 
 const inputSize = {
   width: '120%',
-  fontSize: '140%',
-  backgroundColor: '#eacb94',
+  fontSize: '100%',
+  backgroundColor: 'white',
   color: 'black'
 }
 
@@ -70,6 +67,7 @@ urlChange(event) {
     if (window.innerWidth <= 500) {
       return (
         <div>
+          
       <Form horizontal onSubmit={this.handleSubmit}>
     <FormGroup controlId="formHorizontalEmail">
      <Col componentClass={ControlLabel} sm={1}>
@@ -87,20 +85,20 @@ urlChange(event) {
     }
   return (
     <div style={divStyle}>
+      <Panel style={{marginLeft:'5%', marginRight: '5%', height: '60%', width: '80%'}}>
+        <b style={{color:'black', marginTop: '5%', fontSize: '180%'}}>Buy anything with crypto</b>
   <Form horizontal style={formStyle} onSubmit={this.handleSubmit}>
 <FormGroup controlId="formHorizontalEmail">
  <Col componentClass={ControlLabel} sm={2}>
-   URL
+   <b style={{color:'black'}}>URL</b>
  </Col>
  <Col sm={4}>
     <FormControl value={this.state.urlValue} onChange={this.urlChange} type="url" placeholder="http://www.example.com/" style={inputSize}/>
     <Button style={{marginTop: '2%'}} bsStyle='primary' type="submit">create order</Button>
  </Col>
 </FormGroup>
-
-
-
 </Form>
+</Panel>
 <Showtext />
   </div>
 

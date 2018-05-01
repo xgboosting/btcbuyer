@@ -27,9 +27,7 @@ import name from './../assets/name.png'
 
 const divStyle = {
    flex: 1,
-   justifyContent: 'center',
-   alignItems: 'center',
-   textAlign: 'center',
+
    backgroundColor: '#ff4a83',
    color: '#f5f5f5'
 };
