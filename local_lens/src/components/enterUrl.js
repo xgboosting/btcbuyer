@@ -67,7 +67,7 @@ urlChange(event) {
     if (window.innerWidth <= 500) {
       return (
         <div>
-          
+
       <Form horizontal onSubmit={this.handleSubmit}>
     <FormGroup controlId="formHorizontalEmail">
      <Col componentClass={ControlLabel} sm={1}>
@@ -86,14 +86,14 @@ urlChange(event) {
   return (
     <div style={divStyle}>
       <Panel style={{marginLeft:'5%', marginRight: '5%', height: '60%', width: '80%'}}>
-        <b style={{color:'black', marginTop: '5%', fontSize: '180%'}}>Buy anything with crypto</b>
+        <b style={{color:'black', marginTop: '5%', fontSize: '180%'}}>Buy anything with crypto. 1.5% fee for individuals<br/>crushing the competition</b>
   <Form horizontal style={formStyle} onSubmit={this.handleSubmit}>
-<FormGroup controlId="formHorizontalEmail">
+<FormGroup controlId="formHorizontalEmail1">
  <Col componentClass={ControlLabel} sm={2}>
    <b style={{color:'black'}}>URL</b>
  </Col>
  <Col sm={4}>
-    <FormControl value={this.state.urlValue} onChange={this.urlChange} type="url" placeholder="http://www.example.com/" style={inputSize}/>
+    <FormControl value={this.state.urlValue} onChange={this.urlChange} type="url" placeholder="http://www.etsy.com/" style={inputSize}/>
     <Button style={{marginTop: '2%'}} bsStyle='primary' type="submit">create order</Button>
  </Col>
 </FormGroup>
