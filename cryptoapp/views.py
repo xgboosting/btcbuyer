@@ -531,9 +531,9 @@ class Misc(APIView):
             order = Order.objects.get(uuid=order_uuid)
             print(type(order.price))
             print(order.price)
-            percent = float(order.price) * 0.031
+            percent = float(order.price) * 0.015
             if percent < 3:
-                amount = 3 + float(order.price)
+                amount = 1.5 + float(order.price)
             else:
                 amount = percent + float(order.price)
             payload = {'name': order_uuid,'description': order.url, 'local_price': {'amount':amount,'currency':'USD'},'pricing_type': 'fixed_price','metadata': {'customer_id': str(order.user_uuid) }}

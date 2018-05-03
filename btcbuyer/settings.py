@@ -31,7 +31,7 @@ STATIC_ROOT = '/home/connlloc/btcbuyer/static/'
 #SECRET_KEY = os.environ['KEY']
 SECRET_KEY = "$fb(9!0*t9858&*b(x&v$x3(sj^25&y98@2ox#s3xty9dtp#xq"
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['bitagora.co']
 
