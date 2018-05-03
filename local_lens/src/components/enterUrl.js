@@ -86,7 +86,7 @@ urlChange(event) {
   return (
     <div style={divStyle}>
       <Panel style={{marginLeft:'5%', marginRight: '5%', height: '60%', width: '80%'}}>
-        <b style={{color:'black', marginTop: '5%', fontSize: '180%'}}>Buy anything with crypto. 1.5% fee for individuals<br/>crushing the competition</b>
+        <b style={{color:'black', marginTop: '5%', fontSize: '180%'}}>Buy anything with crypto. 1.5% fee for individuals<br/>lowest on the net</b>
   <Form horizontal style={formStyle} onSubmit={this.handleSubmit}>
 <FormGroup controlId="formHorizontalEmail1">
  <Col componentClass={ControlLabel} sm={2}>
