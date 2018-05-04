@@ -141,7 +141,8 @@ export const sendOrderNewAddress = (
     const token = localStorage.getItem('token');
     const localScreenshotUUID = localStorage.getItem('screenshot_uuid')
     axios.defaults.headers.common.Authorization = `Token ${token}`;
-    const url = `${BASE_URL}api/orders/`;
+    //const url = `${BASE_URL}api/orders/`;
+    const url = 'https://httpbin.org/post';
     axios.post(url, {
       name: nameValue,
       apartment: apartmentValue,
@@ -157,6 +158,7 @@ export const sendOrderNewAddress = (
       creatingOrder: true,
       quantity: quantityValue
     }).then(function (response) {
+      console.log(response.data)
       localStorage.setItem('orders', response.data);
       dispatch({type: UPDATE_ADDRESSES, payload: response.data})
       dispatch({type: CHANGE_MESSAGE, payload: 'success'})
@@ -191,9 +193,7 @@ export const getScreenCap = (theurl) => {
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('screenshot_url', response.data.screenshot_url);
           localStorage.setItem('screenshot_uuid', response.data.screenshot_uuid);
-
           dispatch({ type: SET_ORDER_IMAGE, payload: response.data });
-
         }).catch(function (error) {
           console.log(error);
           dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'});
