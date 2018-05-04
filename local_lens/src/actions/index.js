@@ -342,7 +342,6 @@ export const sendCreateAccount = (theemail, thepassword) => {
        email: theemail,
        password: thepassword
      }).then(function (response) {
-       console.log(response.data);
        localStorage.setItem('token', response.data.token);
        localStorage.setItem('isAuthed', true);
        dispatch({type: MESSAGE, payload:'success! email sent'});
