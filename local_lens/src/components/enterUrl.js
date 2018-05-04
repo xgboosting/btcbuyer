@@ -43,7 +43,6 @@ class enterUrl extends Component {
   this.state = {urlValue: '', fireRedirect: false};
   this.urlChange = this.urlChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
-
 }
 
 handleSubmit(event) {
@@ -51,7 +50,7 @@ handleSubmit(event) {
   event.preventDefault();
   if (this.state.urlValue.length > 1) {
     this.setState({ fireRedirect: true })
-    this.props.getScreenCap(this.state.urlValue);
+    this.props.getScreenCap(this.state.urlValue, localStorage.getItem('token'));
   }
 
 }

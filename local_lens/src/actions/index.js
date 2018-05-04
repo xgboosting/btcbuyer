@@ -170,24 +170,36 @@ export const sendOrderNewAddress = (
 
 export const getScreenCap = (theurl) => {
   return (dispatch) => {
-    //axios.defaults.withCredentials = false;
-    if (localStorage.getItem('token') !== null) {
-    const token = localStorage.getItem('token');
-    axios.defaults.headers.common.Authorization = `Token ${token}`;
-    }
     const url = `${BASE_URL}api/get-screencap/`;
-    axios.post(url, {
-      url: theurl
-    }).then(function (response) {
-      localStorage.setItem('screenshot_url', response.data.screenshot_url);
-      localStorage.setItem('screenshot_uuid', response.data.screenshot_uuid);
+    if (localStorage.getItem('token') !== null) {
+          axios.post(url, {
+            url: theurl,
+            token: localStorage.getItem('token')
+          }).then(function (response) {
+            localStorage.setItem('screenshot_url', response.data.screenshot_url);
+            localStorage.setItem('screenshot_uuid', response.data.screenshot_uuid);
+            dispatch({ type: SET_ORDER_IMAGE, payload: response.data });
+          }).catch(function (error) {
+            console.log(error);
+            dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'});
+          })
+  } else {
+        axios.post(url, {
+          url: theurl,
+          token: 'notavalidtoken'
+        }).then(function (response) {
+          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('screenshot_url', response.data.screenshot_url);
+          localStorage.setItem('screenshot_uuid', response.data.screenshot_uuid);
 
-      dispatch({ type: SET_ORDER_IMAGE, payload: response.data });
+          dispatch({ type: SET_ORDER_IMAGE, payload: response.data });
 
-    }).catch(function (error) {
-      console.log(error);
-      dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'});
-    })
+        }).catch(function (error) {
+          console.log(error);
+          dispatch({type: CHANGE_MESSAGE, payload: 'something went wrong'});
+        })
+  }
+
   }
 }
 

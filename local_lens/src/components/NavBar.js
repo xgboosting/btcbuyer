@@ -52,16 +52,16 @@ const NavBar = () => {
       <Nav>
 
         <NavDropdown eventKey={3.1} title="Settings" id="basic-nav-dropdown" class="ndd">
-          <MenuItem href="/change-password" eventKey={3.6}><b style={{ color: '#eec500'}}>change password</b></MenuItem>
-          <MenuItem href="/change-email" eventKey={3.7}><b style={{ color: '#eec500'}}>change email</b></MenuItem>
-          <MenuItem href="/addresses" eventKey={3.8}><b style={{ color: '#eec500'}}>addresses</b></MenuItem>
-          <MenuItem href="/logOut" eventKey={3.2}><b style={{ color: '#eec500'}}>logout</b></MenuItem>
+          <MenuItem href="/change-password" eventKey={3.6}><b style={{ color: 'black'}}>change password</b></MenuItem>
+          <MenuItem href="/change-email" eventKey={3.7}><b style={{ color: 'black'}}>change email</b></MenuItem>
+          <MenuItem href="/addresses" eventKey={3.8}><b style={{ color: 'black'}}>addresses</b></MenuItem>
+          <MenuItem href="/logOut" eventKey={3.2}><b style={{ color: 'black'}}>logout</b></MenuItem>
         </NavDropdown>
         <NavDropdown eventKey={3.1} title="Orders" id="basic-nav-dropdown" class="ndd">
-         <MenuItem href="/" eventKey={3.5}><b style={{ color: '#eec500'}}>new order</b></MenuItem>
-         <MenuItem href="/paid-orders" eventKey={3.7}><b style={{ color: '#eec500'}}>paid orders</b></MenuItem>
-         <MenuItem href="/unpaid-orders" eventKey={3.6}><b style={{ color: '#eec500'}}>unpaid orders</b></MenuItem>
-         <MenuItem href="/completed-orders" eventKey={3.2}><b style={{ color: '#eec500'}}>shipped orders</b></MenuItem>
+         <MenuItem href="/" eventKey={3.5}><b style={{ color: 'black'}}>new order</b></MenuItem>
+         <MenuItem href="/paid-orders" eventKey={3.7}><b style={{ color: 'black'}}>paid orders</b></MenuItem>
+         <MenuItem href="/unpaid-orders" eventKey={3.6}><b style={{ color: 'black'}}>unpaid orders</b></MenuItem>
+         <MenuItem href="/completed-orders" eventKey={3.2}><b style={{ color: 'black'}}>shipped orders</b></MenuItem>
         </NavDropdown>
       </Nav>
       <Nav pullRight>

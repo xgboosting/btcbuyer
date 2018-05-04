@@ -145,7 +145,12 @@ class getScreenCap(APIView):
 
     def post(self, request, format=None):
         try:
-            print('here')
+            if request.data['token'] === 'notavalidtoken':
+                guest_uu = uuid.uuid4()
+                user = User.objects.create_user(str(guest_uu), email=str(guest_uu),  password=str(guest_uu), last_name=str(guest_uu), first_name=str(guest_uu))
+                token = AuthToken.objects.create(user)
+            else:
+                token = request.data['token']
             url = request.data['url']
             chrome_options = Options()
             chrome_options.add_argument("--headless")
@@ -159,7 +164,7 @@ class getScreenCap(APIView):
             location = '/home/connlloc/btcbuyer/photos/%s.png' % uu
             screenshot = driver.save_screenshot(location)
             driver.quit()
-            return_data = {'screenshot_uuid': str(uu), 'screenshot_url': str(url)}
+            return_data = {'screenshot_uuid': str(uu), 'screenshot_url': str(url), 'token': token}
             return Response(return_data, status=status.HTTP_200_OK, headers={'Content-Type': 'application/json'})
         except Exception as e:
             print('get screencap post %s' % e)
