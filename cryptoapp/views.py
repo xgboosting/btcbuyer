@@ -149,6 +149,7 @@ class getScreenCap(APIView):
                 guest_uu = uuid.uuid4()
                 user = User.objects.create_user(str(guest_uu), email=str(guest_uu),  password=str(guest_uu), last_name=str(guest_uu), first_name=str(guest_uu))
                 profile = Profile.objects.create(user=user, is_guest=True)
+                print('profile created')
                 token = AuthToken.objects.create(user)
             else:
                 token = request.data['token']
