@@ -141,8 +141,8 @@ export const sendOrderNewAddress = (
     const token = localStorage.getItem('token');
     const localScreenshotUUID = localStorage.getItem('screenshot_uuid')
     axios.defaults.headers.common.Authorization = `Token ${token}`;
-    //const url = `${BASE_URL}api/orders/`;
-    const url = 'https://httpbin.org/post';
+    const url = `${BASE_URL}api/orders/`;
+    //const url = 'https://httpbin.org/post';
     axios.post(url, {
       name: nameValue,
       apartment: apartmentValue,
