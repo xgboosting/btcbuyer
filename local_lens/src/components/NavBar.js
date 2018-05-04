@@ -8,7 +8,6 @@ import createAccount from './createAccount';
 import passwordRecover from './passwordRecover';
 import changePassword from './changePassword';
 import changeEmail from './changeEmail';
-import addresses from './addresses';
 import makeOrder from './makeOrder';
 import paidOrder from './orders/paidOrder';
 import completedOrder from './orders/completedOrder';
@@ -54,7 +53,6 @@ const NavBar = () => {
         <NavDropdown eventKey={3.1} title="Settings" id="basic-nav-dropdown" class="ndd">
           <MenuItem href="/change-password" eventKey={3.6}><b style={{ color: 'black'}}>change password</b></MenuItem>
           <MenuItem href="/change-email" eventKey={3.7}><b style={{ color: 'black'}}>change email</b></MenuItem>
-          <MenuItem href="/addresses" eventKey={3.8}><b style={{ color: 'black'}}>addresses</b></MenuItem>
           <MenuItem href="/logOut" eventKey={3.2}><b style={{ color: 'black'}}>logout</b></MenuItem>
         </NavDropdown>
         <NavDropdown eventKey={3.1} title="Orders" id="basic-nav-dropdown" class="ndd">
@@ -81,7 +79,6 @@ const NavBar = () => {
        <Route path="/logOut" component={logOut} />
        <Route path="/change-password" component={changePassword} />
        <Route path="/change-email" component={changeEmail} />
-       <Route path="/addresses" component={addresses} />
        <Route path="/unpaid-orders" component={unpaidOrder} />
        <Route path="/paid-orders" component={paidOrder} />
        <Route path="/completed-orders" component={completedOrder} />
