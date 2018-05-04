@@ -24,7 +24,7 @@ import { Button,
    super(props);
    this.state = {nameValue: '', addressValue: '', apartmentValue: '', countryValue: '', zipValue: '', additionalValue: '', isDefaultValue: true};
    if (localStorage.getItem('token')) {
-     this.props.getAddresses();
+     console.log('tokens');
    }
 
  }
