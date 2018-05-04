@@ -41,7 +41,7 @@ import { Redirect } from 'react-router-dom';
    uuid: '',
    quantityValue: ''
   };
-   
+
    this.nameChange = this.nameChange.bind(this);
    this.addressChange = this.addressChange.bind(this);
    this.apartmentChange = this.apartmentChange.bind(this);
@@ -118,8 +118,10 @@ handleSubmitOrder(event) {
     this.props.updateChangeMessage('you must enter a price greater than 0');
   }
    if (this.state.uuid !== '') {
+     console.log('no new address');
     this.props.sendOrderWithAddress(this.state.priceValue, this.state.uuid, this.state.urlValue, this.state.screenshotUUID, this.state.quantityValue);
   } else {
+    console.log('new address')
   this.props.sendOrderNewAddress(
   this.state.nameValue,
   this.state.apartmentValue,
