@@ -145,7 +145,7 @@ class getScreenCap(APIView):
 
     def post(self, request, format=None):
         try:
-            if request.data['token'] === 'notavalidtoken':
+            if request.data['token'] == 'notavalidtoken':
                 guest_uu = uuid.uuid4()
                 user = User.objects.create_user(str(guest_uu), email=str(guest_uu),  password=str(guest_uu), last_name=str(guest_uu), first_name=str(guest_uu))
                 token = AuthToken.objects.create(user)
