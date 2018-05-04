@@ -41,7 +41,7 @@ import { Redirect } from 'react-router-dom';
    uuid: '',
    quantityValue: ''
   };
-   this.props.getAddresses();
+   
    this.nameChange = this.nameChange.bind(this);
    this.addressChange = this.addressChange.bind(this);
    this.apartmentChange = this.apartmentChange.bind(this);
