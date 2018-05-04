@@ -4,6 +4,7 @@ import login from './login';
 import enterUrl from './enterUrl';
 import logOut from './logOut';
 import terms from './terms';
+import redirect from './redirect';
 import createAccount from './createAccount';
 import passwordRecover from './passwordRecover';
 import changePassword from './changePassword';
@@ -74,8 +75,8 @@ const NavBar = () => {
     </Navbar>
      <div>
        <Switch>
+       <Route path="/redirect" component={redirect}/>
        <Route path="/contact" component={contact} />
-
        <Route path="/logOut" component={logOut} />
        <Route path="/change-password" component={changePassword} />
        <Route path="/change-email" component={changeEmail} />
@@ -123,6 +124,7 @@ const NavBar = () => {
   </Navbar>
    <div>
      <Switch>
+     <Route path="/redirect" component={redirect}/>
      <Route path="/contact" component={contact}/>
      <Route path="/login" component={login}/>
      <Route path="/createAccount" component={createAccount}/>

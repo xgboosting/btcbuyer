@@ -158,7 +158,6 @@ export const sendOrderNewAddress = (
       creatingOrder: true,
       quantity: quantityValue
     }).then(function (response) {
-      console.log(response.data)
       localStorage.setItem('orders', response.data);
       dispatch({type: UPDATE_ADDRESSES, payload: response.data})
       dispatch({type: CHANGE_MESSAGE, payload: 'success'})
