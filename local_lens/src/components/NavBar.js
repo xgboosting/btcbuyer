@@ -5,6 +5,7 @@ import enterUrl from './enterUrl';
 import logOut from './logOut';
 import terms from './terms';
 import redirect from './redirect';
+import accept from './accept';
 import createAccount from './createAccount';
 import passwordRecover from './passwordRecover';
 import changePassword from './changePassword';
@@ -64,6 +65,9 @@ const NavBar = () => {
         </NavDropdown>
       </Nav>
       <Nav pullRight>
+        <NavItem eventKey={4} href="/accept">
+          <b style={{ color: '#ffffff'}}>how to accept<br/>cryptocurrencies</b>
+        </NavItem>
         <NavItem eventKey={4} href="https://github.com/llennox/bitagoraAPI/blob/master/README.md">
           <b style={{ color: '#ffffff'}}>API</b>
         </NavItem>
@@ -75,6 +79,7 @@ const NavBar = () => {
     </Navbar>
      <div>
        <Switch>
+      <Route path="/accept" component={accept}/>
        <Route path="/redirect" component={redirect}/>
        <Route path="/contact" component={contact} />
        <Route path="/logOut" component={logOut} />
@@ -113,6 +118,9 @@ const NavBar = () => {
 
     </Nav>
     <Nav pullRight>
+      <NavItem eventKey={4} href="/accept">
+        <b style={{ color: '#ffffff'}}>how to accept<br/>cryptocurrencies</b>
+      </NavItem>
       <NavItem eventKey={4} href="https://github.com/llennox/bitagoraAPI/blob/master/README.md">
         <b style={{ color: '#ffffff'}}>API</b>
       </NavItem>
@@ -124,6 +132,7 @@ const NavBar = () => {
   </Navbar>
    <div>
      <Switch>
+       <Route path="/accept" component={accept}/>
      <Route path="/redirect" component={redirect}/>
      <Route path="/contact" component={contact}/>
      <Route path="/login" component={login}/>
