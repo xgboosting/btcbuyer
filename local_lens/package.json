@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "http://167.99.175.200/",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dotenv": "^5.0.1",
     "moment": "^2.22.1",
     "moment-timezone": "^0.5.14",
